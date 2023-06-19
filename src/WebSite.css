@@ -1,0 +1,40 @@
+.website-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .navbar {
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+  }
+  
+  .navbar-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .navbar-item {
+    margin-right: 10px;
+  }
+  
+  .navbar-item a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer {
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  
