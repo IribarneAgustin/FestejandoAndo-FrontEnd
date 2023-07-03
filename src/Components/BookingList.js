@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './BookingList.css';
+import '../Assets/Styles/List.css';
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
@@ -24,11 +24,13 @@ function BookingList() {
   }
 
   return (
-    <div className="container">
+    <div className='container'>
       <div>
-        <ul className="booking-list">
-        <h1>Reservas</h1>
-          <li className="booking-list-header"> {/* Add a header row */}
+        <ul className='list'>
+          <h1>Reservas</h1>
+          <li className='list-header'>
+            {' '}
+            {/* Add a header row */}
             <h2>Temática</h2>
             <h2>Fecha</h2>
             <h2>Cliente</h2>
@@ -52,8 +54,6 @@ function BookingList() {
       </div>
     </div>
   );
-  
-  
 }
 
 export default BookingList;
