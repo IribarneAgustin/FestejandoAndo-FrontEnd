@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AdministratorPanel.css';
+import '../Assets/Styles/AdministratorPanel.css';
 import BookingList from './BookingList';
 import ArticleList from './ArticleList';
 import TopicList from './TopicList';
@@ -42,41 +42,32 @@ function AdministratorPanel() {
     <div className='admin-panel'>
       <div class='navbar'>
         <div class='dropdown'>
-          <button class='dropbtn'>
+          <button class='dropbtn' onClick={handleListClientsClick}>
             Clientes
             <i class='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'>
-            <a href='#'>Link 1</a>
-          </div>
+          <div class='dropdown-content'></div>
         </div>
         <div class='dropdown'>
-          <button class='dropbtn'>
+          <button class='dropbtn' onClick={handleListBookingClick}>
             Reservas
             <i class='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'>
-            <a onClick={handleListClientsClick}>Agregar</a>
-            <a onClick={handleListBookingClick}>Listar</a>
-          </div>
+          <div class='dropdown-content'></div>
         </div>
         <div class='dropdown'>
-          <button class='dropbtn'>
+          <button class='dropbtn' onClick={handleListTopicsClick}>
             Temáticas
             <i class='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'>
-            <a onClick={handleListTopicsClick}>Lista</a>
-          </div>
+          <div class='dropdown-content'></div>
         </div>
         <div class='dropdown'>
-          <button class='dropbtn'>
+          <button class='dropbtn' onClick={handleListArticlesClick}>
             Artículos
             <i class='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'>
-            <a onClick={handleListArticlesClick}>Lista</a>
-          </div>
+          <div class='dropdown-content'></div>
         </div>
       </div>
       {showTopicList && <TopicList />}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './TopicList.css';
+import '../Assets/Styles/List.css';
 
 function TopicList() {
   const [topics, setTopics] = useState([]);
@@ -26,9 +26,9 @@ function TopicList() {
   return (
     <div className='container'>
       <div>
-        <ul className='topic-list'>
+        <ul className='list'>
           <h1>Temáticas</h1>
-          <li className='topic-list-header'>
+          <li className='list-header'>
             {' '}
             {/* Add a header row */}
             <h2>Nombre</h2>
