@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Assets/Styles/List.css';
+import BookingAdd from './BookingAdd';
+import BookingDelete from './BookingDelete';
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
@@ -23,31 +25,49 @@ function BookingList() {
     }
   }
 
+  async function onClickModify(id) {
+    const endpoint = `/api/booking/update/${id}`;
+
+    try {
+      const response = await fetch(endpoint);
+
+      if (response.ok) {
+        console.log('Booking updated successfully');
+      } else {
+        console.log('Error updating booking');
+      }
+    } catch (error) {
+      console.log('Fetch error:', error);
+    }
+  }
+
   return (
     <div className='container'>
       <div>
         <ul className='list'>
           <h1>Reservas</h1>
+          {<BookingAdd refreshBookingList={fetchBookings}/>}
+          <hr></hr>
           <li className='list-header'>
             {' '}
             {/* Add a header row */}
-            <h2>Temática</h2>
-            <h2>Fecha</h2>
-            <h2>Cliente</h2>
-            <h2>Seña</h2>
-            <h2>Pagado</h2>
-            <h2>Confirmado</h2>
-            <h2>Precio</h2>
+            <h3>Temática</h3>
+            <h3>Fecha</h3>
+            <h3>Cliente</h3>
+            <h3>Precio</h3>
           </li>
           {bookings.map((booking) => (
             <li key={booking.id}>
               <p>{booking.topic.name}</p>
               <p>{booking.date}</p>
               <p>{booking.client.name}</p>
-              <p>{booking.deposit}</p>
-              <p>{booking.isPaid}</p>
-              <p>{booking.confirm}</p>
               <p>{booking.cost}</p>
+              <p>
+                <button className="update-button" onClick={() => onClickModify(booking.id)}>Modificar</button>
+              </p>
+              <p>
+                {<BookingDelete id={booking.id}  bookingData={booking} refreshBookingList={ fetchBookings }/>}
+              </p>
             </li>
           ))}
         </ul>
