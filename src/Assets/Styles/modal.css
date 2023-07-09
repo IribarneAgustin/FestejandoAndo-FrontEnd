@@ -48,3 +48,8 @@
 .modal button[type="button"] {
   cursor: pointer;
 }
+select[multiple] {
+  height: auto;
+  min-height: 100px; /* Set a desired height */
+  padding: 5px;
+}

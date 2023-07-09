@@ -1,37 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
-import '../Assets/Styles/modal.css';
+import '../../Assets/Styles/modal.css';
+import Select from 'react-select';
+
 Modal.setAppElement('#root');
 
-function BookingAdd({ refreshBookingList }) {
+function BookingAdd({ refreshBookingList, clientList, topicList }) {
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [date, setDate] = useState('');
   const [clientId, setClientId] = useState('');
   const [deposit, setDeposit] = useState('');
   const [isPaid, setIsPaid] = useState(false);
   const [cost, setCost] = useState('');
-  const [clientList, setClientList] = useState([]);
+  const [selectedTopics, setSelectedTopics] = useState([]);
 
-  useEffect(() => {
-    fetchClientList();
-  }, []);
+  const options = topicList.map((topic) => ({
+    value: topic.id,
+    label: topic.name,
+  }));
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const handleSelectChange = (selectedTopics) => {
+    setSelectedTopics(selectedTopics);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    //Getting selected topics
+    const topicsToAdd = selectedTopics.map((topic) => ({
+      id: topic.value,
+    }))
+
+
     // Create a new booking object with the form values
     const newBooking = {
       date,
       client: { id: clientId },
-      topic: [{ id: 1 }],
+      topic: topicsToAdd,
       deposit: parseInt(deposit),
       isPaid,
       confirm: false,
@@ -48,12 +54,11 @@ function BookingAdd({ refreshBookingList }) {
       setDeposit('');
       setIsPaid(false);
       setCost('');
-
+      setSelectedTopics([]);
       closeModal();
 
-      // TODO: Redirect the user or show a success message
     } catch (error) {
-      // TODO: Handle the error appropriately (e.g., show an error message)
+      console.log(error);
     }
   };
 
@@ -67,36 +72,23 @@ function BookingAdd({ refreshBookingList }) {
     })
       .then((response) => response.text())
       .then((response) => {
-        if (response.ok) {
-          console.log(response);
-          window.alert(response);
-        } else {
-          response.replace(/\[|\]/g, '');
-          window.alert('Revise los siguientes errores: '+ response);
-        }
+        console.log(response);
+        window.alert(response);
       })
       .catch((error) => {
         console.error('Error adding booking:', error);
-      }).finally(() => {
+      })
+      .finally(() => {
         refreshBookingList();
       });
   };
+  
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
 
-
-  const fetchClientList = async () => {
-    try {
-      const response = await fetch('/api/client/list');
-
-      if (response.ok) {
-        const data = await response.json();
-        setClientList(data);
-        console.log(data);
-      } else {
-        throw new Error('Failed to fetch clients');
-      }
-    } catch (error) {
-      console.log('Error fetching clients:', error);
-    }
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
@@ -108,12 +100,12 @@ function BookingAdd({ refreshBookingList }) {
         <form className="modal" onSubmit={handleSubmit}>
           <label>
             <b>Fecha: </b>
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
           </label>
           <br />
           <label>
             <b>Cliente:</b>
-            <select value={clientId} onChange={(e) => setClientId(e.target.value)}>
+            <select value={clientId} onChange={(e) => setClientId(e.target.value)} required>
               <option value="">Seleccione un cliente..</option>
               {clientList.map((client) => (
                 <option key={client.id} value={client.id}>
@@ -124,7 +116,18 @@ function BookingAdd({ refreshBookingList }) {
           </label>
           <br />
           <label>
-            <b>Deposito:</b>
+            <b>Temáticas:</b>
+            <Select
+              options={options}
+              isMulti
+              value={selectedTopics}
+              onChange={handleSelectChange}
+              placeholder="Seleccione las temáticas"
+            />
+          </label>
+          <br />
+          <label>
+            <b>Seña:</b>
             <input type="number" min="0" value={deposit} onChange={(e) => setDeposit(e.target.value)} />
           </label>
           <br />
