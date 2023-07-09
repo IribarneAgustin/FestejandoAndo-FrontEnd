@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Assets/Styles/AdministratorPanel.css';
-import BookingList from './BookingList';
+import BookingList from './Booking/BookingList';
 import ArticleList from './ArticleList';
 import TopicList from './TopicList';
 
@@ -40,34 +40,34 @@ function AdministratorPanel() {
 
   return (
     <div className='admin-panel'>
-      <div class='navbar'>
-        <div class='dropdown'>
-          <button class='dropbtn' onClick={handleListClientsClick}>
+      <div className='navbar'>
+        <div className='dropdown'>
+          <button className='dropbtn' onClick={handleListClientsClick}>
             Clientes
-            <i class='fa fa-caret-down'></i>
+            <i className='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'></div>
+          <div className='dropdown-content'></div>
         </div>
-        <div class='dropdown'>
-          <button class='dropbtn' onClick={handleListBookingClick}>
+        <div className='dropdown'>
+          <button className='dropbtn' onClick={handleListBookingClick}>
             Reservas
-            <i class='fa fa-caret-down'></i>
+            <i className='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'></div>
+          <div className='dropdown-content'></div>
         </div>
-        <div class='dropdown'>
-          <button class='dropbtn' onClick={handleListTopicsClick}>
+        <div className='dropdown'>
+          <button className='dropbtn' onClick={handleListTopicsClick}>
             Temáticas
-            <i class='fa fa-caret-down'></i>
+            <i className='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'></div>
+          <div className='dropdown-content'></div>
         </div>
-        <div class='dropdown'>
-          <button class='dropbtn' onClick={handleListArticlesClick}>
+        <div className='dropdown'>
+          <button className='dropbtn' onClick={handleListArticlesClick}>
             Artículos
-            <i class='fa fa-caret-down'></i>
+            <i className='fa fa-caret-down'></i>
           </button>
-          <div class='dropdown-content'></div>
+          <div className='dropdown-content'></div>
         </div>
       </div>
       {showTopicList && <TopicList />}
@@ -75,6 +75,7 @@ function AdministratorPanel() {
       {showArticleList && <ArticleList />}
     </div>
   );
+  
 }
 
 export default AdministratorPanel;

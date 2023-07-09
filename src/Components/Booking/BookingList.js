@@ -1,14 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import '../Assets/Styles/List.css';
+import '../../Assets/Styles/List.css';
 import BookingAdd from './BookingAdd';
 import BookingDelete from './BookingDelete';
+import BookingModify from './BookingModify';
 
 function BookingList() {
+
   const [bookings, setBookings] = useState([]);
+  const [clientList, setClientList] = useState([]);
+  const[topicList, setTopics] = useState([]);
 
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  useEffect(() => {
+    fetchClientList();
+  }, []);
+
+  useEffect(() => {
+    fetchTopicList();
+  }, []);
+
+  const fetchClientList = async () => {
+    try {
+      const response = await fetch('/api/client/list');
+
+      if (response.ok) {
+        const data = await response.json();
+        setClientList(data);
+        console.log(data);
+      } else {
+        throw new Error('Failed to fetch clients');
+      }
+    } catch (error) {
+      console.log('Error fetching clients:', error);
+    }
+  };
 
   async function fetchBookings() {
     try {
@@ -25,28 +53,28 @@ function BookingList() {
     }
   }
 
-  async function onClickModify(id) {
-    const endpoint = `/api/booking/update/${id}`;
-
+  async function fetchTopicList() {
     try {
-      const response = await fetch(endpoint);
+      const response = await fetch('/api/topic/list');
 
       if (response.ok) {
-        console.log('Booking updated successfully');
+        const data = await response.json();
+        setTopics(data);
       } else {
-        console.log('Error updating booking');
+        throw new Error('Failed to fetch topics');
       }
     } catch (error) {
-      console.log('Fetch error:', error);
+      console.log('Error fetching topics:', error);
     }
   }
+
 
   return (
     <div className='container'>
       <div>
         <ul className='list'>
           <h1>Reservas</h1>
-          {<BookingAdd refreshBookingList={fetchBookings}/>}
+          {<BookingAdd refreshBookingList={ fetchBookings } clientList={ clientList } topicList = { topicList }/>}
           <hr></hr>
           <li className='list-header'>
             {' '}
@@ -55,15 +83,17 @@ function BookingList() {
             <h3>Fecha</h3>
             <h3>Cliente</h3>
             <h3>Precio</h3>
+            <h3>Seña</h3>
           </li>
           {bookings.map((booking) => (
             <li key={booking.id}>
-              <p>{booking.topic.name}</p>
+            <p>{booking.topic.map((topic) => topic.name).join(', ')}</p>
               <p>{booking.date}</p>
               <p>{booking.client.name}</p>
               <p>{booking.cost}</p>
+              <p>{booking.deposit}</p>
               <p>
-                <button className="update-button" onClick={() => onClickModify(booking.id)}>Modificar</button>
+                {<BookingModify id={booking.id}  bookingData={booking} refreshBookingList={ fetchBookings } clientList={ clientList } topicList = { topicList }/>} 
               </p>
               <p>
                 {<BookingDelete id={booking.id}  bookingData={booking} refreshBookingList={ fetchBookings }/>}
