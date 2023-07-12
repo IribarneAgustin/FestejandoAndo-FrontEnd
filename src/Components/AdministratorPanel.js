@@ -3,6 +3,7 @@ import '../Assets/Styles/AdministratorPanel.css';
 import BookingList from './Booking/BookingList';
 import ArticleList from './Article/ArticleList';
 import TopicList from './TopicList';
+import ClientList from './Client/ClientList';
 
 function AdministratorPanel() {
   const [showBookingList, setShowBookingList] = useState(false);
@@ -70,6 +71,7 @@ function AdministratorPanel() {
           <div className='dropdown-content'></div>
         </div>
       </div>
+      {showClientList && <ClientList />}
       {showTopicList && <TopicList />}
       {showBookingList && <BookingList />}
       {showArticleList && <ArticleList />}

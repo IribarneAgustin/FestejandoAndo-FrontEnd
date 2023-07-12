@@ -4,23 +4,18 @@ import '../../Assets/Styles/modal.css';
 
 Modal.setAppElement('#root');
 
-function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
+function ClientUpdate({ id, clientData, refreshClientList }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [topicId, setTopicId] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
 
   const openModal = () => {
     setModalIsOpen(true);
-    setName(articleData.name);
-    setImage(articleData.image);
-    setTopicId(articleData.topic.id);
+    setName(clientData.name);
+    setLastName(clientData.lastName);
+    setEmail(clientData.email);
   };
-
-  const options = topicList.map((topic) => ({
-    value: topic.id,
-    label: topic.name,
-  }));
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -29,32 +24,30 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const articleUpdated = {
+    const clientUpdated = {
       name,
-      image,
-      topic: { id: topicId },
+      lastName,
+      email,
     };
-
     try {
-      await updateArticle(articleUpdated);
-
+      await clientUpdate(clientUpdated);
       closeModal();
-      refreshArticleList();
+      refreshClientList();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateArticle = (articleUpdated) => {
+  const clientUpdate = (clientUpdated) => {
     const requestOptions = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(articleUpdated),
+      body: JSON.stringify(clientUpdated),
     };
 
-    fetch(`/api/article/update/${id}`, requestOptions)
+    fetch(`/api/client/update/${id}`, requestOptions)
       .then((response) => {
         return response.text();
       })
@@ -63,10 +56,10 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
         window.alert(data);
       })
       .catch((error) => {
-        console.error('Error updating article:', error);
+        console.error('Error updating client:', error);
       })
       .finally(() => {
-        refreshArticleList();
+        refreshClientList();
       });
   };
 
@@ -74,7 +67,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     <>
       <button onClick={openModal}>Modificar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2 className='container'>Modificar articulo</h2>
+        <h2 className='container'>Modificar cliente</h2>
         <br />
         <form className='modal' onSubmit={handleSubmit}>
           <label>
@@ -88,20 +81,22 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
           </label>
           <br />
           <label>
-            <b>Imagen:</b>
-            <input type='text' value={image} onChange={(e) => setImage(e.target.value)} />
+            <b>Apellido:</b>
+            <input
+              type='text'
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
           </label>
           <br />
           <label>
-            <b>Tematica:</b>
-            <select value={topicId} onChange={(e) => setTopicId(e.target.value)} required>
-              <option value=''>Seleccione una tematica..</option>
-              {topicList.map((topic) => (
-                <option key={topic.id} value={topic.id}>
-                  {topic.name}
-                </option>
-              ))}
-            </select>
+            <b>Email:</b>
+            <input
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
           <br />
           <label>
@@ -115,4 +110,4 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     </>
   );
 }
-export default ArticleUpdate;
+export default ClientUpdate;
