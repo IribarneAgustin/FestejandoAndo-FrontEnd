@@ -97,7 +97,7 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
 
 
     return (
-        <div>
+        <>
             <button onClick={openModal}>Modificar</button>
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
                 <h2 className="container">Modificar Reserva</h2>
@@ -154,7 +154,7 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
                     </label>
                 </form>
             </Modal>
-        </div>
+        </>
     );
 
 }

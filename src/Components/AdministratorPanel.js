@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../Assets/Styles/AdministratorPanel.css';
 import BookingList from './Booking/BookingList';
+import TopicList from './Topic/TopicList';
 import ArticleList from './Article/ArticleList';
-import TopicList from './TopicList';
 import ClientList from './Client/ClientList';
 
 function AdministratorPanel() {
