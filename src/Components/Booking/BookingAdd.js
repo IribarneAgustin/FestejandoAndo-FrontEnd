@@ -6,7 +6,6 @@ import Select from 'react-select';
 Modal.setAppElement('#root');
 
 function BookingAdd({ refreshBookingList, clientList, topicList }) {
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [date, setDate] = useState('');
   const [clientId, setClientId] = useState('');
@@ -30,8 +29,7 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
     //Getting selected topics
     const topicsToAdd = selectedTopics.map((topic) => ({
       id: topic.value,
-    }))
-
+    }));
 
     // Create a new booking object with the form values
     const newBooking = {
@@ -56,7 +54,6 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
       setCost('');
       setSelectedTopics([]);
       closeModal();
-
     } catch (error) {
       console.log(error);
     }
@@ -82,7 +79,7 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
         refreshBookingList();
       });
   };
-  
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -95,18 +92,27 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
     <div>
       <button onClick={openModal}>Agregar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2 className="container">Nueva Reserva</h2>
+        <h2 className='container'>Nueva Reserva</h2>
         <br />
-        <form className="modal" onSubmit={handleSubmit}>
+        <form className='modal' onSubmit={handleSubmit}>
           <label>
             <b>Fecha: </b>
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+            <input
+              type='date'
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
           </label>
           <br />
           <label>
             <b>Cliente:</b>
-            <select value={clientId} onChange={(e) => setClientId(e.target.value)} required>
-              <option value="">Seleccione un cliente..</option>
+            <select
+              value={clientId}
+              onChange={(e) => setClientId(e.target.value)}
+              required
+            >
+              <option value=''>Seleccione un cliente..</option>
               {clientList.map((client) => (
                 <option key={client.id} value={client.id}>
                   {client.name}
@@ -122,28 +128,42 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
               isMulti
               value={selectedTopics}
               onChange={handleSelectChange}
-              placeholder="Seleccione las temáticas"
+              placeholder='Seleccione las temáticas'
             />
           </label>
           <br />
           <label>
             <b>Seña:</b>
-            <input type="number" min="0" value={deposit} onChange={(e) => setDeposit(e.target.value)} />
+            <input
+              type='number'
+              min='0'
+              value={deposit}
+              onChange={(e) => setDeposit(e.target.value)}
+            />
           </label>
           <br />
           <label>
             <b>Precio:</b>
-            <input type="number" min="0" value={cost} onChange={(e) => setCost(e.target.value)} />
+            <input
+              type='number'
+              min='0'
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+            />
           </label>
           <br />
           <label>
             <b>Pagado:</b>
-            <input type="checkbox" checked={isPaid} onChange={(e) => setIsPaid(e.target.checked)} />
+            <input
+              type='checkbox'
+              checked={isPaid}
+              onChange={(e) => setIsPaid(e.target.checked)}
+            />
           </label>
           <br />
           <label>
-            <button type="submit">Reservar</button>
-            <button className="cancel-button" onClick={closeModal}>
+            <button type='submit'>Reservar</button>
+            <button className='cancel-button' onClick={closeModal}>
               Cancelar
             </button>
           </label>
