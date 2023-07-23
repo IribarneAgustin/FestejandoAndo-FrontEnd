@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../Assets/Styles/AdministratorPanel.css';
 import BookingList from './Booking/BookingList';
 import ArticleList from './ArticleList';
-import TopicList from './TopicList';
+import TopicList from './Topic/TopicList';
 
 function AdministratorPanel() {
   const [showBookingList, setShowBookingList] = useState(false);
