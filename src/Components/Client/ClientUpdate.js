@@ -86,7 +86,6 @@ function ClientUpdate({ id, clientData, refreshClientList }) {
               type='text'
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              required
             />
           </label>
           <br />
@@ -96,6 +95,7 @@ function ClientUpdate({ id, clientData, refreshClientList }) {
               type='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </label>
           <br />

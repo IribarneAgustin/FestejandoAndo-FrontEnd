@@ -57,16 +57,15 @@ function ArticleList() {
             {' '}
             {/* Add a header row */}
             <h2>Nombre</h2>
-            <h2>Imagen</h2>
             <h2>Temática</h2>
-            <h2>Sugerencia</h2>
+            <h2>Imagen</h2>
+            <h2></h2>
           </li>
           {articles.map((article) => (
             <li key={article.id}>
               <p>{article.name}</p>
-              <p>{article.image}</p>
               <p>{article.topic.name}</p>
-              <p>{article.suggested}</p>
+              <img src={article.image} alt={`Image`} className='image-wrapper' />
               <p>
                 {
                   <ArticleUpdate
