@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import '../../Assets/Styles/modal.css';
+import { useDropzone } from 'react-dropzone';
+import LoadingSpinner from '../Loading/LoadingSpinner';
+import { uploadFile } from '../../Utils/firebaseConfig';
 
 Modal.setAppElement('#root');
 
@@ -9,6 +12,19 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [topicId, setTopicId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onDrop = async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    setImage(file);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png'],
+    },
+    onDrop,
+  });
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -26,22 +42,38 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     setModalIsOpen(false);
   };
 
+  const closeAndRefreshForm = () => {
+    closeModal();
+    refreshForm();
+  };
+
+  const refreshForm = () => {
+    setName('');
+    setImage('');
+  };
+
+  async function uploadImageAndGetURL(image) {
+    const url = await uploadFile(image);
+    return url;
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const articleUpdated = {
-      name,
-      image,
-      topic: { id: topicId },
-    };
-
     try {
-      await updateArticle(articleUpdated);
+      setIsLoading(true);
+      const url = await uploadImageAndGetURL(image);
 
-      closeModal();
-      refreshArticleList();
+      const articleUpdated = {
+        name,
+        image: url,
+        topic: { id: topicId },
+      };
+
+      await updateArticle(articleUpdated);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +99,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
       })
       .finally(() => {
         refreshArticleList();
+        closeAndRefreshForm();
       });
   };
 
@@ -76,41 +109,51 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2 className='container'>Modificar articulo</h2>
         <br />
-        <form className='modal' onSubmit={handleSubmit}>
-          <label>
-            <b>Nombre:</b>
-            <input
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            <b>Imagen:</b>
-            <input type='text' value={image} onChange={(e) => setImage(e.target.value)} />
-          </label>
-          <br />
-          <label>
-            <b>Tematica:</b>
-            <select value={topicId} onChange={(e) => setTopicId(e.target.value)} required>
-              <option value=''>Seleccione una tematica..</option>
-              {topicList.map((topic) => (
-                <option key={topic.id} value={topic.id}>
-                  {topic.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <br />
-          <label>
-            <button type='submit'>Actualizar</button>
-            <button className='cancel-button' onClick={closeModal}>
-              Cancelar
-            </button>
-          </label>
-        </form>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <form className='modal' onSubmit={handleSubmit}>
+            <label>
+              <b>Nombre:</b>
+              <input
+                type='text'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              <div {...getRootProps({ className: 'dropzone' })}>
+                <input {...getInputProps()} />
+                <button type='button'>Cambiar Imagen</button>
+              </div>
+            </label>
+            <br />
+            <label>
+              <b>Tematica:</b>
+              <select
+                value={topicId}
+                onChange={(e) => setTopicId(e.target.value)}
+                required
+              >
+                <option value=''>Seleccione una tematica..</option>
+                {topicList.map((topic) => (
+                  <option key={topic.id} value={topic.id}>
+                    {topic.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <br />
+            <label>
+              <button type='submit'>Actualizar</button>
+              <button className='cancel-button' onClick={closeAndRefreshForm}>
+                Cancelar
+              </button>
+            </label>
+          </form>
+        )}
       </Modal>
     </>
   );

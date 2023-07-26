@@ -1,25 +1,24 @@
-import React, { useState, useEffect  } from "react";
-import Modal from "react-modal";
-import Select from "react-select";
-import { useDropzone } from "react-dropzone";
-import { uploadFile } from "../../Utils/firebaseConfig";
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import Select from 'react-select';
+import { useDropzone } from 'react-dropzone';
+import { uploadFile } from '../../Utils/firebaseConfig';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 function TopicModify({ entityToModify, articleList, refreshTopicList }) {
-    
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [name, setName] = useState(entityToModify.name);
   const [images, setImages] = useState([]);
   const [selectedArticles, setSelectedArticles] = useState([]);
 
-   const onDrop = (acceptedFiles) => {
+  const onDrop = (acceptedFiles) => {
     setImages([...images, ...acceptedFiles]);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      "image/*": [".jpeg", ".jpg", ".png"],
+      'image/*': ['.jpeg', '.jpg', '.png'],
     },
     onDrop,
   });
@@ -36,11 +35,11 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
   const openModal = () => {
     setModalIsOpen(true);
     if (entityToModify) {
-        const selectedOptions = options.filter((article) => 
-            entityToModify.suggestionsIds.includes(article.value)
-        );
-        setSelectedArticles(selectedOptions);
-      }
+      const selectedOptions = options.filter((article) =>
+        entityToModify.suggestionsIds.includes(article.value)
+      );
+      setSelectedArticles(selectedOptions);
+    }
   };
 
   const closeModal = () => {
@@ -64,7 +63,6 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     const urls = await Promise.all(uploadPromises);
     return urls;
   }
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -94,9 +92,9 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
 
   const updateTopic = (topicData) => {
     fetch(`/api/topic/update/${topicData.id}`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(topicData),
     })
@@ -106,7 +104,7 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
         window.alert(response);
       })
       .catch((error) => {
-        console.error("Error updating topic:", error);
+        console.error('Error updating topic:', error);
       })
       .finally(() => {
         refreshTopicList();
@@ -118,13 +116,13 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     <>
       <button onClick={openModal}>Modificar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2 className="container">Modificar Temática</h2>
+        <h2 className='container'>Modificar Temática</h2>
         <br />
-        <form className="modal" onSubmit={handleSubmit}>
+        <form className='modal' onSubmit={handleSubmit}>
           <label>
             <b>Nombre: </b>
             <input
-              type="text"
+              type='text'
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -138,18 +136,17 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
               isMulti
               value={selectedArticles}
               onChange={handleSelectChange}
-              placeholder="Seleccione los artículos"
+              placeholder='Seleccione los artículos'
             />
           </label>
-          <p className="description">
-            Los artículos seleccionados se ofrecerán cada vez que se desee
-            reservar esta temática
+          <p className='description'>
+            Los artículos seleccionados se ofrecerán cada vez que se desee reservar esta
+            temática
           </p>
           <br />
-
-          <div {...getRootProps({ className: "dropzone" })}>
+          <div {...getRootProps({ className: 'dropzone' })}>
             <input {...getInputProps()} />
-            <button type="button">Agregar Imágenes</button>
+            <button type='button'>Agregar Imágenes</button>
           </div>
           <aside>
             <ul>
@@ -158,10 +155,9 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
               ))}
             </ul>
           </aside>
-
           <label>
-            <button type="submit">Modificar</button>
-            <button className="cancel-button" onClick={closeAndRefreshForm}>
+            <button type='submit'>Modificar</button>
+            <button className='cancel-button' onClick={closeAndRefreshForm}>
               Cancelar
             </button>
           </label>

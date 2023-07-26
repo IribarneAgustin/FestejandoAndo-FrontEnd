@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import '../../Assets/Styles/List.css';
 import '../../Assets/Styles/modal.css';
+import { useDropzone } from 'react-dropzone';
+import LoadingSpinner from '../Loading/LoadingSpinner';
+import { uploadFile } from '../../Utils/firebaseConfig';
 
 Modal.setAppElement('#root');
 
@@ -8,31 +12,71 @@ function ArticleAdd({ refreshArticleList, topicList }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
+  const [imageName, setImageName] = useState('');
   const [topicId, setTopicId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onDrop = async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    setImage(file);
+    setImageName(file.name); // Set the name of the selected image
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png'],
+    },
+    onDrop,
+  });
 
   const options = topicList.map((topic) => ({
     value: topic.id,
     label: topic.name,
   }));
 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const closeAndRefreshForm = () => {
+    closeModal();
+    refreshForm();
+  };
+
+  const refreshForm = () => {
+    setName('');
+    setImage('');
+  };
+
+  async function uploadImageAndGetURL(image) {
+    const url = await uploadFile(image);
+    return url;
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const newArticle = {
-      name,
-      image,
-      topic: { id: topicId },
-    };
-
     try {
-      await addArticle(newArticle);
+      setIsLoading(true);
 
-      setName('');
-      setImage('');
-      setTopicId('');
-      closeModal();
+      // Upload files to Firebase Cloud Storage
+      const url = await uploadImageAndGetURL(image);
+
+      const newArticle = {
+        name,
+        image: url,
+        topic: { id: topicId },
+      };
+
+      await addArticle(newArticle);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -54,60 +98,65 @@ function ArticleAdd({ refreshArticleList, topicList }) {
       })
       .finally(() => {
         refreshArticleList();
+        closeAndRefreshForm();
       });
   };
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
   return (
-    <div>
+    <>
       <button onClick={openModal}>Agregar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2 className='container'>Nuevo articulo</h2>
         <br />
-        <form className='modal' onSubmit={handleSubmit}>
-          <label>
-            <b>Nombre:</b>
-            <input
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            <b>Imagen:</b>
-            <input type='text' value={image} onChange={(e) => setImage(e.target.value)} />
-          </label>
-          <br />
-          <label>
-            <b>Tematica:</b>
-            <select value={topicId} onChange={(e) => setTopicId(e.target.value)} required>
-              <option value=''>Seleccione una tematica..</option>
-              {topicList.map((topic) => (
-                <option key={topic.id} value={topic.id}>
-                  {topic.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <br />
-          <label>
-            <button type='submit'>Guardar</button>
-            <button className='cancel-button' onClick={closeModal}>
-              Cancelar
-            </button>
-          </label>
-        </form>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <form className='modal' onSubmit={handleSubmit}>
+            <label>
+              <b>Nombre:</b>
+              <input
+                type='text'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              <b>Tematica:</b>
+              <select
+                value={topicId}
+                onChange={(e) => setTopicId(e.target.value)}
+                required
+              >
+                <option value=''>Seleccione una tematica..</option>
+                {topicList.map((topic) => (
+                  <option key={topic.id} value={topic.id}>
+                    {topic.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <br />
+            <div {...getRootProps({ className: 'dropzone' })}>
+              <input {...getInputProps()} />
+              <button type='button'>Agregar Imagen</button>
+            </div>
+            {image && (
+              <aside>
+                <li>{imageName}</li>
+              </aside>
+            )}
+            <label>
+              <button type='submit'>Guardar</button>
+              <button className='cancel-button' onClick={closeAndRefreshForm}>
+                Cancelar
+              </button>
+            </label>
+          </form>
+        )}
       </Modal>
-    </div>
+    </>
   );
 }
 
