@@ -29,11 +29,6 @@ function ArticleAdd({ refreshArticleList, topicList }) {
     onDrop,
   });
 
-  const options = topicList.map((topic) => ({
-    value: topic.id,
-    label: topic.name,
-  }));
-
   const openModal = () => {
     setModalIsOpen(true);
   };
