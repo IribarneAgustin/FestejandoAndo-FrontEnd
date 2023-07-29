@@ -5,10 +5,11 @@ import BookingDelete from './BookingDelete';
 import BookingModify from './BookingModify';
 
 function BookingList() {
-
   const [bookings, setBookings] = useState([]);
   const [clientList, setClientList] = useState([]);
-  const[topicList, setTopics] = useState([]);
+  const [topicList, setTopics] = useState([]);
+  const [showHistory, setShowHistory] = useState([]);
+  const [showCurrents, setShowCurrents] = useState([]);
 
   useEffect(() => {
     fetchBookings();
@@ -20,6 +21,10 @@ function BookingList() {
 
   useEffect(() => {
     fetchTopicList();
+  }, []);
+
+  useEffect(() => {
+    fetchHistory();
   }, []);
 
   const fetchClientList = async () => {
@@ -45,6 +50,22 @@ function BookingList() {
       if (response.ok) {
         const data = await response.json();
         setBookings(data);
+        setShowCurrents(data);
+      } else {
+        throw new Error('Failed to fetch bookings');
+      }
+    } catch (error) {
+      console.log('Error fetching bookings:', error);
+    }
+  }
+
+  async function fetchHistory() {
+    try {
+      const response = await fetch('/api/booking/listHistory');
+
+      if (response.ok) {
+        const data = await response.json();
+        setShowHistory(data);
       } else {
         throw new Error('Failed to fetch bookings');
       }
@@ -68,13 +89,32 @@ function BookingList() {
     }
   }
 
+  function handleClickBookingHistory() {
+    setBookings(showHistory);
+  }
+
+  function handleClickBookingActive() {
+    setBookings(showCurrents);
+  }
 
   return (
     <div className='container'>
       <div>
         <ul className='list'>
           <h1>Reservas</h1>
-          {<BookingAdd refreshBookingList={ fetchBookings } clientList={ clientList } topicList = { topicList }/>}
+          <div className='button-alignment'>
+            {
+              <BookingAdd
+                refreshBookingList={fetchBookings}
+                clientList={clientList}
+                topicList={topicList}
+              />
+            }
+          </div>
+          <button className='button-see-history' onClick={handleClickBookingHistory}>
+            Ver Historial
+          </button>
+          <button onClick={handleClickBookingActive}>Ver Actuales</button>
           <hr></hr>
           <li className='list-header'>
             {' '}
@@ -87,16 +127,30 @@ function BookingList() {
           </li>
           {bookings.map((booking) => (
             <li key={booking.id}>
-            <p>{booking.topic.map((topic) => topic.name).join(', ')}</p>
+              <p>{booking.topic.map((topic) => topic.name).join(', ')}</p>
               <p>{booking.date}</p>
               <p>{booking.client.name}</p>
               <p>{booking.cost}</p>
               <p>{booking.deposit}</p>
               <p>
-                {<BookingModify id={booking.id}  bookingData={booking} refreshBookingList={ fetchBookings } clientList={ clientList } topicList = { topicList }/>} 
+                {
+                  <BookingModify
+                    id={booking.id}
+                    bookingData={booking}
+                    refreshBookingList={fetchBookings}
+                    clientList={clientList}
+                    topicList={topicList}
+                  />
+                }
               </p>
               <p>
-                {<BookingDelete id={booking.id}  bookingData={booking} refreshBookingList={ fetchBookings }/>}
+                {
+                  <BookingDelete
+                    id={booking.id}
+                    bookingData={booking}
+                    refreshBookingList={fetchBookings}
+                  />
+                }
               </p>
             </li>
           ))}

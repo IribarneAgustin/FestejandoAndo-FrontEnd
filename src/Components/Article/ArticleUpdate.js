@@ -33,11 +33,6 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     setTopicId(articleData.topic.id);
   };
 
-  const options = topicList.map((topic) => ({
-    value: topic.id,
-    label: topic.name,
-  }));
-
   const closeModal = () => {
     setModalIsOpen(false);
   };

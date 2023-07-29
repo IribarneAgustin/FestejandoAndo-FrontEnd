@@ -166,3 +166,13 @@
   justify-content: center;
   z-index: 1;
 }
+
+.button-alignment {
+  flex: 1;
+  align-items: center;
+}
+
+.button-see-history {
+  display: flex;
+  margin-left: auto;
+}
