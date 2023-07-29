@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import '../../Assets/Styles/List.css';
-import Modal from 'react-modal';
-import '../../Assets/Styles/modal.css';
-import Select from 'react-select';
-import { useDropzone } from 'react-dropzone';
-import { uploadFile } from '../../Utils/firebaseConfig';
-import LoadingSpinner from '../Loading/LoadingSpinner';
+import React, { useState } from "react";
+import "../../Assets/Styles/List.css";
+import Modal from "react-modal";
+import "../../Assets/Styles/modal.css";
+import Select from "react-select";
+import { useDropzone } from "react-dropzone";
+import { uploadFile } from "../../Utils/firebaseConfig";
+import LoadingSpinner from "../Loading/LoadingSpinner";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 function TopicAdd({ articleList, refreshTopicList }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [images, setImages] = useState([]);
   const [selectedArticles, setSelectedArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ function TopicAdd({ articleList, refreshTopicList }) {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': ['.jpeg', '.jpg', '.png'],
+      "image/*": [".jpeg", ".jpg", ".png"],
     },
     onDrop,
   });
@@ -50,7 +50,7 @@ function TopicAdd({ articleList, refreshTopicList }) {
   };
 
   const refreshForm = () => {
-    setName('');
+    setName("");
     setImages([]);
     setSelectedArticles([]);
   };
@@ -69,8 +69,8 @@ function TopicAdd({ articleList, refreshTopicList }) {
       setIsLoading(true);
 
       // Upload files to Firebase Cloud Storage
-      const urls = await uploadImagesAndGetURLs(images); //images.map((image) => uploadFile(image));
-      console.log(urls);
+      const urls = await uploadImagesAndGetURLs(images);
+      
       // Getting selected Articles
       const articlesToAdd = selectedArticles.map((article) => ({
         id: article.value,
@@ -92,10 +92,10 @@ function TopicAdd({ articleList, refreshTopicList }) {
   };
 
   const addTopic = (topicData) => {
-    fetch('/api/topic/save', {
-      method: 'POST',
+    fetch("/api/topic/save", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(topicData),
     })
@@ -105,7 +105,7 @@ function TopicAdd({ articleList, refreshTopicList }) {
         window.alert(response);
       })
       .catch((error) => {
-        console.error('Error adding topic:', error);
+        console.error("Error adding topic:", error);
       })
       .finally(() => {
         refreshTopicList();
@@ -117,51 +117,36 @@ function TopicAdd({ articleList, refreshTopicList }) {
     <>
       <button onClick={openModal}>Agregar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2 className='container'>Nueva Temática</h2>
+        <h2 className="container">Nueva Temática</h2>
         <br />
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <form className='modal' onSubmit={handleSubmit}>
+          <form className="modal" onSubmit={handleSubmit}>
             <label>
               <b>Nombre: </b>
-              <input
-                type='text'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} required/>
             </label>
             <br />
             <label>
               <b>Artículos sugeridos: </b>
-              <Select
-                options={options}
-                isMulti
-                value={selectedArticles}
-                onChange={handleSelectChange}
-                placeholder='Seleccione los artículos'
-              />
+              <Select options={options} isMulti value={selectedArticles} onChange={handleSelectChange} placeholder="Seleccione los artículos"/>
             </label>
-            <p className='description'>
-              Los artículos seleccionados se ofrecerán cada vez que se desee reservar esta
-              temática
+            <p className="description">
+              Los artículos seleccionados se ofrecerán cada vez que se desee
+              reservar esta temática
             </p>
             <br />
-            <div {...getRootProps({ className: 'dropzone' })}>
+
+            <div {...getRootProps({ className: "dropzone" })}>
               <input {...getInputProps()} />
-              <button type='button'>Agregar Imágenes</button>
+              <button type="button">Agregar Imágenes</button>
             </div>
-            <aside>
-              <ul>
-                {images.map((image, index) => (
-                  <li key={index}>{image.name}</li>
-                ))}
-              </ul>
-            </aside>
+            <p>La temática cuenta con {images.length} imágenes </p>
+
             <label>
-              <button type='submit'>Agregar</button>
-              <button className='cancel-button' onClick={closeAndRefreshForm}>
+              <button type="submit">Agregar</button>
+              <button className="cancel-button" onClick={closeAndRefreshForm}>
                 Cancelar
               </button>
             </label>

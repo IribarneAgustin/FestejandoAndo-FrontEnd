@@ -60,12 +60,13 @@ function ArticleList() {
             <h2>Temática</h2>
             <h2>Imagen</h2>
             <h2></h2>
+            <h2></h2>
           </li>
           {articles.map((article) => (
             <li key={article.id}>
               <p>{article.name}</p>
               <p>{article.topic.name}</p>
-              <img src={article.image} alt={`Image`} className='image-wrapper' />
+              <img src={article.image} alt="article" className='image-wrapper' />
               <p>
                 {
                   <ArticleUpdate
