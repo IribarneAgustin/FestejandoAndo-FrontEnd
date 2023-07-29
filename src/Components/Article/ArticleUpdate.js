@@ -13,10 +13,12 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
   const [image, setImage] = useState('');
   const [topicId, setTopicId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [imageWasUpdated, setImageWasUpdated] = useState(false);
 
   const onDrop = async (acceptedFiles) => {
     const file = acceptedFiles[0];
     setImage(file);
+    setImageWasUpdated(true);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -32,11 +34,6 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     setImage(articleData.image);
     setTopicId(articleData.topic.id);
   };
-
-  const options = topicList.map((topic) => ({
-    value: topic.id,
-    label: topic.name,
-  }));
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -61,7 +58,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     event.preventDefault();
     try {
       setIsLoading(true);
-      const url = await uploadImageAndGetURL(image);
+      const url = imageWasUpdated ? await uploadImageAndGetURL(image) : image;
 
       const articleUpdated = {
         name,
