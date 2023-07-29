@@ -6,7 +6,6 @@ import GalleryModal from "../Gallery/GalleryModal";
 import TopicModify from "./TopicModify"
 function TopicList() {
   const [topics, setTopics] = useState([]);
-  const [suggestedArticleList, setSuggestedArticleList] = useState([]);
   const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
@@ -57,6 +56,10 @@ function TopicList() {
     const matchingArticles = articleList.filter(article => article.topic.id === topic.id);
     return matchingArticles.map(article => article.name).join(', ');
   }
+
+  function getSuggetedArticleList() {
+    return articleList.filter(article => article.suggested === true);
+  }
   
 
   return (
@@ -64,7 +67,7 @@ function TopicList() {
       <div>
         <ul className="list">
           <h1>Temáticas</h1>
-          <TopicAdd refreshTopicList={fetchTopics} articleList={suggestedArticleList} />
+          <TopicAdd refreshTopicList={fetchTopics} articleList={getSuggetedArticleList()} />
           <hr></hr>
           <li className="list-header">
             {" "}
@@ -84,7 +87,7 @@ function TopicList() {
                 <GalleryModal topic={topic}/>
               </p>
               <p>
-                <TopicModify entityToModify={topic} articleList={suggestedArticleList} refreshTopicList={fetchTopics} />
+                <TopicModify entityToModify={topic} articleList={getSuggetedArticleList()} refreshTopicList={fetchTopics} />
               </p>
               <p>
                 {<TopicDelete id={topic.id} topicData={topic} refreshTopicList={fetchTopics}/>}
