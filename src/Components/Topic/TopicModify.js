@@ -1,21 +1,26 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Select from "react-select";
 import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../Utils/firebaseConfig";
+import LoadingSpinner from "../Loading/LoadingSpinner";
 
 Modal.setAppElement("#root");
 
 function TopicModify({ entityToModify, articleList, refreshTopicList }) {
-    
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [name, setName] = useState(entityToModify.name);
   const [images, setImages] = useState([]);
+  const [newImages, setNewImages] = useState([]);
   const [selectedArticles, setSelectedArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-   const onDrop = (acceptedFiles) => {
-    setImages([...images, ...acceptedFiles]);
+  const onDrop = (acceptedFiles) => {
+    setNewImages([...newImages, ...acceptedFiles]);
   };
+
+
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -36,11 +41,12 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
   const openModal = () => {
     setModalIsOpen(true);
     if (entityToModify) {
-        const selectedOptions = options.filter((article) => 
-            entityToModify.suggestionsIds.includes(article.value)
-        );
-        setSelectedArticles(selectedOptions);
-      }
+      const selectedOptions = options.filter((article) =>
+        entityToModify.suggestionsIds.includes(article.value)
+      );
+      setSelectedArticles(selectedOptions);
+    }
+    setImages(entityToModify.images)
   };
 
   const closeModal = () => {
@@ -56,6 +62,7 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     setName(entityToModify.name);
     setImages([]);
     setSelectedArticles([]);
+    setNewImages([]);
   };
 
   // Modified code to handle multiple image uploads
@@ -64,14 +71,16 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     const urls = await Promise.all(uploadPromises);
     return urls;
   }
-  
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+
+      setIsLoading(true);
       // Upload files to Firebase Cloud Storage
-      const urls = await uploadImagesAndGetURLs(images);
+      const urls = await uploadImagesAndGetURLs(newImages);
 
       // Getting selected Articles
       const articlesToAdd = selectedArticles.map((article) => ({
@@ -83,12 +92,14 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
         id: entityToModify.id,
         name,
         suggestionsIds: articlesToAdd.map((article) => article.id),
-        images: urls,
+        images: [...images, ...urls],
       };
 
       await updateTopic(updatedTopic);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -120,55 +131,53 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2 className="container">Modificar Temática</h2>
         <br />
-        <form className="modal" onSubmit={handleSubmit}>
-          <label>
-            <b>Nombre: </b>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            <b>Artículos sugeridos: </b>
-            <Select
-              options={options}
-              isMulti
-              value={selectedArticles}
-              onChange={handleSelectChange}
-              placeholder="Seleccione los artículos"
-            />
-          </label>
-          <p className="description">
-            Los artículos seleccionados se ofrecerán cada vez que se desee
-            reservar esta temática
-          </p>
-          <br />
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <form className="modal" onSubmit={handleSubmit}>
+            <label>
+              <b>Nombre: </b>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              <b>Artículos sugeridos: </b>
+              <Select
+                options={options}
+                isMulti
+                value={selectedArticles}
+                onChange={handleSelectChange}
+                placeholder="Seleccione los artículos"
+              />
+            </label>
+            <p className="description">
+              Los artículos seleccionados se ofrecerán cada vez que se desee
+              reservar esta temática
+            </p>
+            <br />
 
-          <div {...getRootProps({ className: "dropzone" })}>
-            <input {...getInputProps()} />
-            <button type="button">Agregar Imágenes</button>
-          </div>
-          <aside>
-            <ul>
-              {images.map((image, index) => (
-                <li key={index}>{image.name}</li>
-              ))}
-            </ul>
-          </aside>
-
-          <label>
-            <button type="submit">Modificar</button>
-            <button className="cancel-button" onClick={closeAndRefreshForm}>
-              Cancelar
-            </button>
-          </label>
-        </form>
+            <div {...getRootProps({ className: "dropzone" })}>
+              <input {...getInputProps()} />
+              <button type="button">Agregar Imágenes</button>
+            </div>
+            <p>La temática cuenta con {images.length + newImages.length} imágenes </p>
+            <br />
+            <label>
+              <button type="submit">Modificar</button>
+              <button className="cancel-button" onClick={closeAndRefreshForm}>
+                Cancelar
+              </button>
+            </label>
+          </form>)}
       </Modal>
     </>
   );
 }
 
-export default TopicModify;
+export { TopicModify as default };
+

@@ -69,8 +69,8 @@ function TopicAdd({ articleList, refreshTopicList }) {
       setIsLoading(true);
 
       // Upload files to Firebase Cloud Storage
-      const urls = await uploadImagesAndGetURLs(images); //images.map((image) => uploadFile(image));
-      console.log(urls);
+      const urls = await uploadImagesAndGetURLs(images);
+      
       // Getting selected Articles
       const articlesToAdd = selectedArticles.map((article) => ({
         id: article.value,
@@ -142,13 +142,7 @@ function TopicAdd({ articleList, refreshTopicList }) {
               <input {...getInputProps()} />
               <button type="button">Agregar Imágenes</button>
             </div>
-            <aside>
-              <ul>
-                {images.map((image, index) => (
-                  <li key={index}>{image.name}</li>
-                ))}
-              </ul>
-            </aside>
+            <p>La temática cuenta con {images.length} imágenes </p>
 
             <label>
               <button type="submit">Agregar</button>
