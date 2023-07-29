@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import Select from 'react-select';
-import { useDropzone } from 'react-dropzone';
-import { uploadFile } from '../../Utils/firebaseConfig';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import Select from "react-select";
+import { useDropzone } from "react-dropzone";
+import { uploadFile } from "../../Utils/firebaseConfig";
+import LoadingSpinner from "../Loading/LoadingSpinner";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 function TopicModify({ entityToModify, articleList, refreshTopicList }) {
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [name, setName] = useState(entityToModify.name);
   const [images, setImages] = useState([]);
+  const [newImages, setNewImages] = useState([]);
   const [selectedArticles, setSelectedArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = (acceptedFiles) => {
-    setImages([...images, ...acceptedFiles]);
+    setNewImages([...newImages, ...acceptedFiles]);
   };
+
+
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': ['.jpeg', '.jpg', '.png'],
+      "image/*": [".jpeg", ".jpg", ".png"],
     },
     onDrop,
   });
@@ -40,6 +46,7 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
       );
       setSelectedArticles(selectedOptions);
     }
+    setImages(entityToModify.images)
   };
 
   const closeModal = () => {
@@ -55,6 +62,7 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     setName(entityToModify.name);
     setImages([]);
     setSelectedArticles([]);
+    setNewImages([]);
   };
 
   // Modified code to handle multiple image uploads
@@ -64,12 +72,15 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     return urls;
   }
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+
+      setIsLoading(true);
       // Upload files to Firebase Cloud Storage
-      const urls = await uploadImagesAndGetURLs(images);
+      const urls = await uploadImagesAndGetURLs(newImages);
 
       // Getting selected Articles
       const articlesToAdd = selectedArticles.map((article) => ({
@@ -81,20 +92,22 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
         id: entityToModify.id,
         name,
         suggestionsIds: articlesToAdd.map((article) => article.id),
-        images: urls,
+        images: [...images, ...urls],
       };
 
       await updateTopic(updatedTopic);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const updateTopic = (topicData) => {
     fetch(`/api/topic/update/${topicData.id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(topicData),
     })
@@ -104,7 +117,7 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
         window.alert(response);
       })
       .catch((error) => {
-        console.error('Error updating topic:', error);
+        console.error("Error updating topic:", error);
       })
       .finally(() => {
         refreshTopicList();
@@ -116,55 +129,55 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     <>
       <button onClick={openModal}>Modificar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2 className='container'>Modificar Temática</h2>
+        <h2 className="container">Modificar Temática</h2>
         <br />
-        <form className='modal' onSubmit={handleSubmit}>
-          <label>
-            <b>Nombre: </b>
-            <input
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            <b>Artículos sugeridos: </b>
-            <Select
-              options={options}
-              isMulti
-              value={selectedArticles}
-              onChange={handleSelectChange}
-              placeholder='Seleccione los artículos'
-            />
-          </label>
-          <p className='description'>
-            Los artículos seleccionados se ofrecerán cada vez que se desee reservar esta
-            temática
-          </p>
-          <br />
-          <div {...getRootProps({ className: 'dropzone' })}>
-            <input {...getInputProps()} />
-            <button type='button'>Agregar Imágenes</button>
-          </div>
-          <aside>
-            <ul>
-              {images.map((image, index) => (
-                <li key={index}>{image.name}</li>
-              ))}
-            </ul>
-          </aside>
-          <label>
-            <button type='submit'>Modificar</button>
-            <button className='cancel-button' onClick={closeAndRefreshForm}>
-              Cancelar
-            </button>
-          </label>
-        </form>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <form className="modal" onSubmit={handleSubmit}>
+            <label>
+              <b>Nombre: </b>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              <b>Artículos sugeridos: </b>
+              <Select
+                options={options}
+                isMulti
+                value={selectedArticles}
+                onChange={handleSelectChange}
+                placeholder="Seleccione los artículos"
+              />
+            </label>
+            <p className="description">
+              Los artículos seleccionados se ofrecerán cada vez que se desee
+              reservar esta temática
+            </p>
+            <br />
+
+            <div {...getRootProps({ className: "dropzone" })}>
+              <input {...getInputProps()} />
+              <button type="button">Agregar Imágenes</button>
+            </div>
+            <p>La temática cuenta con {images.length + newImages.length} imágenes </p>
+            <br />
+            <label>
+              <button type="submit">Modificar</button>
+              <button className="cancel-button" onClick={closeAndRefreshForm}>
+                Cancelar
+              </button>
+            </label>
+          </form>)}
       </Modal>
     </>
   );
 }
 
-export default TopicModify;
+export { TopicModify as default };
+
