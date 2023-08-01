@@ -114,7 +114,9 @@ function BookingList() {
           <button className='button-see-history' onClick={handleClickBookingHistory}>
             Ver Historial
           </button>
-          <button onClick={handleClickBookingActive}>Ver Actuales</button>
+          <button className='button-see-history' onClick={handleClickBookingActive}>
+            Ver Actuales
+          </button>
           <hr></hr>
           <li className='list-header'>
             {' '}

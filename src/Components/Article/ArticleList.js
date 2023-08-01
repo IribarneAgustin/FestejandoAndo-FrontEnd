@@ -66,7 +66,7 @@ function ArticleList() {
             <li key={article.id}>
               <p>{article.name}</p>
               <p>{article.topic.name}</p>
-              <img src={article.image} alt="article" className='image-wrapper' />
+              <img src={article.image} alt='article' className='image-wrapper' />
               <p>
                 {
                   <ArticleUpdate
