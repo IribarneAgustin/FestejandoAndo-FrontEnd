@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import "../../Assets/Styles/galleryModal.css";
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import '../../Assets/Styles/galleryModal.css';
 
 const GalleryModal = ({ topic }) => {
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState([]);
 
   const openModal = () => {
     setModalIsOpen(true);
-    setImages(topic.images)
+    setImages(topic.images);
   };
 
   const closeModal = () => {
@@ -23,15 +22,13 @@ const GalleryModal = ({ topic }) => {
     setImages(updatedImages);
     topic.images = updatedImages;
     updateTopic(topic);
-
-
   };
 
   const updateTopic = (topicData) => {
     fetch(`/api/topic/update/${topicData.id}`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(topicData),
     })
@@ -41,32 +38,32 @@ const GalleryModal = ({ topic }) => {
         window.alert(response);
       })
       .catch((error) => {
-        console.error("Error updating topic:", error);
-      })
-
-  }
+        console.error('Error updating topic:', error);
+      });
+  };
 
   return (
     <>
       <button onClick={openModal}>Ver Fotos</button>
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <div className="gallery-image-container">
+        <div className='gallery-image-container'>
           {images.map((image, index) => (
-            <div key={index}
-              className="gallery-image-item"
+            <div
+              key={index}
+              className='gallery-image-item'
               onMouseEnter={() => setDeleteIndex(index)}
               onMouseLeave={() => setDeleteIndex(null)}
             >
               <img
                 src={image}
                 alt={index + 1}
-                className="gallery-image"
+                className='gallery-image'
                 onClick={(e) => e.stopPropagation()}
               />
               {deleteIndex === index && (
                 <div
-                  className="delete-button"
+                  className='delete-button'
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteClick(image);
@@ -79,7 +76,7 @@ const GalleryModal = ({ topic }) => {
           ))}
         </div>
         <div>
-          <button className="cancel-button gallery-button" onClick={closeModal}>
+          <button className='cancel-button gallery-button' onClick={closeModal}>
             Volver
           </button>
         </div>
