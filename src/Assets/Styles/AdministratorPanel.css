@@ -50,4 +50,8 @@
   .nav-item a:hover {
     text-decoration: underline;
   }
-  
+
+  .logout-button {
+    position: absolute;
+    right: 16px;
+  }
