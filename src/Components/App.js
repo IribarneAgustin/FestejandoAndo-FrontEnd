@@ -4,7 +4,7 @@ import AdministratorPanel from '././AdministratorPanel';
 import WebSite from './WebSite/WebSite';
 
 function App() {
-  return <AdministratorPanel />;
+  return <WebSite />;
 }
 
 export default App;

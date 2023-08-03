@@ -1,0 +1,24 @@
+.hero {
+  height: 600px;
+}
+
+.tematicas {
+  height: 600px;
+  background-color: bisque;
+}
+.calendario {
+  height: 600px;
+  background-color: beige;
+}
+.contacto {
+  height: 600px;
+  background-color: blanchedalmond;
+}
+.quienes-somos {
+  height: 600px;
+  background-color: antiquewhite;
+}
+
+.main-nav li {
+  cursor: pointer;
+}
