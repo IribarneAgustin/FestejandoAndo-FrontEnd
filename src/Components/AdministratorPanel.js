@@ -1,15 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Assets/Styles/AdministratorPanel.css';
 import BookingList from './Booking/BookingList';
 import TopicList from './Topic/TopicList';
 import ArticleList from './Article/ArticleList';
 import ClientList from './Client/ClientList';
+import { useNavigate } from 'react-router-dom';
+import { FaPowerOff } from 'react-icons/fa';
 
 function AdministratorPanel() {
   const [showBookingList, setShowBookingList] = useState(false);
   const [showClientList, setShowClientList] = useState(false);
   const [showArticleList, setShowArticleList] = useState(false);
   const [showTopicList, setShowTopicList] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchLoginForm();
+  }, []);
+
+
+  //We are using basic auth with navigator form
+  async function fetchLoginForm() {
+
+    try {
+      const response = await fetch('/api/', {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        console.log('login failed');
+        navigate("/");
+      } else {
+        setShowClientList(true);
+      }
+
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+
+  }
+
+  const logout = () => {
+    navigate("/");
+  }
 
   const handleListBookingClick = () => {
     setShowClientList(false);
@@ -45,28 +79,30 @@ function AdministratorPanel() {
         <div className='dropdown'>
           <button className='dropbtn' onClick={handleListClientsClick}>
             Clientes
-            <i className='fa fa-caret-down'></i>
           </button>
           <div className='dropdown-content'></div>
         </div>
         <div className='dropdown'>
           <button className='dropbtn' onClick={handleListBookingClick}>
             Reservas
-            <i className='fa fa-caret-down'></i>
           </button>
           <div className='dropdown-content'></div>
         </div>
         <div className='dropdown'>
           <button className='dropbtn' onClick={handleListTopicsClick}>
             Temáticas
-            <i className='fa fa-caret-down'></i>
           </button>
           <div className='dropdown-content'></div>
         </div>
         <div className='dropdown'>
           <button className='dropbtn' onClick={handleListArticlesClick}>
             Artículos
-            <i className='fa fa-caret-down'></i>
+          </button>
+          <div className='dropdown-content'></div>
+        </div>
+        <div className='dropdown'>
+          <button className='dropbtn logout-button' onClick={logout}>
+          <FaPowerOff/><br></br>Salir
           </button>
           <div className='dropdown-content'></div>
         </div>
