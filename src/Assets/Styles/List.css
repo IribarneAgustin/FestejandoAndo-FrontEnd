@@ -173,6 +173,13 @@
 }
 
 .button-see-history {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
   display: flex;
   margin-left: auto;
+}
+
+.button-see-history:hover {
+  background-color: #ccc;
 }
