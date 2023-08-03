@@ -22,3 +22,34 @@
 .main-nav li {
   cursor: pointer;
 }
+
+.logo img {
+  width: 150px;
+  height: 80px;
+  position: absolute;
+  left: 10px;
+}
+
+/* SCROLL TO TOP BUTTON */
+.top-btn-position {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+}
+
+.top-btn-style {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.top-btn-style:hover {
+  animation: none;
+  background-color: #333;
+  color: #fff;
+  border: 2px solid #333;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { useRef } from 'react';
 import Navbar from '../WebSite/Navbar';
 import Tematicas from './Tematicas';
+import ScrollToTop from './ScrollToTop';
 
 function WebSite() {
   const tematicas = useRef(null);
@@ -38,6 +39,7 @@ function WebSite() {
       <div>
         <Navbar onNavLinkClick={handleNavLinkClick} />
       </div>
+      <ScrollToTop />
       <div className='hero'></div>
       <div>
         <div ref={tematicas} className='tematicas'>

@@ -15,7 +15,7 @@ function NavBar({ onNavLinkClick }) {
             <div className='col-12'>
               <nav className='main-nav'>
                 <a className='logo'>
-                  <img src='../../Assets/Styles/Images/logo.png'></img>
+                  <img src='/logo.png' alt='logo'></img>
                 </a>
                 <ul className='nav'>
                   <li

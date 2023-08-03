@@ -18,10 +18,8 @@ function AdministratorPanel() {
     fetchLoginForm();
   }, []);
 
-
   //We are using basic auth with navigator form
   async function fetchLoginForm() {
-
     try {
       const response = await fetch('/api/', {
         method: 'GET',
@@ -29,21 +27,19 @@ function AdministratorPanel() {
 
       if (!response.ok) {
         console.log('login failed');
-        navigate("/");
+        navigate('/');
       } else {
         setShowClientList(true);
       }
-
     } catch (error) {
       console.error('Login error:', error);
       throw error;
     }
-
   }
 
   const logout = () => {
-    navigate("/");
-  }
+    navigate('/');
+  };
 
   const handleListBookingClick = () => {
     setShowClientList(false);
@@ -102,7 +98,8 @@ function AdministratorPanel() {
         </div>
         <div className='dropdown'>
           <button className='dropbtn logout-button' onClick={logout}>
-          <FaPowerOff/><br></br>Salir
+            <FaPowerOff />
+            <br></br>Salir
           </button>
           <div className='dropdown-content'></div>
         </div>
