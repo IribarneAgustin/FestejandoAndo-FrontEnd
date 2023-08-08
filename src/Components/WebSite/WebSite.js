@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRef } from 'react';
 import Navbar from '../WebSite/Navbar';
+import CarouselImages from './Carousel-images';
 import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
 
@@ -40,24 +41,28 @@ function WebSite() {
         <Navbar onNavLinkClick={handleNavLinkClick} />
       </div>
       <ScrollToTop />
-      <div className='hero'></div>
       <div>
-        <div ref={tematicas} className='tematicas'>
-          {<Tematicas />}
+        <div className='hero'>
+          <CarouselImages />
         </div>
-        <div ref={calendario} className='calendario'>
-          <h3>CALENDARIO</h3>
+        <div>
+          <div ref={tematicas} className='tematicas'>
+            {<Tematicas />}
+          </div>
+          <div ref={calendario} className='calendario'>
+            <h3>CALENDARIO</h3>
+          </div>
+          <div ref={contacto} className='contacto'>
+            CONTACTO
+          </div>
+          <div ref={quienesSomos} className='quienes-somos'>
+            QUIENES SOMOS
+          </div>
         </div>
-        <div ref={contacto} className='contacto'>
-          CONTACTO
-        </div>
-        <div ref={quienesSomos} className='quienes-somos'>
-          QUIENES SOMOS
-        </div>
+        <footer>
+          <p>&copy; {new Date().getFullYear()} My Website. All rights reserved.</p>
+        </footer>
       </div>
-      <footer>
-        <p>&copy; {new Date().getFullYear()} My Website. All rights reserved.</p>
-      </footer>
     </>
   );
 }

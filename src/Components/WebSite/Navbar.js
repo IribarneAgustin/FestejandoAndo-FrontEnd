@@ -1,51 +1,47 @@
 import React from 'react';
-import '../../Assets/Styles/Styles-WebSite/template.css';
-import '../../Assets/Styles/Styles-WebSite/WebSite.css';
-import '../../Assets/Styles/Styles-WebSite/font-awesome.css';
-import '../../Assets/Styles/Styles-WebSite/carousel.css';
-import '../../Assets/Styles/Styles-WebSite/flex-slider.css';
-import '../../Assets/Styles/Styles-WebSite/lightbox.css';
+import { Link } from 'react-router-dom';
+import '../../Assets/Styles/WebSite/WebSite.css';
+import '../../Assets/Styles/WebSite/Navbar.css';
 
 function NavBar({ onNavLinkClick }) {
   return (
     <>
-      <header className='header-area header-sticky background-header'>
+      <header className='header-area'>
         <div className='container'>
-          <div className='row'>
-            <div className='col-12'>
-              <nav className='main-nav'>
-                <a className='logo'>
-                  <img src='/logo.png' alt='logo'></img>
-                </a>
-                <ul className='nav'>
-                  <li
-                    className='scroll-to-section'
-                    onClick={() => onNavLinkClick('tematicas')}
-                  >
-                    <a>TEMATICAS</a>
-                  </li>
-                  <li
-                    className='scroll-to-section'
-                    onClick={() => onNavLinkClick('calendario')}
-                  >
-                    <a>CALENDARIO</a>
-                  </li>
-                  <li
-                    className='scroll-to-section'
-                    onClick={() => onNavLinkClick('contacto')}
-                  >
-                    <a>CONTACTO</a>
-                  </li>
-                  <li
-                    className='scroll-to-section'
-                    onClick={() => onNavLinkClick('quienesSomos')}
-                  >
-                    <a>QUIENES SOMOS</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
+          <a className='logo'>
+            <img src='/logo.png' alt='logo'></img>
+          </a>
+          <nav className='main-nav'>
+            <ul className='nav'>
+              <li className='scroll-to-section'>
+                <Link to='/'>HOME</Link>
+              </li>
+              <li
+                className='scroll-to-section'
+                onClick={() => onNavLinkClick('tematicas')}
+              >
+                <a>TEMATICAS</a>
+              </li>
+              <li
+                className='scroll-to-section'
+                onClick={() => onNavLinkClick('calendario')}
+              >
+                <a>CALENDARIO</a>
+              </li>
+              <li
+                className='scroll-to-section'
+                onClick={() => onNavLinkClick('contacto')}
+              >
+                <a>CONTACTO</a>
+              </li>
+              <li
+                className='scroll-to-section'
+                onClick={() => onNavLinkClick('quienesSomos')}
+              >
+                <a>QUIENES SOMOS</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </header>
     </>
