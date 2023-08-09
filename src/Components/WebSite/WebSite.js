@@ -37,14 +37,12 @@ function WebSite() {
   };
   return (
     <>
-      <div>
+      <header className='header'>
         <Navbar onNavLinkClick={handleNavLinkClick} />
-      </div>
+      </header>
       <ScrollToTop />
       <div>
-        <div className='hero'>
-          <CarouselImages />
-        </div>
+        <CarouselImages />
         <div>
           <div ref={tematicas} className='tematicas'>
             {<Tematicas />}
@@ -59,10 +57,10 @@ function WebSite() {
             QUIENES SOMOS
           </div>
         </div>
-        <footer>
-          <p>&copy; {new Date().getFullYear()} My Website. All rights reserved.</p>
-        </footer>
       </div>
+      <footer>
+        <p>&copy; {new Date().getFullYear()} My Website. All rights reserved.</p>
+      </footer>
     </>
   );
 }

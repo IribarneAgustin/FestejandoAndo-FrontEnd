@@ -1,34 +1,34 @@
 import React from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import '../../Assets/Styles/WebSite/WebSite.css';
 import { Carousel } from 'react-responsive-carousel';
 import logo from '../../Assets/Styles/Images/logo.png';
 
 function CarouselImages() {
   return (
-    <div className='carousel'>
-      <Carousel
-        width={'35%'}
-        showArrows
-        autoPlay
-        interval={1000}
-        infiniteLoop
-        centerSlidePercentage={'50%'}
-        centerMode
-      >
-        <div>
-          <img src={logo} />
-          <p className='legend'>Legend 1</p>
-        </div>
-        <div>
-          <img src={logo} />
-          <p className='legend'>Legend 2</p>
-        </div>
-        <div>
-          <img src={logo} />
-          <p className='legend'>Legend 3</p>
-        </div>
-      </Carousel>
-    </div>
+    <Carousel
+      width={'50%'}
+      showArrows
+      autoPlay
+      interval={3000}
+      infiniteLoop
+      centerSlidePercentage={100}
+      centerMode
+      showStatus={false}
+    >
+      <div>
+        <img src={logo} alt='logo 1' />
+      </div>
+      <div>
+        <img src={logo} alt='logo 2' />
+      </div>
+      <div>
+        <img src={logo} alt='logo 3' />
+      </div>
+      <div>
+        <img src={logo} alt='logo 4' />
+      </div>
+    </Carousel>
   );
 }
 
