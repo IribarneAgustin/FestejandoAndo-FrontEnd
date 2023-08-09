@@ -27,7 +27,6 @@ const ScrollToTop = () => {
       {showScrollTopButton && (
         <FaAngleDoubleUp className='top-btn-position top-btn-style' onClick={scrollTop} />
       )}
-      ;
     </>
   );
 };
