@@ -9,25 +9,57 @@ function NavBar({ onNavLinkClick }) {
   const handleClick = () => {
     setClicked(!clicked);
   };
+  const handleNavLinkClick = () => {
+    setClicked(false); // Cierra el menú cuando se hace clic en un enlace
+  };
 
   return (
     <>
-      <div className='container'>
+      <div className='container-navbar'>
         <a className='logo'>
           <img src='/logo.png' alt='logo'></img>
         </a>
-        <nav className='nav'>
+        <nav className={`nav ${clicked ? 'active' : ''}`}>
           <Link to='/' className='nav-link'>
             HOME
           </Link>
-          <a onClick={() => onNavLinkClick('tematicas')}>TEMATICAS</a>
-          <a onClick={() => onNavLinkClick('calendario')}>CALENDARIO</a>
-          <a onClick={() => onNavLinkClick('contacto')}>CONTACTO</a>
-          <a onClick={() => onNavLinkClick('quienesSomos')}>QUIENES SOMOS</a>
+          <a
+            onClick={() => {
+              onNavLinkClick('tematicas');
+              handleNavLinkClick();
+            }}
+          >
+            TEMATICAS
+          </a>
+          <a
+            onClick={() => {
+              onNavLinkClick('calendario');
+              handleNavLinkClick();
+            }}
+          >
+            CALENDARIO
+          </a>
+          <a
+            onClick={() => {
+              onNavLinkClick('contacto');
+              handleNavLinkClick();
+            }}
+          >
+            CONTACTO
+          </a>
+          <a
+            onClick={() => {
+              onNavLinkClick('quienesSomos');
+              handleNavLinkClick();
+            }}
+          >
+            QUIENES SOMOS
+          </a>
         </nav>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
+        <div className={`initial ${clicked ? 'active' : ''}`}></div>
       </div>
     </>
   );

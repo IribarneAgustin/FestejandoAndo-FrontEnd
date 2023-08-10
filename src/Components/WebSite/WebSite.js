@@ -37,9 +37,7 @@ function WebSite() {
   };
   return (
     <>
-      <header className='header'>
-        <Navbar onNavLinkClick={handleNavLinkClick} />
-      </header>
+      <Navbar onNavLinkClick={handleNavLinkClick} />
       <ScrollToTop />
       <div>
         <CarouselImages />
