@@ -5,7 +5,7 @@ import TopicList from './Topic/TopicList';
 import ArticleList from './Article/ArticleList';
 import ClientList from './Client/ClientList';
 import { useNavigate } from 'react-router-dom';
-import { FaPowerOff } from 'react-icons/fa';
+import Navbar from './AdminPanel/Navbar';
 
 function AdministratorPanel() {
   const [showBookingList, setShowBookingList] = useState(false);
@@ -37,9 +37,6 @@ function AdministratorPanel() {
     }
   }
 
-  const logout = () => {
-    navigate('/');
-  };
 
   const handleListBookingClick = () => {
     setShowClientList(false);
@@ -70,45 +67,14 @@ function AdministratorPanel() {
   };
 
   return (
-    <div className='admin-panel'>
-      <div className='navbar'>
-        <div className='dropdown'>
-          <button className='dropbtn' onClick={handleListClientsClick}>
-            Clientes
-          </button>
-          <div className='dropdown-content'></div>
-        </div>
-        <div className='dropdown'>
-          <button className='dropbtn' onClick={handleListBookingClick}>
-            Reservas
-          </button>
-          <div className='dropdown-content'></div>
-        </div>
-        <div className='dropdown'>
-          <button className='dropbtn' onClick={handleListTopicsClick}>
-            Temáticas
-          </button>
-          <div className='dropdown-content'></div>
-        </div>
-        <div className='dropdown'>
-          <button className='dropbtn' onClick={handleListArticlesClick}>
-            Artículos
-          </button>
-          <div className='dropdown-content'></div>
-        </div>
-        <div className='dropdown'>
-          <button className='dropbtn logout-button' onClick={logout}>
-            <FaPowerOff />
-            <br></br>Salir
-          </button>
-          <div className='dropdown-content'></div>
-        </div>
-      </div>
-      {showClientList && <ClientList />}
-      {showTopicList && <TopicList />}
-      {showBookingList && <BookingList />}
-      {showArticleList && <ArticleList />}
-    </div>
+  <>
+    <Navbar clientsClick={handleListClientsClick} bookingsClick={handleListBookingClick} topicsClick={handleListTopicsClick} articlesClick={handleListArticlesClick} ></Navbar>
+    <br></br>
+    {showClientList && <ClientList />}
+    {showTopicList && <TopicList />}
+    {showBookingList && <BookingList />}
+    {showArticleList && <ArticleList />}
+  </>
   );
 }
 
