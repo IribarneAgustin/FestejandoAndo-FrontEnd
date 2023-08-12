@@ -57,7 +57,10 @@ function WebSite() {
         </div>
       </div>
       <footer>
-        <p>&copy; {new Date().getFullYear()} My Website. All rights reserved.</p>
+        <p className='copyright-Festejando'>
+          &copy; Copyright Mobiliario infantil | Festejando Ando -{' '}
+          {new Date().getFullYear()}
+        </p>
       </footer>
     </>
   );
