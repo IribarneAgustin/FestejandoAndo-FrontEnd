@@ -4,7 +4,7 @@ import Navbar from '../WebSite/Navbar';
 import CarouselImages from './Carousel-images';
 import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
-
+import Layout from './Layout';
 function WebSite() {
   const tematicas = useRef(null);
   const calendario = useRef(null);
@@ -37,31 +37,28 @@ function WebSite() {
   };
   return (
     <>
-      <Navbar onNavLinkClick={handleNavLinkClick} />
-      <ScrollToTop />
-      <div>
-        <CarouselImages />
+      <Layout>
+        <Navbar onNavLinkClick={handleNavLinkClick} />
+        <ScrollToTop />
         <div>
-          <div ref={tematicas} className='tematicas'>
-            {<Tematicas />}
-          </div>
-          <div ref={calendario} className='calendario'>
-            <h3>CALENDARIO</h3>
-          </div>
-          <div ref={contacto} className='contacto'>
-            CONTACTO
-          </div>
-          <div ref={quienesSomos} className='quienes-somos'>
-            QUIENES SOMOS
+          <CarouselImages />
+          <div>
+            <div ref={tematicas}>
+              {<Tematicas />}
+            </div>
+            <div ref={calendario} className='calendario'>
+              <h3>CALENDARIO</h3>
+            </div>
+            <div ref={contacto} className='contacto'>
+              CONTACTO
+            </div>
+            <div ref={quienesSomos} className='quienes-somos'>
+              QUIENES SOMOS
+            </div>
           </div>
         </div>
-      </div>
-      <footer>
-        <p className='copyright-Festejando'>
-          &copy; Copyright Mobiliario infantil | Festejando Ando -{' '}
-          {new Date().getFullYear()}
-        </p>
-      </footer>
+      </Layout>
+
     </>
   );
 }
