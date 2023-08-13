@@ -1,16 +1,15 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../../Assets/Styles/adminNavbar.css";
-import "../../Assets/Styles/Images/logo.png";
+import logo from "../../Assets/Styles/Images/logo.png"; // Make sure to import the logo properly
 import { useNavigate } from 'react-router-dom';
 
-function Navbar({ clientsClick,bookingsClick,topicsClick,articlesClick }) {
+function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }) {
     const navRef = useRef();
     const navigate = useNavigate();
+
     const showNavbar = () => {
-        navRef.current.classList.toggle(
-            "responsive_nav"
-        );
+        navRef.current.classList.toggle("responsive_admin-nav"); // Updated class name
     };
 
     const logout = () => {
@@ -18,26 +17,26 @@ function Navbar({ clientsClick,bookingsClick,topicsClick,articlesClick }) {
     };
 
     return (
-        <header>
-            <img onClick={logout} src="logo.png"></img>
-            <nav ref={navRef}>
-                <a onClick={clientsClick} >Clientes</a>
-                <a onClick={bookingsClick} >Reservas</a>
-                <a onClick={topicsClick} >Temáticas</a>
-                <a onClick={articlesClick}>Artículos</a>
+        <admin-header>
+            <img onClick={logout} src={logo} alt="Logo"></img>
+            <admin-nav ref={navRef}>
+                <a onClick={() => { clientsClick(); showNavbar(); }}>Clientes</a>
+                <a onClick={() => { bookingsClick(); showNavbar(); }}>Reservas</a>
+                <a onClick={() => { topicsClick(); showNavbar(); }}>Temáticas</a>
+                <a onClick={() => { articlesClick(); showNavbar(); }}>Artículos</a>
                 <button
-                    className="nav-btn nav-close-btn"
+                    className="admin-nav-btn nav-close-btn"
                     onClick={showNavbar}>
                     <FaTimes />
                 </button>
-            </nav>
+            </admin-nav>
             <button
-                className="nav-btn"
+                className="admin-nav-btn"
                 onClick={showNavbar}>
                 <FaBars />
             </button>
-        </header>
+        </admin-header>
     );
 }
 
-export default Navbar;
+export default AdminNavbar;

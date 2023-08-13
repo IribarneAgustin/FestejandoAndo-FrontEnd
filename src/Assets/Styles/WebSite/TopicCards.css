@@ -1,0 +1,92 @@
+/* TopicCards component */
+.TopicCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 3rem; /* gap between columns */
+  justify-content: center;
+  margin: 0 2.5rem;
+}
+
+/* Product List */
+.productList {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+}
+
+/* Product Card */
+.productCard {
+  position: relative;
+  background-color: #f0f0f0;
+  margin: 1rem;
+  flex: 1 0 25rem;
+  max-width: 30rem;
+  max-height: 50rem;
+  transition: 0.2s;
+}
+
+.productCard:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0.5rem 0.75rem 1.5rem #bbbbbb;
+}
+
+.productImage {
+  margin-top: 0rem;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.productCard__button {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.productCard__button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.productCard__content {
+  margin: 2rem;
+}
+
+.productName {
+  font-size: 1.5rem;
+}
+
+.displayStack__1,
+.displayStack__2 {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productPrice {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.productSales {
+  font-size: 1.1rem;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+  .TopicCards {
+    grid-template-columns: 1fr;
+  }
+
+  .productList {
+    flex-direction: column;
+    align-items: center;
+  }
+}
