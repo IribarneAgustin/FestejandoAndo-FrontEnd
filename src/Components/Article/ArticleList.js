@@ -54,18 +54,16 @@ function ArticleList() {
           {<ArticleAdd refreshArticleList={fetchArticles} topicList={topicList} />}
           <hr></hr>
           <li className='list-header'>
-            {' '}
-            {/* Add a header row */}
             <h2>Nombre</h2>
             <h2>Temática</h2>
+            <h2>Cantidad</h2>
             <h2>Imagen</h2>
-            <h2></h2>
-            <h2></h2>
           </li>
           {articles.map((article) => (
             <li key={article.id}>
               <p>{article.name}</p>
               <p>{article.topic.name}</p>
+              <p>{article.quantity}</p>
               <img src={article.image} alt='article' className='image-wrapper' />
               <p>
                 {

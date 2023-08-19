@@ -15,6 +15,8 @@ function TopicAdd({ articleList, refreshTopicList }) {
   const [images, setImages] = useState([]);
   const [selectedArticles, setSelectedArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [description, setDescription] = useState('');
+  const [suggestedQuantity, setSuggestedQuantity] = useState('');
 
   const onDrop = (acceptedFiles) => {
     setImages([...images, ...acceptedFiles]);
@@ -53,6 +55,8 @@ function TopicAdd({ articleList, refreshTopicList }) {
     setName('');
     setImages([]);
     setSelectedArticles([]);
+    setDescription('');
+    setSuggestedQuantity('');
   };
 
   // Modified code to handle multiple image uploads
@@ -81,6 +85,8 @@ function TopicAdd({ articleList, refreshTopicList }) {
         name,
         suggestionsIds: articlesToAdd.map((article) => article.id),
         images: urls,
+        description: description,
+        suggestedQuantity,
       };
 
       await addTopic(newTopic);
@@ -124,7 +130,7 @@ function TopicAdd({ articleList, refreshTopicList }) {
         ) : (
           <form className='modal' onSubmit={handleSubmit}>
             <label>
-              <b>Nombre: </b>
+              <b>Nombre </b>
               <input
                 type='text'
                 value={name}
@@ -134,7 +140,7 @@ function TopicAdd({ articleList, refreshTopicList }) {
             </label>
             <br />
             <label>
-              <b>Artículos sugeridos: </b>
+              <b>Artículos sugeridos </b>
               <Select
                 options={options}
                 isMulti
@@ -147,6 +153,29 @@ function TopicAdd({ articleList, refreshTopicList }) {
               Los artículos seleccionados se ofrecerán cada vez que se desee reservar esta
               temática
             </p>
+            <br />
+
+            <label>
+              <b>Descripción</b>
+              <textarea
+                type='text'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+
+            <label>
+              <b>Cantidad de niños</b>
+              <input
+                type='number'
+                min="0"
+                value={suggestedQuantity}
+                onChange={(e) => setSuggestedQuantity(e.target.value)}
+                required
+              />
+            </label>
             <br />
 
             <div {...getRootProps({ className: 'dropzone' })}>

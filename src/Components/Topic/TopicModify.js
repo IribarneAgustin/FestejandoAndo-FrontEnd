@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Select from 'react-select';
 import { useDropzone } from 'react-dropzone';
@@ -14,6 +14,8 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
   const [newImages, setNewImages] = useState([]);
   const [selectedArticles, setSelectedArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [description, setDescription] = useState(entityToModify.description != null ? entityToModify.description : '');
+  const [suggestedQuantity, setSuggestedQuantity] = useState(entityToModify.suggestedQuantity != null ? entityToModify.suggestedQuantity : '');
 
   const onDrop = (acceptedFiles) => {
     setNewImages([...newImages, ...acceptedFiles]);
@@ -60,6 +62,8 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
     setImages([]);
     setSelectedArticles([]);
     setNewImages([]);
+    setDescription(entityToModify.description);
+    setSuggestedQuantity(entityToModify.suggestedQuantity)
   };
 
   // Modified code to handle multiple image uploads
@@ -88,6 +92,8 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
         name,
         suggestionsIds: articlesToAdd.map((article) => article.id),
         images: [...images, ...urls],
+        description,
+        suggestedQuantity,
       };
 
       await updateTopic(updatedTopic);
@@ -122,7 +128,7 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
 
   return (
     <>
-      <button onClick={openModal}>Modificar</button>
+      <button className='update-button' onClick={openModal}>Modificar</button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2 className='container'>Modificar Temática</h2>
         <br />
@@ -154,6 +160,29 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
               Los artículos seleccionados se ofrecerán cada vez que se desee reservar esta
               temática
             </p>
+            <br />
+
+            <label>
+              <b>Descripción:</b>
+              <textarea
+                type='text'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+
+            <label>
+              <b>Cantidad de niños</b>
+              <input
+                type='number'
+                min="0"
+                value={suggestedQuantity}
+                onChange={(e) => setSuggestedQuantity(e.target.value)}
+                required
+              />
+            </label>
             <br />
 
             <div {...getRootProps({ className: 'dropzone' })}>

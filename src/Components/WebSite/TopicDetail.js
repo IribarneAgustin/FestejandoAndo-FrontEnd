@@ -5,14 +5,18 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '../../Assets/Styles/WebSite/WebSite.css'
 import '../Loading/LoadingSpinner'
 import LoadingSpinner from "../Loading/LoadingSpinner";
-import { FaMoneyBill,FaCreditCard    } from 'react-icons/fa'; 
 import Layout from './Layout';
 function TopicDetail() {
   const { id } = useParams();
   const [topic, setTopic] = useState(null);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     fetchTopicById(id);
+  }, [id]);
+
+  useEffect(() => {
+    fetchArticlesByTopicId(id);
   }, [id]);
 
   async function fetchTopicById(id) {
@@ -30,36 +34,58 @@ function TopicDetail() {
     }
   }
 
+  async function fetchArticlesByTopicId(id) {
+    try {
+      const response = await fetch(`/api/article/listByTopic/${id}`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setArticles(data);
+      } else {
+        throw new Error('Failed to fetch topics');
+      }
+    } catch (error) {
+      console.log('Error fetching topics:', error);
+    }
+  }
+
   if (!topic) {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
   return (
     <Layout>
-    <div className="topic-detail-container">
-      <div className="carousel-container">
-        <Carousel
-          showArrows
-          autoPlay
-          interval={3000}
-          infiniteLoop
-          centerMode={false}
-          showStatus={false}
-        >
-          {topic.images.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={`Image ${index}`} className="carousel-image" />
-            </div>
-          ))}
-        </Carousel>
+      <div className="topic-detail-container">
+        <div className="carousel-container">
+          <Carousel
+            showArrows
+            autoPlay
+            interval={3000}
+            infiniteLoop
+            centerMode={false}
+            showStatus={false}
+          >
+            {topic.images.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt={`Tematica ${index}`} className="carousel-image" />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        <div className="topic-info">
+          <h1>{topic.name}</h1>
+          <p>{topic.description}Descripcion</p>
+          <b>Cantidad de niños sugerida: </b>{topic.suggestedQuantity}
+          <h3>Artículos</h3>
+          <ul>
+            {articles.map((article, index) => (
+              <li key={index}>{article.name + ' (' + (article.quantity != null ? article.quantity  : 0) + ')'}</li>
+            ))}
+          </ul>
+
+
+        </div>
       </div>
-      <div className="topic-info">
-        <h1>{topic.name}</h1>
-        <h4><FaCreditCard  /> Todos los medios de pago</h4>
-        <h4><FaMoneyBill  /> 15% de descuento pagando en efectivo o transferencia</h4>
-        <h3>Armamos presupuesto a tu medida</h3>
-      </div>
-    </div>
     </Layout>
   );
 }

@@ -16,8 +16,7 @@ export function TopicCards(props) {
                 <div className='productCard__content'>
                     <h3 className='productName'>{props.name}</h3>
                     <div className='displayStack__1'>
-                        <div className='productPrice'>${props.price}</div>
-                        <div className='productSales'>{props.totalSales}</div>
+                        <div className='productDescription'>{props.description}</div>
                     </div>
                     <div className='displayStack__2'>
                         <button className="productCard__button">Agregar al carrito <FaShoppingCart /></button>

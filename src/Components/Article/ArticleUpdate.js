@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import '../../Assets/Styles/modal.css';
 import { useDropzone } from 'react-dropzone';
@@ -14,6 +14,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
   const [topicId, setTopicId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [imageWasUpdated, setImageWasUpdated] = useState(false);
+  const [quantity, setQuantity] = useState('');
 
   const onDrop = async (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -33,6 +34,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     setName(articleData.name);
     setImage(articleData.image);
     setTopicId(articleData.topic.id);
+    setQuantity(articleData.quantity);
   };
 
   const closeModal = () => {
@@ -47,6 +49,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
   const refreshForm = () => {
     setName('');
     setImage('');
+    setQuantity('');
   };
 
   async function uploadImageAndGetURL(image) {
@@ -64,6 +67,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
         name,
         image: url,
         topic: { id: topicId },
+        quantity,
       };
 
       await updateArticle(articleUpdated);
@@ -116,6 +120,17 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
                 type='text'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              <b>Cantidad:</b>
+              <input
+                type='number'
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
                 required
               />
             </label>
