@@ -64,7 +64,6 @@
 .nav-link {
   text-decoration: none;
   color: #252525;
-  transition: color 0.3s ease;
 }
 
 .nav-link:hover {
