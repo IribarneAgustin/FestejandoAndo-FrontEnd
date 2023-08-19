@@ -77,37 +77,33 @@ function TopicList() {
           />
           <hr></hr>
           <li className='list-header'>
-            {' '}
-            {/* Add a header row */}
             <h2>Nombre</h2>
             <h2>Artículos</h2>
             <h2>Artículos sugeridos</h2>
-            <h2></h2>
-            <h2></h2>
+            <h2>Cantidad de niños</h2>
+            <h2>Descripción</h2>
           </li>
           {topics.map((topic) => (
             <li key={topic.id}>
               <p>{topic.name}</p>
               <p>{getArticleNamesByTopic(topic)}</p>
               <p>{getSuggestedArticleNames(topic)}</p>
+              <p>{topic.suggestedQuantity}</p>
+              <p>{topic.description}</p>
               <p>
                 <GalleryModal topic={topic} />
               </p>
               <p>
                 <TopicModify
-                  entityToModify={topic}
-                  articleList={getSuggetedArticleList()}
-                  refreshTopicList={fetchTopics}
-                />
-              </p>
-              <p>
-                {
-                  <TopicDelete
+                    entityToModify={topic}
+                    articleList={getSuggetedArticleList()}
+                    refreshTopicList={fetchTopics}
+                  />                
+                <TopicDelete
                     id={topic.id}
                     topicData={topic}
                     refreshTopicList={fetchTopics}
                   />
-                }
               </p>
             </li>
           ))}

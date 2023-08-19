@@ -97,7 +97,7 @@
 
 /*DELETE BUTTON*/
 
-.delete-button {
+.red-button {
   background-color: #f44336;
   color: #ffffff;
   border: none;
@@ -107,16 +107,16 @@
   cursor: pointer;
 }
 
-.delete-button:hover {
+.red-button:hover {
   background-color: #d32f2f;
 }
 
-.delete-button:focus {
+.red-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.3);
 }
 
-.delete-button:active {
+.red-button:active {
   background-color: #b71c1c;
 }
 
@@ -182,4 +182,9 @@
 
 .button-see-history:hover {
   background-color: #ccc;
+}
+
+textarea {
+  height: 100px;
+  width:auto
 }

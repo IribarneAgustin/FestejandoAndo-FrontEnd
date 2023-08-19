@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { TopicCards } from './TopicCards';
-import Layout from './Layout';
 
 function Tematicas() {
 
@@ -33,9 +32,7 @@ function Tematicas() {
           id={topic.id}
           image={topic.images}
           name={topic.name}
-          price={topic.price}
-          totalSales={1000}
-          timeLeft={1}
+          description={topic.description}
           rating={5}
         />
       ))}

@@ -21,7 +21,7 @@
   margin: 1rem;
   flex: 1 0 25rem;
   max-width: 30rem;
-  max-height: 50rem;
+  max-height: 100rem;
   transition: 0.2s;
 }
 
@@ -70,12 +70,7 @@
   align-items: center;
 }
 
-.productPrice {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.productSales {
+.productDescription {
   font-size: 1.1rem;
 }
 

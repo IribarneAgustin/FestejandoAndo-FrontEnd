@@ -36,7 +36,7 @@ const TopicDelete = ({ id, topicData, refreshTopicList }) => {
       
       
 
-  return <button onClick={handleDelete}>Eliminar</button>;
+  return <button className='red-button' onClick={handleDelete}>Eliminar</button>;
 };
 
 TopicDelete.propTypes = {
