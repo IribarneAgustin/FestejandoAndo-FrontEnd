@@ -5,6 +5,8 @@ import CarouselImages from './Carousel-images';
 import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
 import Layout from './Layout';
+import InteractiveCalendar from './InteractiveCalendar';
+
 function WebSite() {
   const tematicas = useRef(null);
   const calendario = useRef(null);
@@ -47,7 +49,7 @@ function WebSite() {
               {<Tematicas />}
             </div>
             <div ref={calendario} className='calendario'>
-              <h3>CALENDARIO</h3>
+              {<InteractiveCalendar/>}
             </div>
             <div ref={contacto} className='contacto'>
               CONTACTO

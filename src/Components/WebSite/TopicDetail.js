@@ -6,6 +6,8 @@ import '../../Assets/Styles/WebSite/WebSite.css'
 import '../Loading/LoadingSpinner'
 import LoadingSpinner from "../Loading/LoadingSpinner";
 import Layout from './Layout';
+import { FaShoppingCart } from 'react-icons/fa';
+
 function TopicDetail() {
   const { id } = useParams();
   const [topic, setTopic] = useState(null);
@@ -82,6 +84,8 @@ function TopicDetail() {
               <li key={index}>{article.name + ' (' + (article.quantity != null ? article.quantity  : 0) + ')'}</li>
             ))}
           </ul>
+
+          <button className="productCard__button">Agregar al carrito <FaShoppingCart /></button>
 
 
         </div>
