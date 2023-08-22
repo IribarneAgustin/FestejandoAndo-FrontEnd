@@ -62,7 +62,7 @@ function TopicList() {
     return matchingArticles.map((article) => article.name).join(', ');
   }
 
-  function getSuggetedArticleList() {
+  function getSuggestedArticleList() {
     return articleList.filter((article) => article.suggested === true);
   }
 
@@ -73,7 +73,7 @@ function TopicList() {
           <h1>Temáticas</h1>
           <TopicAdd
             refreshTopicList={fetchTopics}
-            articleList={getSuggetedArticleList()}
+            articleList={getSuggestedArticleList()}
           />
           <hr></hr>
           <li className='list-header'>
@@ -95,15 +95,15 @@ function TopicList() {
               </p>
               <p>
                 <TopicModify
-                    entityToModify={topic}
-                    articleList={getSuggetedArticleList()}
-                    refreshTopicList={fetchTopics}
-                  />                
+                  entityToModify={topic}
+                  articleList={getSuggestedArticleList()}
+                  refreshTopicList={fetchTopics}
+                />
                 <TopicDelete
-                    id={topic.id}
-                    topicData={topic}
-                    refreshTopicList={fetchTopics}
-                  />
+                  id={topic.id}
+                  topicData={topic}
+                  refreshTopicList={fetchTopics}
+                />
               </p>
             </li>
           ))}

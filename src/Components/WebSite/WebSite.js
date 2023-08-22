@@ -45,11 +45,9 @@ function WebSite() {
         <div>
           <CarouselImages />
           <div>
-            <div ref={tematicas}>
-              {<Tematicas />}
-            </div>
+            <div ref={tematicas}>{<Tematicas />}</div>
             <div ref={calendario} className='calendario'>
-              {<InteractiveCalendar/>}
+              {<InteractiveCalendar />}
             </div>
             <div ref={contacto} className='contacto'>
               CONTACTO
@@ -60,7 +58,6 @@ function WebSite() {
           </div>
         </div>
       </Layout>
-
     </>
   );
 }

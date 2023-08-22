@@ -4,7 +4,6 @@ import { Calendar } from 'react-modern-calendar-datepicker';
 import { myCustomLocale } from './MyCustomLocale';
 
 const InteractiveCalendar = () => {
-
   const [selectedDay, setSelectedDay] = useState();
 
   const handleDateChange = (selectedDay) => {
@@ -14,15 +13,14 @@ const InteractiveCalendar = () => {
     }
   };
 
-
   return (
-    <div className="calendar-container">
+    <div className='calendar-container'>
       <Calendar
         locale={myCustomLocale}
         value={selectedDay}
         onChange={handleDateChange}
         shouldHighlightWeekends
-        colorPrimary="#e67e22"
+        colorPrimary='#e67e22'
       />
     </div>
   );
