@@ -81,23 +81,11 @@
   margin: 20px;
 }
 
-.topic-info h1{
+.topic-info h1 {
   text-transform: uppercase;
 }
 
-.topic-info h4{
-  color:rgb(252, 162, 27);
+.topic-info h4 {
+  color: rgb(252, 162, 27);
   font-weight: bold;
-}
-
-footer {
-  background-color: #ffffff; 
-  color: rgb(0, 0, 0); 
-  padding: 20px; 
-  text-align: center; 
-}
-
-footer p {
-  margin: 0; 
-  font-size: 14px;
 }
