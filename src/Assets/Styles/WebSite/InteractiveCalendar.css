@@ -240,11 +240,11 @@
 
 .Calendar__monthText {
   margin-left: -0.3em;
-  color:black;
+  color: black;
 }
 .Calendar__yearText:last-child {
   margin-right: -0.3em;
-  color:black;
+  color: black;
 }
 
 .Calendar__monthYear.-shown > *:hover,
@@ -391,7 +391,7 @@
   min-width: 85%;
   padding: 0.2em 0.5em;
   border-radius: 8.5px;
-  color:black
+  color: black;
 }
 
 .Calendar__monthSelector.-open,
@@ -422,11 +422,13 @@
   font-size: 1.3em;
   min-width: 70%;
   transition: 0.3s;
-  color:black
+  color: black;
 }
 
-.Calendar__monthSelectorItem:not(.-active) .Calendar__monthSelectorItemText:not(:disabled):hover,
-.Calendar__yearSelectorItem:not(.-active) .Calendar__yearSelectorText:not(:disabled):hover {
+.Calendar__monthSelectorItem:not(.-active)
+  .Calendar__monthSelectorItemText:not(:disabled):hover,
+.Calendar__yearSelectorItem:not(.-active)
+  .Calendar__yearSelectorText:not(:disabled):hover {
   background: #f5f5f5;
 }
 
@@ -545,7 +547,9 @@
   height: 2.45em;
 }
 
-.Calendar__day:not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween):not(.-selected):hover {
+.Calendar__day:not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(
+    .-selectedBetween
+  ):not(.-selected):hover {
   background: #eaeaea;
   border-radius: 50%;
   color: var(--cl-color-black);
@@ -587,11 +591,15 @@
   border-bottom-left-radius: 100em;
 }
 
-.Calendar__day.-weekend:not(.-selected):not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween) {
+.Calendar__day.-weekend:not(.-selected):not(.-blank):not(.-selectedStart):not(
+    .-selectedEnd
+  ):not(.-selectedBetween) {
   color: var(--cl-color-error);
 }
 
-.Calendar__day.-weekend.-today:not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween)::after {
+.Calendar__day.-weekend.-today:not(.-selectedStart):not(.-selectedEnd):not(
+    .-selectedBetween
+  )::after {
   background: var(--cl-color-error);
 }
 
@@ -610,7 +618,9 @@
   position: relative;
 }
 
-.Calendar__day.-today:not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween)::after {
+.Calendar__day.-today:not(.-selectedStart):not(.-selectedEnd):not(
+    .-selectedBetween
+  )::after {
   content: '';
   position: absolute;
   bottom: 0.2em;
@@ -624,7 +634,9 @@
   transition: 0.2s;
 }
 
-.Calendar__day.-today:hover:not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween)::after {
+.Calendar__day.-today:hover:not(.-selectedStart):not(.-selectedEnd):not(
+    .-selectedBetween
+  )::after {
   opacity: 0;
 }
 
@@ -679,4 +691,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh; /* Set the height as per your requirement */
+  position: relative;
+  z-index: 0;
 }

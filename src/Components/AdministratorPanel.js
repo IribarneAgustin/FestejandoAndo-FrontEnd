@@ -37,7 +37,6 @@ function AdministratorPanel() {
     }
   }
 
-
   const handleListBookingClick = () => {
     setShowClientList(false);
     setShowTopicList(false);
@@ -67,14 +66,19 @@ function AdministratorPanel() {
   };
 
   return (
-  <>
-    <Navbar clientsClick={handleListClientsClick} bookingsClick={handleListBookingClick} topicsClick={handleListTopicsClick} articlesClick={handleListArticlesClick} ></Navbar>
-    <br></br>
-    {showClientList && <ClientList />}
-    {showTopicList && <TopicList />}
-    {showBookingList && <BookingList />}
-    {showArticleList && <ArticleList />}
-  </>
+    <>
+      <Navbar
+        clientsClick={handleListClientsClick}
+        bookingsClick={handleListBookingClick}
+        topicsClick={handleListTopicsClick}
+        articlesClick={handleListArticlesClick}
+      ></Navbar>
+      <br></br>
+      {showClientList && <ClientList />}
+      {showTopicList && <TopicList />}
+      {showBookingList && <BookingList />}
+      {showArticleList && <ArticleList />}
+    </>
   );
 }
 

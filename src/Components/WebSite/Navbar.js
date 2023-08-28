@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import '../../Assets/Styles/WebSite/WebSite.css';
 import '../../Assets/Styles/WebSite/Navbar.css';
 import BurguerButton from './BurguerButton';
+import ShoppingCart from './ShoppingCart';
 
 function NavBar({ onNavLinkClick }) {
   const [clicked, setClicked] = useState(false);
+
   const handleClick = () => {
     setClicked(!clicked);
   };
@@ -56,6 +58,9 @@ function NavBar({ onNavLinkClick }) {
             QUIENES SOMOS
           </a>
         </nav>
+        <div>
+          <ShoppingCart />
+        </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>

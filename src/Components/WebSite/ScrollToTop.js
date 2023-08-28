@@ -5,14 +5,19 @@ import '../../Assets/Styles/WebSite/WebSite.css';
 const ScrollToTop = () => {
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
 
+  const settingScroll = () => {
+    if (window.scrollY > 300) {
+      setShowScrollTopButton(true);
+    } else {
+      setShowScrollTopButton(false);
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        setShowScrollTopButton(true);
-      } else {
-        setShowScrollTopButton(false);
-      }
-    });
+    window.addEventListener('scroll', settingScroll);
+    return () => {
+      window.removeEventListener('scroll', settingScroll);
+    };
   }, []);
 
   const scrollTop = () => {
