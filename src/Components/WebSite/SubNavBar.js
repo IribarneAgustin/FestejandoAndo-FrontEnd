@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../Assets/Styles/WebSite/WebSite.css';
 import '../../Assets/Styles/WebSite/Navbar.css';
 import BurguerButton from './BurguerButton';
+import ShoppingCart from './ShoppingCart';
 import { useNavigate } from 'react-router-dom';
 
 function SubNavBar() {
@@ -12,9 +13,9 @@ function SubNavBar() {
     setClicked(!clicked);
   };
 
-const home = () => {
+  const home = () => {
     navigate('/');
-};
+  };
 
   return (
     <>
@@ -27,10 +28,13 @@ const home = () => {
             VOLVER ATRÁS
           </Link>
         </nav>
+        <div>
+          <ShoppingCart />
+        </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
-        <div className={`initial ${clicked ? 'active' : ''}`}></div>
+        <div className={`initial ${clicked ? 'sub-active' : ''}`}></div>
       </div>
     </>
   );

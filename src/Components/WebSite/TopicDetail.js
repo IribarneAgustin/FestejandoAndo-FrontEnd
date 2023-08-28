@@ -15,9 +15,6 @@ function TopicDetail() {
 
   useEffect(() => {
     fetchTopicById(id);
-  }, [id]);
-
-  useEffect(() => {
     fetchArticlesByTopicId(id);
   }, [id]);
 

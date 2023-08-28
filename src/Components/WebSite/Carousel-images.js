@@ -7,6 +7,7 @@ import logo from '../../Assets/Styles/Images/logo.png';
 function CarouselImages() {
   return (
     <Carousel
+      className='festejando-carousel'
       width={'50%'}
       showArrows
       autoPlay

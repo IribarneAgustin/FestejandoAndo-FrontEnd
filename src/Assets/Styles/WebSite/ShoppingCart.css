@@ -1,0 +1,45 @@
+.cart-icon {
+  cursor: pointer;
+  margin: 25px;
+  font-size: 30px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1) translate(0, -5px);
+  color: #a89a6b;
+}
+
+.shopping-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.close-icon {
+  cursor: pointer;
+  font-size: 34px;
+  color: #333;
+}
+
+.close-icon:hover {
+  color: red;
+}
+
+.shopping-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 35%; /* O el porcentaje deseado para la mitad derecha */
+  background-color: white;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.shopping-modal.active {
+  transform: translateX(0); /* Muestra el modal deslizándolo desde la derecha */
+  border: 1px solid rgba(78, 78, 78, 0.1);
+}
