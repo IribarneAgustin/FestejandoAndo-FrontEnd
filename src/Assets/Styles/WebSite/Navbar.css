@@ -16,6 +16,7 @@
 .logo img {
   width: 150px;
   height: 80px;
+  cursor: pointer;
 }
 
 .nav {
