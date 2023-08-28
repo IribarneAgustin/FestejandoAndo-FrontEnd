@@ -5,11 +5,9 @@ import CarouselImages from './Carousel-images';
 import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
 import Layout from './Layout';
-import InteractiveCalendar from './InteractiveCalendar';
 
 function WebSite() {
   const tematicas = useRef(null);
-  const calendario = useRef(null);
   const contacto = useRef(null);
   const quienesSomos = useRef(null);
 
@@ -24,9 +22,6 @@ function WebSite() {
       case 'tematicas':
         scrollToSection(tematicas);
         break;
-      case 'calendario':
-        scrollToSection(calendario);
-        break;
       case 'contacto':
         scrollToSection(contacto);
         break;
@@ -39,16 +34,13 @@ function WebSite() {
   };
   return (
     <>
-      <Layout>
+      <Layout showSubNav={false}>
         <Navbar onNavLinkClick={handleNavLinkClick} />
         <ScrollToTop />
         <div>
           <CarouselImages />
           <div>
             <div ref={tematicas}>{<Tematicas />}</div>
-            <div ref={calendario} className='calendario'>
-              {<InteractiveCalendar />}
-            </div>
             <div ref={contacto} className='contacto'>
               CONTACTO
             </div>
