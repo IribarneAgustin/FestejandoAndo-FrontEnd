@@ -7,7 +7,6 @@ import '../Loading/LoadingSpinner';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
-import SubNavBar from './SubNavBar';
 
 function TopicDetail() {
   const { id } = useParams();
@@ -54,8 +53,7 @@ function TopicDetail() {
   }
 
   return (
-    <Layout>
-      <SubNavBar />
+    <Layout showSubNav={true}>
       <div className='topic-detail-container'>
         <div className='carousel-container'>
           <Carousel

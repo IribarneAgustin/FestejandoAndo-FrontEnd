@@ -1,11 +1,13 @@
 import '../../Assets/Styles/WebSite/Layout.css';
 import '../../Assets/Styles/WebSite/WebSite.css';
 import { FaInstagram, FaRegEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import SubNavBar from './SubNavBar';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, showSubNav }) => {
   return (
     <>
-      {children}
+    {showSubNav && <SubNavBar /> } 
+    {children}
       <footer className='footer'>
         <ul className='contact-icons'>
           <li>
@@ -20,8 +22,8 @@ const Layout = ({ children }) => {
           </li>
           <li>
             <FaRegEnvelope className='icon-link' />
-            <a className='mail-text' href='mailto:festejandoando@gmail.com'>
-              festejandoando@gmail.com
+            <a className='mail-text' href='mailto:festejandoando_@gmail.com'>
+              festejandoando_@gmail.com
             </a>
           </li>
           <li>
