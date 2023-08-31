@@ -5,6 +5,8 @@ import CarouselImages from './Carousel-images';
 import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
 import Layout from './Layout';
+import store from './Redux/store';
+import { Provider } from 'react-redux';
 
 function WebSite() {
   const tematicas = useRef(null);
@@ -34,22 +36,24 @@ function WebSite() {
   };
   return (
     <>
-      <Layout showSubNav={false}>
-        <Navbar onNavLinkClick={handleNavLinkClick} />
-        <ScrollToTop />
-        <div>
-          <CarouselImages />
+      <Provider store={store}>
+        <Layout showSubNav={false}>
+          <Navbar onNavLinkClick={handleNavLinkClick} />
+          <ScrollToTop />
           <div>
-            <div ref={tematicas}>{<Tematicas />}</div>
-            <div ref={contacto} className='contacto'>
-              CONTACTO
-            </div>
-            <div ref={quienesSomos} className='quienes-somos'>
-              QUIENES SOMOS
+            <CarouselImages />
+            <div>
+              <div ref={tematicas}>{<Tematicas />}</div>
+              <div ref={contacto} className='contacto'>
+                CONTACTO
+              </div>
+              <div ref={quienesSomos} className='quienes-somos'>
+                QUIENES SOMOS
+              </div>
             </div>
           </div>
-        </div>
-      </Layout>
+        </Layout>
+      </Provider>
     </>
   );
 }

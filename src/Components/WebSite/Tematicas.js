@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { TopicCards } from './TopicCards';
 
 function Tematicas() {
-
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -25,8 +24,8 @@ function Tematicas() {
   }
 
   return (
-    <div className="TopicCards">
-      {topics.map(topic => (
+    <div className='TopicCards'>
+      {topics.map((topic) => (
         <TopicCards
           key={topic.id}
           id={topic.id}

@@ -18,10 +18,52 @@
   padding-left: 20px;
 }
 
+.shopping-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  height: 85%;
+}
+
+.shopping-footer {
+  margin-top: auto; /* Push the footer to the bottom */
+  text-align: center;
+  padding: 10px;
+}
+
+.saved-topic {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.topic-image {
+  padding-left: 15px;
+  max-width: 100px;
+  height: auto;
+}
+
+.topic-name {
+  flex: 1;
+  text-transform: uppercase;
+}
+
 .close-icon {
   cursor: pointer;
   font-size: 34px;
   color: #333;
+}
+
+.remove-icon {
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+}
+
+.remove-icon:hover {
+  background-color: transparent;
 }
 
 .close-icon:hover {
@@ -33,7 +75,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 35%; /* O el porcentaje deseado para la mitad derecha */
+  width: 40%; /* O el porcentaje deseado para la mitad derecha */
   background-color: white;
   border-radius: 10px;
   overflow: auto;
@@ -42,4 +84,42 @@
 .shopping-modal.active {
   transform: translateX(0); /* Muestra el modal deslizándolo desde la derecha */
   border: 1px solid rgba(78, 78, 78, 0.1);
+}
+
+.clean-cart-button {
+  font-size: 18px;
+  background-color: gray;
+  padding: 10px;
+  margin: 0;
+  transition: background-color 0.3s ease;
+}
+
+.clean-cart-button:hover {
+  background-color: rgb(134, 133, 133);
+  color: black;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .shopping-container {
+    padding: 10px; /* Add padding to the container */
+  }
+
+  .saved-topic {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .topic-image {
+    max-width: 80px; /* Adjust image size */
+    margin-right: 10px;
+  }
+
+  .topic-name {
+    margin: 0; /* Reset margin */
+  }
+
+  .shopping-modal {
+    width: 100%;
+  }
 }
