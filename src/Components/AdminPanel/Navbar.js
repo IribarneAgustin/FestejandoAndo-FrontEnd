@@ -25,7 +25,6 @@ function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }
             clientsClick();
             showNavbar();
           }}
-          href='Clientes'
         >
           Clientes
         </a>
@@ -34,7 +33,6 @@ function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }
             bookingsClick();
             showNavbar();
           }}
-          href='Reservas'
         >
           Reservas
         </a>
@@ -43,7 +41,6 @@ function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }
             topicsClick();
             showNavbar();
           }}
-          href='Tematicas'
         >
           Temáticas
         </a>
@@ -52,7 +49,6 @@ function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }
             articlesClick();
             showNavbar();
           }}
-          href='Atributos'
         >
           Artículos
         </a>
