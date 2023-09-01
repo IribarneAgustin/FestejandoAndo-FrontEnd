@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { FiTrash } from 'react-icons/fi';
 import { BiShoppingBag } from 'react-icons/bi';
@@ -13,6 +13,27 @@ function ShoppingCart() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
+  const totalItemsInCart = cartItems.length;
+
+  useEffect(() => {
+    const disableBodyOverflow = () => {
+      document.body.style.overflow = 'hidden';
+    };
+
+    const enableBodyOverflow = () => {
+      document.body.style.overflow = 'auto';
+    };
+
+    if (modalIsOpen) {
+      disableBodyOverflow();
+    } else {
+      enableBodyOverflow();
+    }
+
+    return () => {
+      enableBodyOverflow();
+    };
+  }, [modalIsOpen]);
 
   const handleDeleteFromCart = (id) => {
     dispatch(deleteFromCart(id));
@@ -34,6 +55,7 @@ function ShoppingCart() {
     <>
       <div className='cart-icon' onClick={openModal}>
         <BiShoppingBag />
+        {<span className='cart-icon-count'>{totalItemsInCart}</span>}
       </div>
       <Modal
         className={`shopping-modal ${modalIsOpen ? 'active' : ''}`}

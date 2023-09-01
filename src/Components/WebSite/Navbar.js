@@ -13,6 +13,7 @@ function NavBar({ onNavLinkClick }) {
   const handleClick = () => {
     setClicked(!clicked);
   };
+
   const handleNavLinkClick = () => {
     setClicked(false); // Cierra el menú cuando se hace clic en un enlace
   };
