@@ -15,10 +15,8 @@ export function TopicCards({ id, image, name, description, rating }) {
   }
 
   const handleAddToCart = () => {
-    if (!itemExistsInCart) {
-      const item = { id, name, image };
-      dispatch(addToCart(item)); // Dispatch the addToCart action with the topic data
-    }
+    const item = { id, name, image };
+    dispatch(addToCart(item)); // Dispatch the addToCart action with the topic data
   };
 
   return (

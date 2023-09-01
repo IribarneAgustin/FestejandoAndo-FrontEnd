@@ -3,15 +3,20 @@ import { useParams } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '../../Assets/Styles/WebSite/WebSite.css';
+import '../../Assets/Styles/WebSite/TopicCards.css';
 import '../Loading/LoadingSpinner';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../WebSite/Redux/ShoppingAction';
 
 function TopicDetail() {
   const { id } = useParams();
   const [topic, setTopic] = useState(null);
   const [articles, setArticles] = useState([]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cartItems);
 
   useEffect(() => {
     fetchTopicById(id);
@@ -52,6 +57,17 @@ function TopicDetail() {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
+  const itemExistsInCart = cartItems.some((item) => item.id === topic.id);
+
+  const handleAddToCart = () => {
+    const item = {
+      id: topic.id,
+      name: topic.name,
+      image: topic.images,
+    };
+    dispatch(addToCart(item)); // Dispatch the addToCart action with the topic data
+  };
+
   return (
     <Layout showSubNav={true}>
       <div className='topic-detail-container'>
@@ -87,11 +103,17 @@ function TopicDetail() {
               </li>
             ))}
           </ul>
-
-          <button className='productCard__button'>
-            Agregar al carrito <FaShoppingCart />
-          </button>
         </div>
+      </div>
+      <div className='center-button-container'>
+        <button
+          className='productDetail__button'
+          disabled={itemExistsInCart}
+          onClick={handleAddToCart}
+        >
+          {itemExistsInCart ? 'Agregado ' : 'Agregar al Carrito '}
+          <FaShoppingCart />
+        </button>
       </div>
     </Layout>
   );
