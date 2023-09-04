@@ -6,6 +6,7 @@ import { IoMdClose } from 'react-icons/io';
 import '../../Assets/Styles/WebSite/ShoppingCart.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteFromCart, clearCart } from '../WebSite/Redux/ShoppingAction';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -14,6 +15,7 @@ function ShoppingCart() {
   const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
   const totalItemsInCart = cartItems.length;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const disableBodyOverflow = () => {
@@ -42,6 +44,10 @@ function ShoppingCart() {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
+  const handleInitPurhcase = () => {
+    navigate("/bookingForm");
+  }
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -82,6 +88,10 @@ function ShoppingCart() {
             ))}
           </div>
           <div className='shopping-footer'>
+            <button className='purchase-button' onClick={() => handleInitPurhcase()}>
+              INICIAR COMPRA
+            </button>
+            <br/>
             <button className='clean-cart-button' onClick={() => handleClearCart()}>
               Vaciar carrito
             </button>
