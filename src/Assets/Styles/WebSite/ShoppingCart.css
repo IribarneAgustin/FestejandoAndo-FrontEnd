@@ -106,6 +106,7 @@
   background-color: gray;
   padding: 10px;
   margin: 0;
+  margin-bottom: 1rem;
   transition: background-color 0.3s ease;
 }
 
@@ -138,4 +139,25 @@
   .shopping-modal {
     width: 100%;
   }
+}
+
+.purchase-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.purchase-button:hover {
+  background-color: #0056b3;
+}
+
+.purchase-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }

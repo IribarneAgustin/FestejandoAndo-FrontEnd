@@ -6,16 +6,19 @@ import Layout from './Layout';
 import DatePicker, { registerLocale } from "react-datepicker";
 import el from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { useSelector, useDispatch } from 'react-redux';
+import { clearCart } from '../WebSite/Redux/ShoppingAction';
+import { useNavigate } from 'react-router-dom';
 registerLocale("el", el);
 
 
 const BookingForm = () => {
 
     const [selectedDate, setSelectedDate] = useState(null);
-    const [topicListFromShoppingCart, setTopicListFromShoppingCart] = useState([]);
-
+    const cartItems = useSelector((state) => state.cartItems);
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm()
+    const navigate = useNavigate();
 
     const onSubmit = data => {
 
@@ -26,24 +29,23 @@ const BookingForm = () => {
         };
 
         const bookingData = {
-                quantity: data.quantity,
-                address: data.address,
-                description: data.description,
-                date: selectedDate,
-                client: client,
-                confirm: false,
-                isPaid: false,
-                cost: null,
-                topic: topicListFromShoppingCart
-            };
-    
-            console.log(bookingData);
-            saveData(bookingData);
+            quantity: data.quantity,
+            address: data.address,
+            description: data.description,
+            date: selectedDate,
+            client: client,
+            confirm: false,
+            isPaid: false,
+            cost: null,
+            topic: cartItems
+        };
 
+        console.log(bookingData);
+        saveData(bookingData);
     };
-    
 
-    
+
+
 
     async function saveData(bookingData) {
         try {
@@ -56,12 +58,18 @@ const BookingForm = () => {
             }).then((response) => response.text())
                 .then((response) => {
                     console.log(response);
+                    alert("La reserva fué solicitada correctamente, pronto nos pondremos en contacto para continuar");
                 })
                 .catch((error) => {
                     console.error('Error ', error);
+                    alert(error);
                 });
         } catch (error) {
             console.error('An error occurred', error);
+            alert(error);
+        } finally {
+            dispatch(clearCart());
+            navigate("/");
         }
     }
 
@@ -92,6 +100,17 @@ const BookingForm = () => {
                             />
 
                             <textarea type="text" {...register("description")} placeholder='Comentarios...' />
+                            <div className='cart-items'>
+                                <h4>Temáticas</h4>
+                                <p className='topic-name'>
+                                    {cartItems.map((item, index) => (
+                                        <span key={item.id}>
+                                            {item.name}
+                                            {index !== cartItems.length - 1 ? ', ' : ''}
+                                        </span>
+                                    ))}
+                                </p>
+                            </div>
                             <button className='btn'>SOLICITAR RESERVA</button>
                         </form>
 
