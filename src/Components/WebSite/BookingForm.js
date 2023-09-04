@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../WebSite/Redux/ShoppingAction';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../Loading/LoadingSpinner';
+
 registerLocale("el", el);
 
 
@@ -19,32 +21,39 @@ const BookingForm = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
-    const onSubmit = data => {
-
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+      
         const client = {
-            name: data.name,
-            email: data.email,
-            phoneNumber: data.phoneNumber
+          name: data.name,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
         };
-
+      
         const bookingData = {
-            quantity: data.quantity,
-            address: data.address,
-            description: data.description,
-            date: selectedDate,
-            client: client,
-            confirm: false,
-            isPaid: false,
-            cost: null,
-            topic: cartItems
+          quantity: data.quantity,
+          address: data.address,
+          description: data.description,
+          date: selectedDate,
+          client: client,
+          confirm: false,
+          isPaid: false,
+          cost: null,
+          topic: cartItems,
         };
-
-        console.log(bookingData);
-        saveData(bookingData);
-    };
-
-
+      
+        try {
+          await saveData(bookingData);
+        } catch (error) {
+          console.error('An error occurred', error);
+          alert(error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
 
 
     async function saveData(bookingData) {
@@ -77,6 +86,9 @@ const BookingForm = () => {
 
     return (
         <Layout showSubNav={true}>
+            {isLoading ? (
+          <LoadingSpinner />
+        ) : (
             <section className='BookingForm'>
                 <div className="register">
                     <div className="col-1">
@@ -120,6 +132,7 @@ const BookingForm = () => {
                     </div>
                 </div>
             </section>
+        )};
         </Layout>
     )
 };
