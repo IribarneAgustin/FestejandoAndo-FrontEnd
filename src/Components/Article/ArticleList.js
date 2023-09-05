@@ -60,7 +60,7 @@ function ArticleList() {
             <h2>Imagen</h2>
           </li>
           {articles.map((article) => (
-            <li key={article.id}>
+            <li className='list-item' key={article.id}>
               <p>{article.name}</p>
               <p>{article.topic.name}</p>
               <p>{article.quantity}</p>

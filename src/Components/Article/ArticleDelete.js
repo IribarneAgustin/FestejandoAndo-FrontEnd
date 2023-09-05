@@ -30,7 +30,7 @@ const ArticleDelete = ({ id, articleData, refreshArticleList }) => {
       });
   };
   return (
-    <button className='button' onClick={handleDelete}>
+    <button className='red-button-big' onClick={handleDelete}>
       Eliminar
     </button>
   );

@@ -154,10 +154,12 @@ const BookingForm = () => {
                     ))}
                   </p>
                 </div>
-                <ReCAPTCHA
-                  sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
-                  onChange={handleCaptchaChange}
-                />
+                <div className='captcha-festejando'>
+                  <ReCAPTCHA
+                    sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
+                    onChange={handleCaptchaChange}
+                  />
+                </div>
                 <button className='btn'>SOLICITAR RESERVA</button>
               </form>
             </div>

@@ -9,7 +9,7 @@
   padding: 0;
 }
 
-.list li {
+.list-item {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 10px;
@@ -19,10 +19,67 @@
   margin-bottom: 10px;
 }
 
-.list-header {
+.list-item-client {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.list-item-booking {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.list-header-booking {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+  border-radius: 5px;
   font-weight: bold;
-  background-color: #333;
   color: #000000;
+  background-color: #b3b3b3;
+}
+
+.list-header-client {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #b3b3b3;
+}
+
+.list-header {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #b3b3b3;
+}
+
+.visually-hidden {
+  font-size: 0;
 }
 
 @media (max-width: 768px) {
@@ -95,6 +152,11 @@
   display: block;
 }
 
+.buttons-booking {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /*DELETE BUTTON*/
 
 .red-button {
@@ -107,6 +169,17 @@
   cursor: pointer;
 }
 
+.red-button-big {
+  background-color: #f44336;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.red-button-big:hover,
 .red-button:hover {
   background-color: #d32f2f;
 }
@@ -186,5 +259,5 @@
 
 textarea {
   height: 100px;
-  width:auto
+  width: auto;
 }

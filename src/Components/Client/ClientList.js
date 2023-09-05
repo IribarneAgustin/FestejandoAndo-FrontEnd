@@ -33,15 +33,13 @@ function ClientList() {
           <h1>Clientes</h1>
           {<ClientAdd refreshClientList={fetchClients} />}
           <hr></hr>
-          <li className='list-header'>
-            {' '}
-            {/* Add a header row */}
+          <li className='list-header-client'>
             <h2>Nombre</h2>
             <h2>Apellido</h2>
             <h2>Email</h2>
           </li>
           {client.map((client) => (
-            <li key={client.id}>
+            <li className='list-item-client' key={client.id}>
               <p>{client.name}</p>
               <p>{client.lastName}</p>
               <p>{client.email}</p>

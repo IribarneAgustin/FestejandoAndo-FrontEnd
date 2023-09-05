@@ -30,6 +30,10 @@ const ClientDelete = ({ id, clientData, refreshClientList }) => {
       });
   };
 
-  return <button onClick={handleDelete}>Eliminar</button>;
+  return (
+    <button className='red-button-big' onClick={handleDelete}>
+      Eliminar
+    </button>
+  );
 };
 export default ClientDelete;

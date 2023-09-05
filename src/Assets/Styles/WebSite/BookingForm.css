@@ -10,64 +10,64 @@
   margin-bottom: 200px;
 }
 
-.register{
+.register {
   max-width: 978px;
   width: 100vw;
-  display:flex;
+  display: flex;
   border: 1px solid #e9ecef;
   border-radius: 5px;
   /* box-shadow: 1px 3px 10px #e9ecef; */
   background-color: white;
 }
 
-.register span{
+.register span {
   color: #adb5bd;
 }
 
-#form{
+#form {
   max-width: 320px;
   width: 100vw;
   margin: 2em auto;
-  font-family: "Poppins", cursive;
+  font-family: 'Poppins', cursive;
 }
 
 #form > input,
 #form > textarea {
   border: 1px solid #e9ecef;
-  padding: .9em 1em;
-  box-sizing: border-box; 
-  font-family: "Poppins", cursive;
+  padding: 0.9em 1em;
+  box-sizing: border-box;
+  font-family: 'Poppins', cursive;
 }
 
-#form > input:focus{
+#form > input:focus {
   outline: none;
 }
-#form > textarea:focus{
+#form > textarea:focus {
   outline: none;
 }
 
-#form > .btn{
+#form > .btn {
   background-color: #003049;
   color: #e9ecef;
   font-size: 1em;
   cursor: pointer;
 }
 
-.flex{
+.flex {
   display: flex;
   gap: 1em;
 }
 
-.flex-col{
+.flex-col {
   flex-direction: column;
 }
 
-.register .col-1{
+.register .col-1 {
   margin: auto;
   padding: 3em 0;
 }
 
-.register .col-2 img{
+.register .col-2 img {
   width: 480px;
   height: 100%;
   object-fit: cover;
@@ -77,8 +77,8 @@
   display: none;
 }
 
-@media screen and (min-width: 860px)  {
-  .register .col-2 img{
+@media screen and (min-width: 860px) {
+  .register .col-2 img {
     display: initial;
   }
 }
@@ -104,4 +104,8 @@
 /* Additional styling for the dropdown arrow */
 .react-datepicker__triangle::before {
   border-bottom-color: #e9ecef;
+}
+
+.captcha-festejando {
+  margin: 5px;
 }
