@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../WebSite/Redux/ShoppingAction';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
+import LoadingSpinner from '../Loading/LoadingSpinner';
+
 registerLocale('el', el);
 
 const BookingForm = () => {
@@ -22,6 +24,38 @@ const BookingForm = () => {
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
+  };
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+
+    const client = {
+      name: data.name,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+    };
+
+    const bookingData = {
+      quantity: data.quantity,
+      address: data.address,
+      description: data.description,
+      date: selectedDate,
+      client: client,
+      confirm: false,
+      isPaid: false,
+      cost: null,
+      topic: cartItems,
+    };
+
+    try {
+      await saveData(bookingData);
+    } catch (error) {
+      console.error('An error occurred', error);
+      alert(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCaptchaSubmit = () => {
@@ -86,76 +120,81 @@ const BookingForm = () => {
 
   return (
     <Layout showSubNav={true}>
-      <section className='BookingForm'>
-        <div className='register'>
-          <div className='col-1'>
-            <h2>Solicitar Reserva</h2>
-            <span>
-              Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos
-            </span>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <section className='BookingForm'>
+          <div className='register'>
+            <div className='col-1'>
+              <h2>Solicitar Reserva</h2>
+              <span>
+                Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos
+              </span>
 
-            <form
-              id='form'
-              className='flex flex-col'
-              onSubmit={handleSubmit(onSubmit) && handleCaptchaSubmit}
-            >
-              <input type='text' {...register('name')} placeholder='Nombre' />
-              <input type='email' {...register('email')} placeholder='Email' required />
-              <input type='text' {...register('phoneNumber')} placeholder='Teléfono' />
-              <input
-                type='number'
-                min='0'
-                {...register('quantity')}
-                placeholder='Cantidad de niños estimada'
-                required
-              />
-              <input
-                type='text'
-                {...register('address')}
-                placeholder='Dirección del evento'
-                required
-              />
-              <DatePicker
-                locale='el'
-                placeholderText='Fecha'
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                dateFormat='dd/MM/yyyy'
-                minDate={new Date()}
-                required
-              />
+              <form
+                id='form'
+                className='flex flex-col'
+                onSubmit={handleSubmit(onSubmit) && handleCaptchaSubmit}
+              >
+                <input type='text' {...register('name')} placeholder='Nombre' />
+                <input type='email' {...register('email')} placeholder='Email' required />
+                <input type='text' {...register('phoneNumber')} placeholder='Teléfono' />
+                <input
+                  type='number'
+                  min='0'
+                  {...register('quantity')}
+                  placeholder='Cantidad de niños estimada'
+                  required
+                />
+                <input
+                  type='text'
+                  {...register('address')}
+                  placeholder='Dirección del evento'
+                  required
+                />
+                <DatePicker
+                  locale='el'
+                  placeholderText='Fecha'
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  dateFormat='dd/MM/yyyy'
+                  minDate={new Date()}
+                  required
+                />
 
-              <textarea
-                type='text'
-                {...register('description')}
-                placeholder='Comentarios...'
-              />
-              <div className='cart-items'>
-                <h4>Temáticas</h4>
-                <p className='topic-name'>
-                  {cartItems.map((item, index) => (
-                    <span key={item.id}>
-                      {item.name}
-                      {index !== cartItems.length - 1 ? ', ' : ''}
-                    </span>
-                  ))}
-                </p>
-              </div>
-              <ReCAPTCHA
-                sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
-                onChange={handleCaptchaChange}
-                required
-              />
-              <button className='btn' disabled={!handleCaptchaChange}>
-                SOLICITAR RESERVA
-              </button>
-            </form>
+                <textarea
+                  type='text'
+                  {...register('description')}
+                  placeholder='Comentarios...'
+                />
+                <div className='cart-items'>
+                  <h4>Temáticas</h4>
+                  <p className='topic-name'>
+                    {cartItems.map((item, index) => (
+                      <span key={item.id}>
+                        {item.name}
+                        {index !== cartItems.length - 1 ? ', ' : ''}
+                      </span>
+                    ))}
+                  </p>
+                </div>
+                <ReCAPTCHA
+                  sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
+                  onChange={handleCaptchaChange}
+                  required
+                />
+                <button className='btn' disabled={!handleCaptchaChange}>
+                  SOLICITAR RESERVA
+                </button>
+              </form>
+            </div>
+            <div className='col-2'>
+              <img src={bgImg} alt='' />
+            </div>
           </div>
-          <div className='col-2'>
-            <img src={bgImg} alt='' />
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
+      ;
     </Layout>
   );
 };
