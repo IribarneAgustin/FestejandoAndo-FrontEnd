@@ -31,7 +31,11 @@ const BookingDelete = ({ id, bookingData, refreshBookingList }) => {
       });
   };
 
-  return <button onClick={handleDelete}>Eliminar</button>;
+  return (
+    <button className='red-button-big' onClick={handleDelete}>
+      Eliminar
+    </button>
+  );
 };
 
 BookingDelete.propTypes = {

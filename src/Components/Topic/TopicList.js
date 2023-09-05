@@ -84,7 +84,7 @@ function TopicList() {
             <h2>Descripción</h2>
           </li>
           {topics.map((topic) => (
-            <li key={topic.id}>
+            <li className='list-item' key={topic.id}>
               <p>{topic.name}</p>
               <p>{getArticleNamesByTopic(topic)}</p>
               <p>{getSuggestedArticleNames(topic)}</p>

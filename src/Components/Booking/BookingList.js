@@ -118,17 +118,19 @@ function BookingList() {
             Ver Actuales
           </button>
           <hr></hr>
-          <li className='list-header'>
-            {' '}
-            {/* Add a header row */}
+          <li className='list-header-booking'>
             <h3>Temática</h3>
             <h3>Fecha</h3>
             <h3>Cliente</h3>
             <h3>Precio</h3>
             <h3>Seña</h3>
+            <h3 className='visually-hidden'>Hidden</h3>
+            <h3 className='visually-hidden'>Hidden</h3>
+            <h3>Reserva</h3>
+            <h3>Estado</h3>
           </li>
           {bookings.map((booking) => (
-            <li key={booking.id}>
+            <li className='list-item-booking' key={booking.id}>
               <p>{booking.topic.map((topic) => topic.name).join(', ')}</p>
               <p>{booking.date}</p>
               <p>{booking.client.name}</p>
@@ -153,6 +155,10 @@ function BookingList() {
                     refreshBookingList={fetchBookings}
                   />
                 }
+              </p>
+              <p className='buttons-booking'>
+                <button className='update-button'>Confirmar</button>
+                <button className='red-button'>Cancelar</button>
               </p>
             </li>
           ))}
