@@ -21,11 +21,11 @@ const BookingForm = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [captchaValue, setCaptchaValue] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
   };
-  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -56,37 +56,6 @@ const BookingForm = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleCaptchaSubmit = () => {
-    if (captchaValue) {
-      alert('Formulario enviado con éxito.');
-    } else {
-      alert('Por favor, complete el reCAPTCHA.');
-    }
-  };
-
-  const onSubmit = (data) => {
-    const client = {
-      name: data.name,
-      email: data.email,
-      phoneNumber: data.phoneNumber,
-    };
-
-    const bookingData = {
-      quantity: data.quantity,
-      address: data.address,
-      description: data.description,
-      date: selectedDate,
-      client: client,
-      confirm: false,
-      isPaid: false,
-      cost: null,
-      topic: cartItems,
-    };
-
-    console.log(bookingData);
-    saveData(bookingData);
   };
 
   async function saveData(bookingData) {
@@ -130,11 +99,18 @@ const BookingForm = () => {
               <span>
                 Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos
               </span>
-
               <form
                 id='form'
                 className='flex flex-col'
-                onSubmit={handleSubmit(onSubmit) && handleCaptchaSubmit}
+                onSubmit={(e) => {
+                  handleSubmit((data) => {
+                    if (captchaValue) {
+                      onSubmit(data);
+                    } else {
+                      alert('Por favor, complete el reCAPTCHA');
+                    }
+                  })(e);
+                }}
               >
                 <input type='text' {...register('name')} placeholder='Nombre' />
                 <input type='email' {...register('email')} placeholder='Email' required />
@@ -181,11 +157,8 @@ const BookingForm = () => {
                 <ReCAPTCHA
                   sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
                   onChange={handleCaptchaChange}
-                  required
                 />
-                <button className='btn' disabled={!handleCaptchaChange}>
-                  SOLICITAR RESERVA
-                </button>
+                <button className='btn'>SOLICITAR RESERVA</button>
               </form>
             </div>
             <div className='col-2'>
