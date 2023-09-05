@@ -97,3 +97,10 @@
   position: relative;
   z-index: -2;
 }
+
+@media (max-width: 768px) {
+  .festejando-carousel {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+}
