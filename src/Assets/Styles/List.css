@@ -82,6 +82,13 @@
   font-size: 0;
 }
 
+.status-booking {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
 @media (max-width: 768px) {
   .list li {
     grid-template-columns: repeat(1, minmax(0, 1fr));
