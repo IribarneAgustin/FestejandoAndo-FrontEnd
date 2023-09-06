@@ -3,6 +3,8 @@ import '../../Assets/Styles/List.css';
 import BookingAdd from './BookingAdd';
 import BookingDelete from './BookingDelete';
 import BookingModify from './BookingModify';
+import BookingConfirm from './BookingConfirm';
+import BookingCancel from './BookingCancel';
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
@@ -97,6 +99,12 @@ function BookingList() {
     setBookings(showCurrents);
   }
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+    return formattedDate;
+  }
+
   return (
     <div className='container'>
       <div>
@@ -132,7 +140,7 @@ function BookingList() {
           {bookings.map((booking) => (
             <li className='list-item-booking' key={booking.id}>
               <p>{booking.topic.map((topic) => topic.name).join(', ')}</p>
-              <p>{booking.date}</p>
+              <p>{formatDate(booking.date)}</p>
               <p>{booking.client.name}</p>
               <p>{booking.cost}</p>
               <p>{booking.deposit}</p>
@@ -157,8 +165,11 @@ function BookingList() {
                 }
               </p>
               <p className='buttons-booking'>
-                <button className='update-button'>Confirmar</button>
-                <button className='red-button'>Cancelar</button>
+                <BookingConfirm id={booking.id} refreshBookingList={fetchBookings} />
+                <BookingCancel id={booking.id} refreshBookingList={fetchBookings} />
+              </p>
+              <p className='status-booking'>
+                {booking.confirm ? 'Confirmada' : 'No confirmada'}
               </p>
             </li>
           ))}
