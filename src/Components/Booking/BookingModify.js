@@ -3,24 +3,35 @@ import Modal from 'react-modal';
 import '../../Assets/Styles/modal.css';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 Modal.setAppElement('#root');
 
 function BookingModify({ id, bookingData, refreshBookingList, clientList, topicList }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [date, setDate] = useState('');
   const [clientId, setClientId] = useState('');
   const [deposit, setDeposit] = useState('');
   const [isPaid, setIsPaid] = useState(false);
   const [cost, setCost] = useState('');
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const [selectedEmail, setSelectedEmail] =  useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [suggestedChildrenQuantity, setSuggestedChildrenQuantity] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+
 
   const openModal = () => {
     setModalIsOpen(true);
+    setDescription(bookingData.description)
+    setAddress(bookingData.address);
+    setSuggestedChildrenQuantity(bookingData.quantity);
     setClientId(bookingData.client.id);
-    setDate(bookingData.date);
-    setDeposit(bookingData.deposit);
+    setSelectedDate(removeTimestamp(bookingData.date));
     setIsPaid(bookingData.isPaid);
     setCost(bookingData.cost);
+    setSelectedEmail(bookingData.client.email);
+    setDeposit(bookingData.deposit)
     setSelectedTopics(
       bookingData.topic.map((topic) => ({
         value: topic.id,
@@ -28,6 +39,12 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
       }))
     );
   };
+
+  function removeTimestamp(dateString) {
+    const originalDate = new Date(dateString);
+    const newDate = new Date(originalDate.getFullYear(), originalDate.getMonth(), originalDate.getDate());
+    return newDate;
+  }
 
   const options = topicList.map((topic) => ({
     value: topic.id,
@@ -52,8 +69,11 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
 
     // Create a new booking object with the form values
     const bookingUpdated = {
-      date,
-      client: { id: clientId },
+      description,
+      quantity: suggestedChildrenQuantity,
+      address,
+      date: selectedDate,
+      client: { id: clientId, email: selectedEmail },
       topic: topicsToAdd,
       deposit: parseInt(deposit),
       isPaid,
@@ -102,34 +122,40 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
         <h2 className='container'>Modificar Reserva</h2>
         <br />
         <form className='modal' onSubmit={handleSubmit}>
-          <label>
-            <b>Fecha: </b>
-            <input
-              type='date'
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-            />
+        <b>Fecha</b>
+        <label>
+            <DatePicker
+                  locale='el'
+                  placeholderText='Fecha'
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  dateFormat='dd/MM/yyyy'
+                  minDate={new Date()}
+                  required
+                />
           </label>
+          <b>Cliente</b>
           <br />
           <label>
-            <b>Cliente:</b>
             <select
               value={clientId}
-              onChange={(e) => setClientId(e.target.value)}
+              onChange={(e) => { 
+                setClientId(e.target.value)
+                setSelectedEmail(e.target.options[e.target.selectedIndex].getAttribute("data-email"));
+              }}
               required
             >
               <option value=''>Seleccione un cliente...</option>
               {clientList.map((client) => (
-                <option key={client.id} value={client.id}>
+                <option key={client.id} value={client.id} data-email={client.email}>
                   {client.name}
                 </option>
               ))}
             </select>
           </label>
+          <b>Temáticas</b>
           <br />
           <label>
-            <b>Temáticas:</b>
             <Select
               options={options}
               isMulti
@@ -138,9 +164,9 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
               placeholder='Seleccione las temáticas'
             />
           </label>
+          <b>Seña</b>
           <br />
           <label>
-            <b>Deposito:</b>
             <input
               type='number'
               min='0'
@@ -148,9 +174,9 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
               onChange={(e) => setDeposit(e.target.value)}
             />
           </label>
+          <b>Precio</b>
           <br />
           <label>
-            <b>Precio:</b>
             <input
               type='number'
               min='0'
@@ -159,16 +185,43 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
               onChange={(e) => setCost(e.target.value)}
             />
           </label>
+          <b>Pagado</b>
           <br />
           <label>
-            <b>Pagado:</b>
             <input
               type='checkbox'
               checked={isPaid}
               onChange={(e) => setIsPaid(e.target.checked)}
             />
           </label>
+          <b>Cantidad de niños sugerida</b>
           <br />
+          <label>
+            <input
+              type='number'
+              min='0'
+              value={suggestedChildrenQuantity}
+              onChange={(e) => setSuggestedChildrenQuantity(e.target.value)}
+            />
+          </label>
+          <b>Direccion</b>
+          <br />
+          <label>
+            <input
+              type='text'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <b>Descripción</b>
+          <br />
+          <label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              style={{ resize: 'none' }}
+            />
+          </label>
           <label>
             <button type='submit'>Modificar</button>
             <button className='cancel-button' onClick={closeModal}>
