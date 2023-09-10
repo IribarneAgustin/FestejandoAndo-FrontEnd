@@ -11,7 +11,6 @@ import { clearCart } from '../WebSite/Redux/ShoppingAction';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import LoadingSpinner from '../Loading/LoadingSpinner';
-
 registerLocale('el', el);
 
 const BookingForm = () => {
@@ -188,7 +187,7 @@ const BookingForm = () => {
                   </p>
                 </div>
                 <div>
-                  <h4>Se sugieren agregar los siguientes artículos</h4>
+                    {suggestions.length > 0 && <h4>Se sugieren agregar los siguientes artículos</h4>}
                   <div>
                     {suggestions.map((item, index) => (
                       <span key={`suggestion-${item.id}`}>
