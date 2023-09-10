@@ -16,6 +16,8 @@ function ArticleAdd({ refreshArticleList, topicList }) {
   const [topicId, setTopicId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState('');
+  const [suggested, setSuggested] = useState(false);
+
 
   const onDrop = async (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -47,6 +49,7 @@ function ArticleAdd({ refreshArticleList, topicList }) {
     setName('');
     setImage('');
     setQuantity('');
+    setSuggested(false);
   };
 
   async function uploadImageAndGetURL(image) {
@@ -64,6 +67,7 @@ function ArticleAdd({ refreshArticleList, topicList }) {
       const url = await uploadImageAndGetURL(image);
 
       const newArticle = {
+        suggested,
         name,
         image: url,
         topic: { id: topicId },
@@ -146,6 +150,16 @@ function ArticleAdd({ refreshArticleList, topicList }) {
                 ))}
               </select>
             </label>
+            <br />
+            <label>
+              <b>Sugerencia</b>
+              <input
+                type='checkbox'
+                checked={suggested}
+                onChange={(e) => setSuggested(e.target.checked)}
+              />
+            </label>
+
             <br />
             <div {...getRootProps({ className: 'dropzone' })}>
               <input {...getInputProps()} />

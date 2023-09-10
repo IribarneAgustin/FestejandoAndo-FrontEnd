@@ -32,6 +32,8 @@ function Tematicas() {
           image={topic.images}
           name={topic.name}
           description={topic.description}
+          suggestionsIds={topic.suggestionsIds}
+          suggestedQuantity={topic.suggestedQuantity}
           rating={5}
         />
       ))}

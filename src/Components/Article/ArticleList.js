@@ -58,6 +58,7 @@ function ArticleList() {
             <h2>Temática</h2>
             <h2>Cantidad</h2>
             <h2>Imagen</h2>
+            <h2>Sugerencia</h2>
           </li>
           {articles.map((article) => (
             <li className='list-item' key={article.id}>
@@ -65,6 +66,7 @@ function ArticleList() {
               <p>{article.topic.name}</p>
               <p>{article.quantity}</p>
               <img src={article.image} alt='article' className='image-wrapper' />
+              <p>{article.suggested ? 'Sugerido' : ''}</p> {/* Conditional rendering */}
               <p>
                 {
                   <ArticleUpdate
@@ -86,6 +88,7 @@ function ArticleList() {
               </p>
             </li>
           ))}
+
         </ul>
       </div>
     </div>

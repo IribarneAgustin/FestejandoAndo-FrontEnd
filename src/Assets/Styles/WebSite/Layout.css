@@ -5,6 +5,7 @@
   padding: 10px;
   text-align: center;
   font-size: 14px;
+  margin-top: 10%;
 }
 
 /* SOCIAL MEDIA */
@@ -76,4 +77,15 @@
   padding: 4em; 
   margin-top: 6em; 
   margin-bottom: 6em; 
+}
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 14rem; 
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    margin-top: 17rem; 
+  }
 }

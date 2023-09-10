@@ -3,9 +3,11 @@ import Modal from 'react-modal';
 import '../../Assets/Styles/modal.css';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import el from 'date-fns/locale/es';
 Modal.setAppElement('#root');
+registerLocale('el', el);
+
 
 function BookingModify({ id, bookingData, refreshBookingList, clientList, topicList }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -123,7 +125,6 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
         <br />
         <form className='modal' onSubmit={handleSubmit}>
         <b>Fecha</b>
-        <label>
             <DatePicker
                   locale='el'
                   placeholderText='Fecha'
@@ -133,7 +134,6 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
                   minDate={new Date()}
                   required
                 />
-          </label>
           <b>Cliente</b>
           <br />
           <label>

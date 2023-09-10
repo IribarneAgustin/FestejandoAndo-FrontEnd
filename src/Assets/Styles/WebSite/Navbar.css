@@ -10,6 +10,7 @@
   font-size: 15px;
   letter-spacing: 2px;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .initial.sub-active {
@@ -173,3 +174,31 @@
     border-radius: 0 0 40% 0;
   }
 }
+
+.container-sub-navbar {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  color: #252525;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  justify-content: space-between;
+  font-size: 15px;
+  letter-spacing: 2px;
+  box-sizing: border-box;
+  margin-bottom: 15%;
+}
+
+@media (max-width: 768px) {
+  .container-sub-navbar {
+    margin-bottom: 14rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-sub-navbar {
+    margin-bottom: 20rem;
+  }
+}
+

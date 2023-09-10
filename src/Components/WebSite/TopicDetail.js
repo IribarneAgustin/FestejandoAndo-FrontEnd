@@ -98,14 +98,16 @@ function TopicDetail() {
           {topic.suggestedQuantity}
           <h3>Artículos</h3>
           <ul>
-            {articles.map((article, index) => (
-              <li key={index}>
-                {article.name +
-                  ' (' +
-                  (article.quantity != null ? article.quantity : 0) +
-                  ')'}
-              </li>
-            ))}
+            {articles
+              .filter((article) => !article.suggested) 
+              .map((article, index) => (
+                <li key={index}>
+                  {article.name +
+                    ' (' +
+                    (article.quantity != null ? article.quantity : 0) +
+                    ')'}
+                </li>
+              ))}
           </ul>
         </div>
       </div>

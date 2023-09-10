@@ -6,8 +6,6 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 200px;
-  margin-bottom: 200px;
 }
 
 .register {
@@ -109,3 +107,46 @@
 .captcha-festejando {
   margin: 5px;
 }
+
+.BookingForm span{
+  color: black;
+}
+
+.BookingForm textarea {
+  resize: none;
+}
+
+#form > textarea {
+  border: 1px solid #e9ecef;
+  padding: 0.9em 1em;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+/*
+@media screen and (max-width: 600px) {
+  .BookingForm {
+    margin-top: 85%;
+    margin-bottom:85%; 
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+  .BookingForm {
+    margin-top: 35%;
+    margin-bottom:35%; 
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .BookingForm {
+    margin-top: 25%;
+    margin-bottom:25%; 
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+*/

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../WebSite/Redux/ShoppingAction';
 
-export function TopicCards({ id, image, name, description, rating }) {
+export function TopicCards({ id, image, name, description, rating, suggestedQuantity, suggestionsIds }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems);
@@ -15,7 +15,7 @@ export function TopicCards({ id, image, name, description, rating }) {
   }
 
   const handleAddToCart = () => {
-    const item = { id, name, image };
+    const item = { id, name, image, description, suggestedQuantity, suggestionsIds };
     dispatch(addToCart(item)); // Dispatch the addToCart action with the topic data
   };
 
