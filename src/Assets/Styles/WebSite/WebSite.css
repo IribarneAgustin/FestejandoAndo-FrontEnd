@@ -12,17 +12,25 @@
   height: 600px;
   background-color: bisque;
 }
+
 .calendario {
   height: 600px;
   background-color: beige;
 }
+
 .contacto {
   height: 600px;
   background-color: blanchedalmond;
 }
+
 .quienes-somos {
   height: 600px;
   background-color: antiquewhite;
+}
+
+.presupuestos {
+  height: 600px;
+  background-color: rgb(228, 179, 116);
 }
 
 .carousel {

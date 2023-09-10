@@ -98,6 +98,40 @@
   font-size: 1.1rem;
 }
 
+/* QUIENES SOMOS STYLES */
+
+.centered-container-text {
+  font-family: Poppins, sans-serif;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.side-image {
+  height: auto;
+  margin: 10px;
+}
+
+.image-container {
+  float: left; /* La imagen se ubicará a la izquierda */
+  margin-right: 10px; /* Agrega espacio a la derecha de la imagen para separarla de los textos */
+}
+
+.text-container {
+  flex: 1; /* El contenedor de texto ocupará el espacio restante */
+  display: flex;
+  flex-direction: column; /* Los párrafos estarán uno debajo del otro */
+  overflow: hidden;
+  margin-right: 120px;
+  margin-left: 20px;
+}
+
+.text-quienesSomos {
+  font-size: 15px;
+  display: block;
+  margin-right: 20px;
+}
+
 /* Media query for smaller screens */
 @media only screen and (max-width: 768px) {
   .TopicCards {
@@ -107,5 +141,36 @@
   .productList {
     flex-direction: column;
     align-items: center;
+  }
+
+  .centered-container-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .side-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .text-container {
+    margin: 10px;
+    max-width: 400px;
+  }
+
+  .text-quienesSomos {
+    margin: 0; /* Eliminado el margen derecho para evitar que los párrafos se superpongan */
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .centered-container-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }

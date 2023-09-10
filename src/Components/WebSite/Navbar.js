@@ -41,19 +41,19 @@ function NavBar({ onNavLinkClick }) {
           </a>
           <a
             onClick={() => {
-              onNavLinkClick('contacto');
-              handleNavLinkClick();
-            }}
-          >
-            CONTACTO
-          </a>
-          <a
-            onClick={() => {
               onNavLinkClick('quienesSomos');
               handleNavLinkClick();
             }}
           >
             QUIENES SOMOS
+          </a>
+          <a
+            onClick={() => {
+              onNavLinkClick('presupuestos');
+              handleNavLinkClick();
+            }}
+          >
+            PRESUPUESTOS
           </a>
         </nav>
         <div>
