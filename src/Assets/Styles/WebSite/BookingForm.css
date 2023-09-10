@@ -6,6 +6,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-top: 25%;
+  margin-bottom: 25%;
 }
 
 .register {
@@ -124,11 +126,11 @@
   width: 100%;
   box-sizing: border-box;
 }
-/*
+
 @media screen and (max-width: 600px) {
   .BookingForm {
-    margin-top: 85%;
-    margin-bottom:85%; 
+    margin-top: 55%;
+    margin-bottom:15%; 
   }
 }
 
@@ -149,4 +151,3 @@
     margin-right: 5%;
   }
 }
-*/
