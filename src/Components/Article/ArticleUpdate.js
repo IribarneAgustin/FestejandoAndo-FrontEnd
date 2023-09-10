@@ -15,6 +15,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
   const [isLoading, setIsLoading] = useState(false);
   const [imageWasUpdated, setImageWasUpdated] = useState(false);
   const [quantity, setQuantity] = useState('');
+  const [suggested, setSuggested] = useState(false);
 
   const onDrop = async (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -35,6 +36,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     setImage(articleData.image);
     setTopicId(articleData.topic.id);
     setQuantity(articleData.quantity);
+    setSuggested(articleData.suggested)
   };
 
   const closeModal = () => {
@@ -50,6 +52,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
     setName('');
     setImage('');
     setQuantity('');
+    setSuggested('')
   };
 
   async function uploadImageAndGetURL(image) {
@@ -64,6 +67,7 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
       const url = imageWasUpdated ? await uploadImageAndGetURL(image) : image;
 
       const articleUpdated = {
+        suggested,
         name,
         image: url,
         topic: { id: topicId },
@@ -157,6 +161,16 @@ function ArticleUpdate({ id, articleData, refreshArticleList, topicList }) {
                 ))}
               </select>
             </label>
+            <br />
+            <label>
+              <b>Sugerencia</b>
+              <input
+                type='checkbox'
+                checked={suggested}
+                onChange={(e) => setSuggested(e.target.checked)}
+              />
+            </label>
+
             <br />
             <label>
               <button type='submit'>Actualizar</button>

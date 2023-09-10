@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../Assets/Styles/WebSite/BookingForm.css';
 import { useForm } from 'react-hook-form';
 import bgImg from '../../Assets/Styles/Images/tina.png';
@@ -22,6 +22,14 @@ const BookingForm = () => {
   const navigate = useNavigate();
   const [captchaValue, setCaptchaValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
+
+  useEffect(() => {
+    cartItems.forEach((item) => {
+      fetchSuggestionsByTopic(item.id);
+    });
+  }, []);
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
@@ -36,7 +44,15 @@ const BookingForm = () => {
       phoneNumber: data.phoneNumber,
     };
 
+    const suggestionNames = suggestions
+      .filter((suggestion) => checkedItems.includes(suggestion.id))
+      .map((suggestion) => suggestion.name)
+      .join(', ');
+
+    console.log(suggestionNames);
+
     const bookingData = {
+      suggestionNames: suggestionNames,
       quantity: data.quantity,
       address: data.address,
       description: data.description,
@@ -87,6 +103,35 @@ const BookingForm = () => {
     }
   }
 
+  async function fetchSuggestionsByTopic(id) {
+    try {
+      const response = await fetch(`/api/article/listSuggestedArticlesByTopic/${id}`);
+
+      if (response.ok) {
+        const newData = await response.json();
+        setSuggestions((prevData) => {
+          const existingSuggestionIds = new Set(prevData.map((item) => item.id));
+          const uniqueSuggestions = newData.filter(
+            (item) => !existingSuggestionIds.has(item.id)
+          );
+          return [...prevData, ...uniqueSuggestions];
+        });
+      } else {
+        throw new Error('Failed to fetch topics');
+      }
+    } catch (error) {
+      console.log('Error fetching topics:', error);
+    }
+  }
+
+  const handleCheckboxChange = (itemId) => {
+    if (checkedItems.includes(itemId)) {
+      setCheckedItems(checkedItems.filter((id) => id !== itemId));
+    } else {
+      setCheckedItems([...checkedItems, itemId]);
+    }
+  };
+
   return (
     <Layout showSubNav={true}>
       {isLoading ? (
@@ -96,9 +141,7 @@ const BookingForm = () => {
           <div className='register'>
             <div className='col-1'>
               <h2>Solicitar Reserva</h2>
-              <span>
-                Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos
-              </span>
+              <span>Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos</span>
               <form
                 id='form'
                 className='flex flex-col'
@@ -122,12 +165,7 @@ const BookingForm = () => {
                   placeholder='Cantidad de niños estimada'
                   required
                 />
-                <input
-                  type='text'
-                  {...register('address')}
-                  placeholder='Dirección del evento'
-                  required
-                />
+                <input type='text' {...register('address')} placeholder='Dirección del evento' required />
                 <DatePicker
                   locale='el'
                   placeholderText='Fecha'
@@ -137,14 +175,9 @@ const BookingForm = () => {
                   minDate={new Date()}
                   required
                 />
-
-                <textarea
-                  type='text'
-                  {...register('description')}
-                  placeholder='Comentarios...'
-                />
+                <textarea type='text' {...register('description')} placeholder='Comentarios...' />
                 <div className='cart-items'>
-                  <h4>Temáticas</h4>
+                  <h4>Temáticas a reservar</h4>
                   <p className='topic-name'>
                     {cartItems.map((item, index) => (
                       <span key={item.id}>
@@ -154,13 +187,31 @@ const BookingForm = () => {
                     ))}
                   </p>
                 </div>
+                <div>
+                  <h4>Se sugieren agregar los siguientes artículos</h4>
+                  <div>
+                    {suggestions.map((item, index) => (
+                      <span key={`suggestion-${item.id}`}>
+                        <input
+                          type='checkbox'
+                          checked={checkedItems.includes(item.id)}
+                          onChange={() => handleCheckboxChange(item.id)}
+                        />
+                        <span>{item.name}</span>
+                        {index !== suggestions.length - 1 ? ', ' : ''}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <div className='captcha-festejando'>
                   <ReCAPTCHA
                     sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
                     onChange={handleCaptchaChange}
                   />
                 </div>
-                <button className='btn'>SOLICITAR RESERVA</button>
+                <button type='submit' className='btn'>
+                  SOLICITAR RESERVA
+                </button>
               </form>
             </div>
             <div className='col-2'>

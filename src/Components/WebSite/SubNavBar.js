@@ -19,7 +19,7 @@ function SubNavBar() {
 
   return (
     <>
-      <div className='container-navbar'>
+      <div className='container-sub-navbar'>
         <a className='logo'>
           <img onClick={home} src='/logo.png' alt='logo'></img>
         </a>
