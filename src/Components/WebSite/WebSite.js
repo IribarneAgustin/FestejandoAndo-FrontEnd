@@ -5,11 +5,12 @@ import CarouselImages from './Carousel-images';
 import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
 import Layout from './Layout';
+import QuienesSomos from './QuienesSomos';
 
 function WebSite() {
   const tematicas = useRef(null);
-  const contacto = useRef(null);
   const quienesSomos = useRef(null);
+  const presupuestos = useRef(null);
 
   const scrollToSection = (elementRef) => {
     window.scrollTo({
@@ -22,11 +23,11 @@ function WebSite() {
       case 'tematicas':
         scrollToSection(tematicas);
         break;
-      case 'contacto':
-        scrollToSection(contacto);
-        break;
       case 'quienesSomos':
         scrollToSection(quienesSomos);
+        break;
+      case 'presupuestos':
+        scrollToSection(presupuestos);
         break;
       default:
         break;
@@ -41,11 +42,9 @@ function WebSite() {
           <CarouselImages />
           <div>
             <div ref={tematicas}>{<Tematicas />}</div>
-            <div ref={contacto} className='contacto'>
-              CONTACTO
-            </div>
-            <div ref={quienesSomos} className='quienes-somos'>
-              QUIENES SOMOS
+            <div ref={quienesSomos}>{<QuienesSomos />}</div>
+            <div ref={presupuestos} className='presupuestos'>
+              PRESUPUESTOS
             </div>
           </div>
         </div>

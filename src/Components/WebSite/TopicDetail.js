@@ -14,6 +14,7 @@ import { addToCart } from '../WebSite/Redux/ShoppingAction';
 function TopicDetail() {
   const { id } = useParams();
   const [topic, setTopic] = useState(null);
+  const [article, setArticle] = useState(null);
   const [articles, setArticles] = useState([]);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems);
@@ -45,6 +46,7 @@ function TopicDetail() {
       if (response.ok) {
         const data = await response.json();
         setArticles(data);
+        setArticle(data);
       } else {
         throw new Error('Failed to fetch topics');
       }
@@ -80,11 +82,13 @@ function TopicDetail() {
             centerMode={false}
             showStatus={false}
           >
-            {topic.images.map((image, index) => (
-              <div key={index}>
-                <img src={image} alt={`Tematica ${index}`} className='carousel-image' />
-              </div>
-            ))}
+            {[...topic.images, ...(articles || []).map((article) => article.image)].map(
+              (image, index) => (
+                <div key={index}>
+                  <img src={image} alt={`Tematica ${index}`} className='carousel-image' />
+                </div>
+              )
+            )}
           </Carousel>
         </div>
         <div className='topic-info'>
