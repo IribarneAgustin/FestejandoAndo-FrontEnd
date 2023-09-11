@@ -1,14 +1,25 @@
+import React, { useState } from 'react';
 import { FaShoppingCart, FaStar } from 'react-icons/fa';
 import '../../Assets/Styles/WebSite/TopicCards.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../WebSite/Redux/ShoppingAction';
+import CartPopUp from './CartPopUp';
 
-export function TopicCards({ id, image, name, description, rating, suggestedQuantity, suggestionsIds }) {
+export function TopicCards({
+  id,
+  image,
+  name,
+  description,
+  rating,
+  suggestedQuantity,
+  suggestionsIds,
+}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems);
   const itemExistsInCart = cartItems.some((item) => item.id === id);
+  const [isCartPopUpOpen, setCartPopUpOpen] = useState(false);
 
   function onClickImage(topicId) {
     navigate(`/tematica/${topicId}`);
@@ -17,6 +28,7 @@ export function TopicCards({ id, image, name, description, rating, suggestedQuan
   const handleAddToCart = () => {
     const item = { id, name, image, description, suggestedQuantity, suggestionsIds };
     dispatch(addToCart(item)); // Dispatch the addToCart action with the topic data
+    setCartPopUpOpen(true);
   };
 
   return (
@@ -50,6 +62,11 @@ export function TopicCards({ id, image, name, description, rating, suggestedQuan
           </div>
         </div>
       </div>
+      <CartPopUp
+        name={name}
+        isOpen={isCartPopUpOpen}
+        onClose={() => setCartPopUpOpen(false)}
+      />
     </div>
   );
 }

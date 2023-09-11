@@ -10,14 +10,15 @@ import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../WebSite/Redux/ShoppingAction';
+import CartPopUp from './CartPopUp';
 
 function TopicDetail() {
   const { id } = useParams();
   const [topic, setTopic] = useState(null);
-  const [article, setArticle] = useState(null);
   const [articles, setArticles] = useState([]);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cartItems);
+  const [isCartPopUpOpen, setCartPopUpOpen] = useState(false);
 
   useEffect(() => {
     fetchTopicById(id);
@@ -46,7 +47,6 @@ function TopicDetail() {
       if (response.ok) {
         const data = await response.json();
         setArticles(data);
-        setArticle(data);
       } else {
         throw new Error('Failed to fetch topics');
       }
@@ -68,6 +68,7 @@ function TopicDetail() {
       image: topic.images,
     };
     dispatch(addToCart(item)); // Dispatch the addToCart action with the topic data
+    setCartPopUpOpen(true);
   };
 
   return (
@@ -99,7 +100,7 @@ function TopicDetail() {
           <h3>Artículos</h3>
           <ul>
             {articles
-              .filter((article) => !article.suggested) 
+              .filter((article) => !article.suggested)
               .map((article, index) => (
                 <li key={index}>
                   {article.name +
@@ -120,6 +121,11 @@ function TopicDetail() {
           {itemExistsInCart ? 'Agregado ' : 'Agregar al Carrito '}
           <FaShoppingCart />
         </button>
+        <CartPopUp
+          name={topic.name}
+          isOpen={isCartPopUpOpen}
+          onClose={() => setCartPopUpOpen(false)}
+        />
       </div>
     </Layout>
   );

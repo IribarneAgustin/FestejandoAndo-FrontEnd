@@ -28,7 +28,7 @@ const BookingForm = () => {
     cartItems.forEach((item) => {
       fetchSuggestionsByTopic(item.id);
     });
-  }, []);
+  }, [cartItems]);
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
@@ -140,7 +140,9 @@ const BookingForm = () => {
           <div className='register'>
             <div className='col-1'>
               <h2>Solicitar Reserva</h2>
-              <span>Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos</span>
+              <span>
+                Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos
+              </span>
               <form
                 id='form'
                 className='flex flex-col'
@@ -164,7 +166,12 @@ const BookingForm = () => {
                   placeholder='Cantidad de niños estimada'
                   required
                 />
-                <input type='text' {...register('address')} placeholder='Dirección del evento' required />
+                <input
+                  type='text'
+                  {...register('address')}
+                  placeholder='Dirección del evento'
+                  required
+                />
                 <DatePicker
                   locale='el'
                   placeholderText='Fecha'
@@ -174,7 +181,11 @@ const BookingForm = () => {
                   minDate={new Date()}
                   required
                 />
-                <textarea type='text' {...register('description')} placeholder='Comentarios...' />
+                <textarea
+                  type='text'
+                  {...register('description')}
+                  placeholder='Comentarios...'
+                />
                 <div className='cart-items'>
                   <h4>Temáticas a reservar</h4>
                   <p className='topic-name'>
@@ -187,7 +198,9 @@ const BookingForm = () => {
                   </p>
                 </div>
                 <div>
-                    {suggestions.length > 0 && <h4>Se sugieren agregar los siguientes artículos</h4>}
+                  {suggestions.length > 0 && (
+                    <h4>Se sugieren agregar los siguientes artículos</h4>
+                  )}
                   <div>
                     {suggestions.map((item, index) => (
                       <span key={`suggestion-${item.id}`}>
