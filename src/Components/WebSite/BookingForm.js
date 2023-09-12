@@ -136,7 +136,7 @@ const BookingForm = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <section className='BookingForm'>
+        <div className='BookingForm'>
           <div className='register'>
             <div className='col-1'>
               <h2>Solicitar Reserva</h2>
@@ -230,9 +230,8 @@ const BookingForm = () => {
               <img src={bgImg} alt='' />
             </div>
           </div>
-        </section>
+        </div>
       )}
-      ;
     </Layout>
   );
 };

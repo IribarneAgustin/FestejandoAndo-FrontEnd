@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 26vh;
+  height: 23vh;
 }
 
 .logo img {
@@ -58,7 +58,7 @@
 }
 
 .nav.active a {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   color: white;
 }
 
@@ -91,7 +91,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 50vh;
+  height: 36vh;
 }
 
 /* nav-icon-5 BURGUER BUTTON*/
@@ -187,18 +187,4 @@
   font-size: 15px;
   letter-spacing: 2px;
   box-sizing: border-box;
-  margin-bottom: 15%;
 }
-
-@media (max-width: 768px) {
-  .container-sub-navbar {
-    margin-bottom: 14rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .container-sub-navbar {
-    margin-bottom: 4rem;
-  }
-}
-
