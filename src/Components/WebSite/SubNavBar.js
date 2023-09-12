@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../Assets/Styles/WebSite/WebSite.css';
 import '../../Assets/Styles/WebSite/Navbar.css';
-import BurguerButton from './BurguerButton';
 import ShoppingCart from './ShoppingCart';
 import { useNavigate } from 'react-router-dom';
 
 function SubNavBar() {
-  const [clicked, setClicked] = useState(false);
+  const [clicked] = useState(false);
   const navigate = useNavigate();
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
 
   const home = () => {
     navigate('/');
@@ -31,10 +27,6 @@ function SubNavBar() {
         <div>
           <ShoppingCart />
         </div>
-        <div className='burguer'>
-          <BurguerButton clicked={clicked} handleClick={handleClick} />
-        </div>
-        <div className={`initial ${clicked ? 'sub-active' : ''}`}></div>
       </div>
     </>
   );
