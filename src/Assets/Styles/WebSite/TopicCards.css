@@ -175,3 +175,17 @@
     text-align: center;
   }
 }
+
+@media (max-width: 768px) {
+  .topic-detail-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topic-info {
+    margin: 0;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
