@@ -141,7 +141,7 @@ const BookingForm = () => {
             <div className='col-1'>
               <h2>Solicitar Reserva</h2>
               <span>
-                Envianos tus datos y pronto te enviaremos un presupuesto adaptado para vos
+                Completá tus datos y pronto te enviaremos un presupuesto adaptado para vos
               </span>
               <form
                 id='form'
