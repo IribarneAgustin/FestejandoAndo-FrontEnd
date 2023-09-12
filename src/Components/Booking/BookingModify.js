@@ -125,6 +125,7 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
         <br />
         <form className='modal' onSubmit={handleSubmit}>
         <b>Fecha</b>
+        <div>
             <DatePicker
                   locale='el'
                   placeholderText='Fecha'
@@ -134,6 +135,7 @@ function BookingModify({ id, bookingData, refreshBookingList, clientList, topicL
                   minDate={new Date()}
                   required
                 />
+                </div>
           <b>Cliente</b>
           <br />
           <label>

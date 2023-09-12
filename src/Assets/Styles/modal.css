@@ -13,7 +13,6 @@
   text-align: center;
   width: 80%;
 }
-
 .modal label {
   margin-bottom: 10px;
   display: flex;
@@ -31,10 +30,6 @@
   width: 100%;
 }
 
-.modal button {
-  width: auto;
-}
-
 .modal button[type="submit"] {
   background-color: #4caf50;
   color: white;
@@ -50,7 +45,7 @@
 }
 select[multiple] {
   height: auto;
-  min-height: 100px; /* Set a desired height */
+  min-height: 100px; 
   padding: 5px;
 }
 .description {
