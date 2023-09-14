@@ -11,6 +11,7 @@ import { clearCart } from '../WebSite/Redux/ShoppingAction';
 import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import LoadingSpinner from '../Loading/LoadingSpinner';
+import AlertPopup from './AlertPopUp';
 registerLocale('el', el);
 
 const BookingForm = () => {
@@ -23,6 +24,7 @@ const BookingForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     cartItems.forEach((item) => {
@@ -85,9 +87,7 @@ const BookingForm = () => {
         .then((response) => response.text())
         .then((response) => {
           console.log(response);
-          alert(
-            'La reserva fué solicitada correctamente, pronto nos pondremos en contacto para continuar'
-          );
+          setIsPopupOpen(true);
         })
         .catch((error) => {
           console.error('Error ', error);
@@ -98,7 +98,7 @@ const BookingForm = () => {
       alert(error);
     } finally {
       dispatch(clearCart());
-      navigate('/');
+      setIsLoading(false);
     }
   }
 
@@ -231,6 +231,9 @@ const BookingForm = () => {
             </div>
           </div>
         </div>
+      )}
+      {isPopupOpen && (
+        <AlertPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
       )}
     </Layout>
   );
