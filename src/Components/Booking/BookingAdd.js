@@ -2,17 +2,23 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import '../../Assets/Styles/modal.css';
 import Select from 'react-select';
-
+import DatePicker from 'react-datepicker';
+import LoadingSpinner from '../Loading/LoadingSpinner';
 Modal.setAppElement('#root');
 
 function BookingAdd({ refreshBookingList, clientList, topicList }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [date, setDate] = useState('');
   const [clientId, setClientId] = useState('');
   const [deposit, setDeposit] = useState('');
   const [isPaid, setIsPaid] = useState(false);
   const [cost, setCost] = useState('');
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [suggestedChildrenQuantity, setSuggestedChildrenQuantity] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedEmail, setSelectedEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const options = topicList.map((topic) => ({
     value: topic.id,
@@ -25,7 +31,8 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
+    try{
     //Getting selected topics
     const topicsToAdd = selectedTopics.map((topic) => ({
       id: topic.value,
@@ -33,8 +40,11 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
 
     // Create a new booking object with the form values
     const newBooking = {
-      date,
-      client: { id: clientId },
+      address,
+      description,
+      quantity: suggestedChildrenQuantity,
+      date: selectedDate,
+      client: { id: clientId, email: selectedEmail },
       topic: topicsToAdd,
       deposit: parseInt(deposit),
       isPaid,
@@ -42,43 +52,50 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
       cost: parseFloat(cost),
     };
 
-    try {
-      // Call addBooking method with bookingData
       await addBooking(newBooking);
-
-      // Reset the form fields
-      setDate('');
-      setClientId('');
-      setDeposit('');
-      setIsPaid(false);
-      setCost('');
-      setSelectedTopics([]);
-      closeModal();
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      closeModal();
     }
   };
 
-  const addBooking = (bookingData) => {
-    fetch('/api/booking/save', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bookingData),
-    })
-      .then((response) => response.text())
-      .then((response) => {
-        console.log(response);
-        window.alert(response);
-      })
-      .catch((error) => {
-        console.error('Error adding booking:', error);
-      })
-      .finally(() => {
-        refreshBookingList();
+  function cleanForm() {
+    setSuggestedChildrenQuantity('');
+    setAddress('');
+    setDescription('');
+    setSelectedDate('');
+    setClientId('');
+    setDeposit('');
+    setIsPaid(false);
+    setCost('');
+    setSelectedTopics([]);
+  }
+
+  const addBooking = async (bookingData) => {
+    try {
+      const response = await fetch('/api/booking/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
       });
+  
+      if (!response.ok) {
+        throw new Error(`Error adding booking: ${response.statusText}`);
+      }
+  
+      const result = await response.text();
+      console.log(result);
+      window.alert(result);
+      refreshBookingList();
+    } catch (error) {
+      console.error('Error adding booking:', error);
+    }
   };
+  
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -86,6 +103,7 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
 
   const closeModal = () => {
     setModalIsOpen(false);
+    cleanForm();
   };
 
   return (
@@ -94,80 +112,116 @@ function BookingAdd({ refreshBookingList, clientList, topicList }) {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2 className='container'>Nueva Reserva</h2>
         <br />
-        <form className='modal' onSubmit={handleSubmit}>
-          <label>
-            <b>Fecha: </b>
-            <input
-              type='date'
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            <b>Cliente:</b>
-            <select
-              value={clientId}
-              onChange={(e) => setClientId(e.target.value)}
-              required
-            >
-              <option value=''>Seleccione un cliente..</option>
-              {clientList.map((client) => (
-                <option key={client.id} value={client.id}>
-                  {client.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <br />
-          <label>
-            <b>Temáticas:</b>
-            <Select
-              options={options}
-              isMulti
-              value={selectedTopics}
-              onChange={handleSelectChange}
-              placeholder='Seleccione las temáticas'
-            />
-          </label>
-          <br />
-          <label>
-            <b>Seña:</b>
-            <input
-              type='number'
-              min='0'
-              value={deposit}
-              onChange={(e) => setDeposit(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            <b>Precio:</b>
-            <input
-              type='number'
-              min='0'
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            <b>Pagado:</b>
-            <input
-              type='checkbox'
-              checked={isPaid}
-              onChange={(e) => setIsPaid(e.target.checked)}
-            />
-          </label>
-          <br />
-          <label>
-            <button type='submit'>Reservar</button>
-            <button className='cancel-button' onClick={closeModal}>
-              Cancelar
-            </button>
-          </label>
-        </form>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <form className='modal' onSubmit={handleSubmit}>
+            <b>Fecha</b>
+            <div>
+              <DatePicker
+                locale='el'
+                placeholderText='Fecha'
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                dateFormat='dd/MM/yyyy'
+                minDate={new Date()}
+                required
+              />
+            </div>
+            <b>Cliente</b>
+            <br />
+            <label>
+              <select
+                value={clientId}
+                onChange={(e) => {
+                  setClientId(e.target.value)
+                  setSelectedEmail(e.target.options[e.target.selectedIndex].getAttribute("data-email"));
+                }}
+                required
+              >
+                <option value=''>Seleccione un cliente...</option>
+                {clientList.map((client) => (
+                  <option key={client.id} value={client.id} data-email={client.email}>
+                    {client.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <b>Temáticas</b>
+            <br />
+            <label>
+              <Select
+                options={options}
+                isMulti
+                value={selectedTopics}
+                onChange={handleSelectChange}
+                placeholder='Seleccione las temáticas'
+              />
+            </label>
+            <b>Seña</b>
+            <br />
+            <label>
+              <input
+                type='number'
+                min='0'
+                value={deposit}
+                onChange={(e) => setDeposit(e.target.value)}
+              />
+            </label>
+            <b>Precio</b>
+            <br />
+            <label>
+              <input
+                type='number'
+                min='0'
+                value={cost}
+                onChange={(e) => setCost(e.target.value)}
+              />
+            </label>
+            <b>Pagado</b>
+            <br />
+            <label>
+              <input
+                type='checkbox'
+                checked={isPaid}
+                onChange={(e) => setIsPaid(e.target.checked)}
+              />
+            </label>
+            <b>Cantidad de niños sugerida</b>
+            <br />
+            <label>
+              <input
+                type='number'
+                min='0'
+                value={suggestedChildrenQuantity}
+                onChange={(e) => setSuggestedChildrenQuantity(e.target.value)}
+              />
+            </label>
+            <b>Direccion</b>
+            <br />
+            <label>
+              <input
+                type='text'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </label>
+            <b>Descripción</b>
+            <br />
+            <label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </label>
+            <label>
+              <button type='submit'>Reservar</button>
+              <button className='cancel-button' onClick={closeModal}>
+                Cancelar
+              </button>
+            </label>
+          </form>
+        )}
       </Modal>
     </div>
   );

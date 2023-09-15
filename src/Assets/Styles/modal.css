@@ -53,3 +53,7 @@ select[multiple] {
   font-size: 12px;
   color: #666;
 }
+textarea{
+  resize: none;
+  height: 4rem;
+}
