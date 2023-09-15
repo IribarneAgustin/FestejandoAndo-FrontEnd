@@ -8,7 +8,6 @@ import el from 'date-fns/locale/es';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../WebSite/Redux/ShoppingAction';
-import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import AlertPopup from './AlertPopUp';
@@ -19,7 +18,6 @@ const BookingForm = () => {
   const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
   const [captchaValue, setCaptchaValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
