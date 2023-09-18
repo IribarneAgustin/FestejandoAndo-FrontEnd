@@ -12,6 +12,7 @@ function BookingList() {
   const [topicList, setTopics] = useState([]);
   const [showHistory, setShowHistory] = useState([]);
   const [showCurrents, setShowCurrents] = useState([]);
+  const [selectedOption, setSelectedOption] = useState('active');
 
   useEffect(() => {
     fetchBookings();
@@ -28,6 +29,18 @@ function BookingList() {
   useEffect(() => {
     fetchHistory();
   }, []);
+
+  useEffect(() => {
+    if (selectedOption === 'active') {
+      setBookings(showCurrents);
+    } else if (selectedOption === 'history') {
+      setBookings(showHistory);
+    } else if (selectedOption === 'confirmed') {
+      setBookings(showCurrents.filter((booking) => booking.confirm));
+    } else if (selectedOption === 'not-confirmed') {
+      setBookings(showCurrents.filter((booking) => !booking.confirm));
+    }
+  }, [selectedOption, showCurrents, showHistory]);
 
   const fetchClientList = async () => {
     try {
@@ -91,14 +104,6 @@ function BookingList() {
     }
   }
 
-  function handleClickBookingHistory() {
-    setBookings(showHistory);
-  }
-
-  function handleClickBookingActive() {
-    setBookings(showCurrents);
-  }
-
   function formatDate(dateString) {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
@@ -119,12 +124,18 @@ function BookingList() {
               />
             }
           </div>
-          <button className='button-see-history' onClick={handleClickBookingHistory}>
-            Ver Historial
-          </button>
-          <button className='button-see-history' onClick={handleClickBookingActive}>
-            Ver Actuales
-          </button>
+          <div className='select-container'>
+            <select
+              className='booking-dropdown'
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            >
+              <option value='active'>Actuales</option>
+              <option value='confirmed'>Confirmadas</option>
+              <option value='not-confirmed'>No confirmadas</option>
+              <option value='history'>Historial</option>
+            </select>
+          </div>
           <hr></hr>
           <li className='list-header-booking'>
             <h3>Temática</h3>
