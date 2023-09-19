@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 /* Product List */
@@ -189,3 +190,10 @@
     text-align: center;
   }
 }
+
+.article-list {
+  list-style: none;
+  padding: 4px 0; 
+}
+
+
