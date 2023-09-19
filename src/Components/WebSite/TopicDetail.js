@@ -98,16 +98,16 @@ function TopicDetail() {
           <b>Cantidad de niños sugerida: </b>
           {topic.suggestedQuantity}
           <h3>Artículos</h3>
-          <ul>
+          <ul className='article-list'>
             {articles
               .filter((article) => !article.suggested)
               .map((article, index) => (
-                <li key={index}>
-                  {article.name +
-                    ' (' +
-                    (article.quantity != null ? article.quantity : 0) +
-                    ')'}
-                </li>
+                  <li key={index}>
+                      {article.name +
+                        ' (' +
+                        (article.quantity != null ? article.quantity : 0) +
+                        ')'}
+                  </li>
               ))}
           </ul>
         </div>
