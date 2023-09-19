@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# FESTEJANDO ANDO - Sistema de Alquiler de Mobiliario Infantil
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**FESTEJANDO ANDO** es un proyecto de sistema para alquilar mobiliario infantil que permite a los usuarios explorar y solicitar reservas de una amplia variedad de artículos organizados por temáticas. Este sistema también incluye características como sugerencias de artículos para alquilar según las temáticas configuradas por el administrador y un carrito de compras para facilitar la gestión de las reservas. Además, el sistema envía notificaciones por correo electrónico tanto al cliente como al administrador cuando se realiza una reserva.
 
-## Available Scripts
+## Características Funcionales
 
-In the project directory, you can run:
+- **Inicio de Sesión/Cierre de Sesión como Administrador:** Los administradores pueden iniciar sesión en el sistema y cerrar sesión cuando lo deseen.
 
-### `npm start`
+- **Panel de Administración:** El sistema incluye un panel de administración que permite a los administradores gestionar clientes, temáticas, artículos y reservas de manera eficiente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **CRUD de Artículos:** Los administradores pueden crear, leer, actualizar y eliminar (CRUD) artículos disponibles para alquilar.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **CRUD de Temáticas:** Los administradores pueden gestionar las temáticas que organizan los artículos, incluyendo su creación, lectura, actualización y eliminación.
 
-### `npm test`
+- **CRUD de Reservas:** Los administradores pueden realizar operaciones CRUD en las reservas, lo que facilita la gestión de las solicitudes de alquiler.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **CRUD de Clientes:** Los administradores pueden administrar la información de los clientes, incluyendo la creación, lectura, actualización y eliminación de registros.
 
-### `npm run build`
+- **Galería de Temáticas:** Los usuarios pueden explorar una galería de temáticas para encontrar artículos relacionados con sus necesidades de alquiler.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Detalle de Temática:** Cada temática muestra información detallada y artículos relacionados para una experiencia de navegación más completa.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Carrito de Compras:** Los usuarios pueden agregar y gestionar artículos en su carrito de compras antes de confirmar su reserva.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Formulario de Reserva:** Los usuarios pueden completar un formulario de reserva para solicitar la reserva de artículos específicos.
 
-### `npm run eject`
+- **Captcha (Prevención de Spam):** El sistema utiliza Captcha para evitar el envío automático de formularios y reducir el riesgo de spam.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Notificaciones por Correo Electrónico:** Se envían notificaciones por correo electrónico tanto al cliente como al administrador cuando se realiza una reserva, solicitando confirmación.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Recursos No Funcionales
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Backend API Rest Java Spring Boot:** El sistema utiliza una API REST implementada en Java con Spring Boot para manejar las operaciones del servidor.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Frontend React JS:** La interfaz de usuario se desarrolla utilizando React JS para proporcionar una experiencia de usuario fluida y receptiva.
 
-## Learn More
+- **Base de Datos MySQL:** Se utiliza MySQL como sistema de gestión de bases de datos para almacenar y gestionar datos relacionados con clientes, temáticas, artículos y reservas.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Cómo Ejecutar el Proyecto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Para ejecutar el proyecto **FESTEJANDO ANDO** en su entorno local, siga estos pasos:
 
-### Code Splitting
+1. Clone ambos repositorios, tanto del frontend como del backend desde GitHub.
+```shell
+   git clone https://github.com/tu_usuario/festejando-ando-frontend.git
+```
+Backend URL: https://github.com/IribarneAgustin/Festejando-Ando
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Frontend URL: https://github.com/IribarneAgustin?tab=repositories
+   
+3. Configure la base de datos MySQL con la configuración adecuada y asegúrese de que esté en funcionamiento.
+4. Configure las propiedades de la aplicación, como la URL de la base de datos y las credenciales, en el archivo de configuración.
+5. Instale las dependencias del proyecto tanto para el backend como para el frontend.
 
-### Analyzing the Bundle Size
+# En el directorio del backend
+```shell
+cd festejando-ando-backend
+```
+Run as Spring boot Application 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# En el directorio del frontend
+```shell
+cd ../festejando-ando-frontend
+npm install
+npm start
+```
 
-### Making a Progressive Web App
+Abra su navegador web y vaya a http://localhost:3000 para acceder a la aplicación.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+¡Disfrute explorando y utilizando FESTEJANDO ANDO!
 
-### Advanced Configuration
+## Contribuciones
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Contribuciones son bienvenidas. Si deseas contribuir al proyecto, sigue estos pasos:
 
-### Deployment
+1. Haz un fork del repositorio en GitHub.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. Crea una nueva rama para tu función o corrección de errores.
 
-### `npm run build` fails to minify
+3. Realiza los cambios necesarios y asegúrate de seguir las mejores prácticas de codificación.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4. Envía una solicitud de extracción (pull request) con una descripción detallada de los cambios que has realizado.
+
+5. Los colaboradores revisarán tu solicitud y la fusionarán en el proyecto principal si es apropiado.
+
+## Problemas y Soporte
+
+Si encuentras problemas o tienes preguntas sobre el proyecto, no dudes en abrir un issue en GitHub o ponerte en contacto con el equipo de desarrollo.
+
+¡Gracias por usar **FESTEJANDO ANDO**! Esperamos que este sistema de alquiler de mobiliario infantil sea útil para ti y tu comunidad.
+
