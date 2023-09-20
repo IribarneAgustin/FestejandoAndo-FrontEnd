@@ -15,22 +15,6 @@ function BookingList() {
   const [selectedOption, setSelectedOption] = useState('active');
 
   useEffect(() => {
-    fetchBookings();
-  }, []);
-
-  useEffect(() => {
-    fetchClientList();
-  }, []);
-
-  useEffect(() => {
-    fetchTopicList();
-  }, []);
-
-  useEffect(() => {
-    fetchHistory();
-  }, []);
-
-  useEffect(() => {
     if (selectedOption === 'active') {
       setBookings(showCurrents);
     } else if (selectedOption === 'history') {
@@ -41,6 +25,13 @@ function BookingList() {
       setBookings(showCurrents.filter((booking) => !booking.confirm));
     }
   }, [selectedOption, showCurrents, showHistory]);
+
+  useEffect(() => {
+    fetchBookings();
+    fetchClientList();
+    fetchTopicList();
+    fetchHistory();
+  }, []);
 
   const fetchClientList = async () => {
     try {
@@ -66,6 +57,7 @@ function BookingList() {
         const data = await response.json();
         setBookings(data);
         setShowCurrents(data);
+        setShowHistory(data);
       } else {
         throw new Error('Failed to fetch bookings');
       }
