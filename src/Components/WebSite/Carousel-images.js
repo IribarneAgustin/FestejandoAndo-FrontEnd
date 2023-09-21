@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '../../Assets/Styles/WebSite/WebSite.css';
 import { Carousel } from 'react-responsive-carousel';
-import imageCellphoneView from '../../Assets/Styles/Images/main-banner.png';
-import imagePcView from '../../Assets/Styles/Images/BANNER.png';
+import Banner1 from '../../Assets/Styles/Images/Banner1.jpg';
+import Banner2 from '../../Assets/Styles/Images/Banner2.jpg';
+import Banner3 from '../../Assets/Styles/Images/Banner3.jpg';
+import BannerMobile1 from '../../Assets/Styles/Images/BannerMobile1.jpg';
+import BannerMobile2 from '../../Assets/Styles/Images/BannerMobile2.jpg';
+import BannerMobile3 from '../../Assets/Styles/Images/BannerMobile3.jpg';
+
 
 function CarouselImages() {
 
@@ -25,30 +30,60 @@ function CarouselImages() {
 
   return (
     <div className='carousel-container'>
-      <Carousel
-        className='festejando-carousel'
-        showArrows={true}
-        autoPlay
-        interval={3000}
-        infiniteLoop
-        centerSlidePercentage={100}
-        centerMode
-        showThumbs={false}
-        showStatus={false}
-        showIndicators={true}
-        dynamicHeight
-      >
-        {isMobile ? (
+      {isMobile ? (
+        <Carousel
+          className='festejando-carousel'
+          showArrows={false}
+          autoPlay
+          interval={2500}
+          infiniteLoop
+          centerSlidePercentage={100}
+          centerMode
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={true}
+          dynamicHeight
+        >
           <div>
-            <img src={imageCellphoneView} alt='logo2' sizes='auto'></img>
+            <img src={BannerMobile1} alt='bannerMobile' sizes='auto'></img>
           </div>
-        ) : (
           <div>
-            <img src={imagePcView} alt='logo1' sizes='auto'></img>
+            <img src={BannerMobile2} alt='bannerMobile' sizes='auto'></img>
           </div>
-        )}
-      </Carousel>
-    </div>
+          <div>
+            <img src={BannerMobile3} alt='bannerMobile' sizes='auto'></img>
+          </div>
+
+        </Carousel>
+      ) : (
+        <Carousel
+          className='festejando-carousel'
+          showArrows={false}
+          autoPlay
+          interval={2500}
+          infiniteLoop
+          centerSlidePercentage={100}
+          centerMode
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={true}
+          dynamicHeight
+        >
+          <div>
+            <img src={Banner1} alt='banner' sizes='auto'></img>
+          </div>
+          <div>
+            <img src={Banner2} alt='banner' sizes='auto'></img>
+          </div>
+          <div>
+            <img src={Banner3} alt='banner' sizes='auto'></img>
+          </div>
+
+        </Carousel>
+
+      )}
+
+    </div >
   );
 }
 
