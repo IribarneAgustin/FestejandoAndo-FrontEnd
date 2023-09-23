@@ -16,9 +16,9 @@ function SubNavBar() {
   return (
     <>
       <div className='container-sub-navbar'>
-        <a className='logo'>
+        <Link className='logo'>
           <img onClick={home} src='/logo.png' alt='logo'></img>
-        </a>
+        </Link>
         <nav className={`nav ${clicked ? 'active' : ''}`}>
           <Link to='/' className='nav-link'>
             VOLVER ATRÁS

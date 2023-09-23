@@ -15,27 +15,26 @@ function AdministratorPanel() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchLoginForm();
-  }, []);
+    async function fetchLoginForm() {
+      try {
+        const response = await fetch('/api/', {
+          method: 'GET',
+        });
 
-  //We are using basic auth with navigator form
-  async function fetchLoginForm() {
-    try {
-      const response = await fetch('/api/', {
-        method: 'GET',
-      });
-
-      if (!response.ok) {
-        console.log('login failed');
-        navigate('/');
-      } else {
-        setShowClientList(true);
+        if (!response.ok) {
+          console.log('login failed');
+          navigate('/');
+        } else {
+          setShowClientList(true);
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        throw error;
       }
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
     }
-  }
+
+    fetchLoginForm();
+  }, [navigate]);
 
   const handleListBookingClick = () => {
     setShowClientList(false);
