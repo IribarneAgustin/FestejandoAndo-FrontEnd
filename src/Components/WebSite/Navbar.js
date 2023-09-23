@@ -24,37 +24,37 @@ function NavBar({ onNavLinkClick }) {
   return (
     <>
       <div className='container-navbar'>
-        <a className='logo'>
+        <Link className='logo'>
           <img onClick={home} src='/logo.png' alt='logo'></img>
-        </a>
+        </Link>
         <nav className={`nav ${clicked ? 'active' : ''}`}>
           <Link to='/' className='nav-link'>
             HOME
           </Link>
-          <a
+          <Link className = 'nav-link'
             onClick={() => {
               onNavLinkClick('tematicas');
               handleNavLinkClick();
             }}
           >
             TEMATICAS
-          </a>
-          <a
+          </Link>
+          <Link className = 'nav-link'
             onClick={() => {
               onNavLinkClick('quienesSomos');
               handleNavLinkClick();
             }}
           >
             QUIENES SOMOS
-          </a>
-          <a
+          </Link>
+          <Link className = 'nav-link'
             onClick={() => {
               onNavLinkClick('presupuestos');
               handleNavLinkClick();
             }}
           >
             PRESUPUESTOS
-          </a>
+          </Link>
         </nav>
         <div>
           <ShoppingCart />

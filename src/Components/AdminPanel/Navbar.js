@@ -3,6 +3,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import '../../Assets/Styles/adminNavbar.css';
 import logo from '../../Assets/Styles/Images/logo.png'; // Make sure to import the logo properly
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }) {
   const navRef = useRef();
@@ -20,38 +21,38 @@ function AdminNavbar({ clientsClick, bookingsClick, topicsClick, articlesClick }
     <admin-header>
       <img onClick={logout} src={logo} alt='Logo'></img>
       <admin-nav ref={navRef}>
-        <a
+        <Link
           onClick={() => {
             clientsClick();
             showNavbar();
           }}
         >
           Clientes
-        </a>
-        <a
+        </Link>
+        <Link
           onClick={() => {
             bookingsClick();
             showNavbar();
           }}
         >
           Reservas
-        </a>
-        <a
+        </Link>
+        <Link
           onClick={() => {
             topicsClick();
             showNavbar();
           }}
         >
           Temáticas
-        </a>
-        <a
+        </Link>
+        <Link
           onClick={() => {
             articlesClick();
             showNavbar();
           }}
         >
           Artículos
-        </a>
+        </Link>
         <button className='admin-nav-btn nav-close-btn' onClick={showNavbar}>
           <FaTimes />
         </button>
