@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../Assets/Styles/WebSite/BookingForm.css';
 import { useForm } from 'react-hook-form';
-import bgImg from '../../Assets/Styles/Images/tina.png';
+import bgImg from '../../Assets/Styles/Images/BookingForm.jpg';
 import Layout from './Layout';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import el from 'date-fns/locale/es';
