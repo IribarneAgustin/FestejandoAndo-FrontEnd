@@ -112,6 +112,7 @@
 .side-image {
   height: auto;
   margin: 10px;
+  max-height: 500px;
 }
 
 .image-container {

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Assets/Styles/WebSite/TopicCards.css';
-import image from '../../Assets/Styles/Images/agus-jugando.png';
+import image from '../../Assets/Styles/Images/QuienesSomos.jpg';
 
 function QuienesSomos() {
   return (
