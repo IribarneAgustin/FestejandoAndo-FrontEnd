@@ -81,7 +81,6 @@
 .carousel-main-container {
   flex: 1;
   width: 100%;
-  overflow: hidden;
   margin-bottom: auto;
 }
 .carousel-container {
@@ -116,7 +115,7 @@
 
 .festejando-carousel {
   position: relative;
-  z-index: -2;
+  padding-bottom: 25px;
 }
 
 @media (max-width: 768px) {
