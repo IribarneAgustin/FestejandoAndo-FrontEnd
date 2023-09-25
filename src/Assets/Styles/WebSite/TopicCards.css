@@ -4,14 +4,14 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 3rem; /* gap between columns */
   justify-content: center;
-  margin: 0 2.5rem;
+  margin: 0.5rem 2.5rem;
 }
 
 .center-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 7rem;
 }
 
 /* Product List */
@@ -139,6 +139,7 @@
 @media only screen and (max-width: 768px) {
   .TopicCards {
     grid-template-columns: 1fr;
+    margin-top: 5rem;
   }
 
   .productList {
@@ -167,6 +168,10 @@
   .text-quienesSomos {
     margin: 0; /* Eliminado el margen derecho para evitar que los párrafos se superpongan */
   }
+
+  .center-button-container {
+    margin-top: 4rem;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -194,7 +199,5 @@
 
 .article-list {
   list-style: none;
-  padding: 4px 0; 
+  padding: 4px 0;
 }
-
-
