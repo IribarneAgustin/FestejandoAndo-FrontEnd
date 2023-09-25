@@ -5,13 +5,14 @@
   gap: 3rem; /* gap between columns */
   justify-content: center;
   margin: 0.5rem 2.5rem;
+  grid-auto-rows: minmax(100px, auto);
 }
 
 .center-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 7rem;
+  margin-top: 2rem;
 }
 
 /* Product List */
@@ -99,6 +100,11 @@
   font-size: 1.1rem;
 }
 
+.article-list {
+  list-style: none;
+  padding: 4px 0;
+}
+
 /* QUIENES SOMOS STYLES */
 
 .centered-container-text {
@@ -136,10 +142,9 @@
 }
 
 /* Media query for smaller screens */
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .TopicCards {
     grid-template-columns: 1fr;
-    margin-top: 5rem;
   }
 
   .productList {
@@ -169,21 +174,6 @@
     margin: 0; /* Eliminado el margen derecho para evitar que los párrafos se superpongan */
   }
 
-  .center-button-container {
-    margin-top: 4rem;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .centered-container-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
   .topic-detail-container {
     flex-direction: column;
     align-items: stretch;
@@ -197,7 +187,11 @@
   }
 }
 
-.article-list {
-  list-style: none;
-  padding: 4px 0;
+@media (max-width: 1000px) {
+  .centered-container-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
