@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://festejando-ando.onrender.com',
+      target: 'https://festejandoando.fly.dev',
       changeOrigin: true,
     })
   );
