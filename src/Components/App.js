@@ -1,4 +1,3 @@
-import '../Assets/Styles/App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdministratorPanel from './AdministratorPanel';
@@ -7,6 +6,8 @@ import TopicDetail from './WebSite/TopicDetail';
 import BookingForm from './WebSite/BookingForm';
 import store from './../Components/WebSite/Redux/store';
 import { Provider } from 'react-redux';
+import ScheduledTask from '../Components/WebSite/ScheduledTask';
+import '../Assets/Styles/App.css';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/bookingForm' element={<BookingForm />} />
         </Routes>
       </Router>
+      <ScheduledTask />
     </Provider>
   );
 }
