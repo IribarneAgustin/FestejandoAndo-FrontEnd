@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/FestejandoAndo-FrontEnd/static/css/main.94b97815.css",
-    "main.js": "/FestejandoAndo-FrontEnd/static/js/main.32d3a24e.js",
-    "static/js/787.5d40e9b8.chunk.js": "/FestejandoAndo-FrontEnd/static/js/787.5d40e9b8.chunk.js",
-    "static/media/QuienesSomos.jpg": "/FestejandoAndo-FrontEnd/static/media/QuienesSomos.7e3b3ec8da418dcc0f9d.jpg",
-    "static/media/Banner2.jpg": "/FestejandoAndo-FrontEnd/static/media/Banner2.9babfa889023fa7b6738.jpg",
-    "static/media/Banner3.jpg": "/FestejandoAndo-FrontEnd/static/media/Banner3.70a304bafb75c1b5f9aa.jpg",
-    "static/media/BookingForm.jpg": "/FestejandoAndo-FrontEnd/static/media/BookingForm.40c6ee0b3949cab01ca5.jpg",
-    "static/media/Banner1.jpg": "/FestejandoAndo-FrontEnd/static/media/Banner1.ecf7f1ea149780562341.jpg",
-    "static/media/logo.png": "/FestejandoAndo-FrontEnd/static/media/logo.29bdd1997b95648de85c.png",
-    "static/media/BannerMobile2.jpg": "/FestejandoAndo-FrontEnd/static/media/BannerMobile2.d45506b0412564c8e3a7.jpg",
-    "static/media/BannerMobile3.jpg": "/FestejandoAndo-FrontEnd/static/media/BannerMobile3.d6731b39339ba5134525.jpg",
-    "static/media/BannerMobile1.jpg": "/FestejandoAndo-FrontEnd/static/media/BannerMobile1.320385148605347f4024.jpg",
-    "index.html": "/FestejandoAndo-FrontEnd/index.html",
-    "main.94b97815.css.map": "/FestejandoAndo-FrontEnd/static/css/main.94b97815.css.map",
-    "main.32d3a24e.js.map": "/FestejandoAndo-FrontEnd/static/js/main.32d3a24e.js.map",
-    "787.5d40e9b8.chunk.js.map": "/FestejandoAndo-FrontEnd/static/js/787.5d40e9b8.chunk.js.map"
+    "main.css": "/static/css/main.94b97815.css",
+    "main.js": "/static/js/main.efc9953f.js",
+    "static/js/787.5d40e9b8.chunk.js": "/static/js/787.5d40e9b8.chunk.js",
+    "static/media/QuienesSomos.jpg": "/static/media/QuienesSomos.7e3b3ec8da418dcc0f9d.jpg",
+    "static/media/Banner2.jpg": "/static/media/Banner2.9babfa889023fa7b6738.jpg",
+    "static/media/Banner3.jpg": "/static/media/Banner3.70a304bafb75c1b5f9aa.jpg",
+    "static/media/BookingForm.jpg": "/static/media/BookingForm.40c6ee0b3949cab01ca5.jpg",
+    "static/media/Banner1.jpg": "/static/media/Banner1.ecf7f1ea149780562341.jpg",
+    "static/media/logo.png": "/static/media/logo.29bdd1997b95648de85c.png",
+    "static/media/BannerMobile2.jpg": "/static/media/BannerMobile2.d45506b0412564c8e3a7.jpg",
+    "static/media/BannerMobile3.jpg": "/static/media/BannerMobile3.d6731b39339ba5134525.jpg",
+    "static/media/BannerMobile1.jpg": "/static/media/BannerMobile1.320385148605347f4024.jpg",
+    "index.html": "/index.html",
+    "main.94b97815.css.map": "/static/css/main.94b97815.css.map",
+    "main.efc9953f.js.map": "/static/js/main.efc9953f.js.map",
+    "787.5d40e9b8.chunk.js.map": "/static/js/787.5d40e9b8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.94b97815.css",
-    "static/js/main.32d3a24e.js"
+    "static/js/main.efc9953f.js"
   ]
 }
