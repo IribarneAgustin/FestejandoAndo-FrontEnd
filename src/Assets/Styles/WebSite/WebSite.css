@@ -1,0 +1,114 @@
+.website-container {
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.tematicas {
+  height: 600px;
+  background-color: bisque;
+}
+
+.calendario {
+  height: 600px;
+  background-color: beige;
+}
+
+.contacto {
+  height: 600px;
+  background-color: blanchedalmond;
+}
+
+.quienes-somos {
+  height: 600px;
+  background-color: antiquewhite;
+}
+
+.presupuestos {
+  height: 600px;
+  background-color: rgb(228, 179, 116);
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel.carousel-slider {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* SCROLL TO TOP BUTTON */
+.top-btn-position {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+}
+
+.top-btn-style {
+  height: 40px;
+  width: 40px;
+  z-index: 10;
+  border-radius: 50%;
+  border: 2px solid #333;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.top-btn-style:hover {
+  animation: none;
+  background-color: #333;
+  color: #fff;
+  border: 2px solid #333;
+}
+
+.topic-detail-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.carousel-main-container {
+  flex: 1;
+  width: 100%;
+  margin-bottom: auto;
+}
+.carousel-container {
+  flex: 1;
+  width: 100%;
+}
+
+.festejando-carousel {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.topic-info {
+  flex: 1;
+  padding: 20px;
+  margin: 20px;
+}
+
+.topic-info h1 {
+  text-transform: uppercase;
+}
+
+.topic-info h4 {
+  color: rgb(252, 162, 27);
+  font-weight: bold;
+}
