@@ -1,9 +1,92 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/topic/list:path*",
-        "destination": "https://festejandoando.fly.dev/api/topic/list:path*"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://festejandoando.fly.dev/api/:path*"
+    },
+    {
+      "source": "/api/client/list",
+      "destination": "https://festejandoando.fly.dev/api/client/list"
+    },
+    {
+      "source": "/api/client/save",
+      "destination": "https://festejandoando.fly.dev/api/client/save"
+    },
+    {
+      "source": "/api/client/update/:id",
+      "destination": "https://festejandoando.fly.dev/api/client/update/:id"
+    },
+    {
+      "source": "/api/client/delete/:id",
+      "destination": "https://festejandoando.fly.dev/api/client/delete/:id"
+    },
+    {
+      "source": "/api/topic/list",
+      "destination": "https://festejandoando.fly.dev/api/topic/list"
+    },
+    {
+      "source": "/api/topic/save",
+      "destination": "https://festejandoando.fly.dev/api/topic/save"
+    },
+    {
+      "source": "/api/topic/update/:id",
+      "destination": "https://festejandoando.fly.dev/api/topic/update/:id"
+    },
+    {
+      "source": "/api/topic/delete/:id",
+      "destination": "https://festejandoando.fly.dev/api/topic/delete/:id"
+    },
+    {
+      "source": "/api/booking/list",
+      "destination": "https://festejandoando.fly.dev/api/booking/list"
+    },
+    {
+      "source": "/api/booking/save",
+      "destination": "https://festejandoando.fly.dev/api/booking/save"
+    },
+    {
+      "source": "/api/booking/update/:id",
+      "destination": "https://festejandoando.fly.dev/api/booking/update/:id"
+    },
+    {
+      "source": "/api/booking/delete/:id",
+      "destination": "https://festejandoando.fly.dev/api/booking/delete/:id"
+    },
+    {
+      "source": "/api/booking/cancel/:id",
+      "destination": "https://festejandoando.fly.dev/api/booking/cancel/:id"
+    },
+    {
+      "source": "/api/booking/confirm/:id",
+      "destination": "https://festejandoando.fly.dev/api/booking/confirm/:id"
+    },
+    {
+      "source": "/api/booking/listHistory",
+      "destination": "https://festejandoando.fly.dev/api/booking/listHistory"
+    },
+    {
+      "source": "/api/article/list",
+      "destination": "https://festejandoando.fly.dev/api/article/list"
+    },
+    {
+      "source": "/api/article/save",
+      "destination": "https://festejandoando.fly.dev/api/article/save"
+    },
+    {
+      "source": "/api/article/update/:id",
+      "destination": "https://festejandoando.fly.dev/api/article/update/:id"
+    },
+    {
+      "source": "/api/article/delete/:id",
+      "destination": "https://festejandoando.fly.dev/api/article/delete/:id"
+    },
+    {
+      "source": "/api/article/listSuggestedArticlesByTopic/:id",
+      "destination": "https://festejandoando.fly.dev/api/article/listSuggestedArticlesByTopic/:id"
+    },
+    {
+      "source": "/api/article/listByTopic/:id",
+      "destination": "https://festejandoando.fly.dev/api/article/listByTopic/:id"
+    }
+  ]
+}
