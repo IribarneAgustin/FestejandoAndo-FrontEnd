@@ -28,11 +28,6 @@
   background-color: antiquewhite;
 }
 
-.presupuestos {
-  height: 600px;
-  background-color: rgb(228, 179, 116);
-}
-
 .carousel {
   display: flex;
   justify-content: center;

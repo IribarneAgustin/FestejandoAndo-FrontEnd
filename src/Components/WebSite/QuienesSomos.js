@@ -10,6 +10,7 @@ function QuienesSomos() {
           <img src={image} alt='Imagen' className='side-image' />
         </div>
         <div className='text-container'>
+          <div className='presupuestos-title'>Quienes somos</div>
           <p className='text-quienesSomos'>
             Holis por acá <strong>Agus</strong> 👋🏻🧚🏼‍♀️ O en mis otras versiones… seño agus,
             tina, zapallita y para los peques POFE (sisi sin r, para mas ternura). Por

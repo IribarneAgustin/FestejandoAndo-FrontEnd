@@ -122,8 +122,7 @@
 }
 
 .image-container {
-  float: left; /* La imagen se ubicará a la izquierda */
-  margin-right: 10px; /* Agrega espacio a la derecha de la imagen para separarla de los textos */
+  float: left;
 }
 
 .text-container {
@@ -139,6 +138,69 @@
   font-size: 15px;
   display: block;
   margin-right: 20px;
+}
+
+/* PRESUPUESTOS STYLES */
+
+.presupuestos-container {
+  background-color: #ffe056;
+  padding-bottom: 30px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.presupuestos {
+  list-style: none;
+  padding: 0;
+}
+
+.presupuestos-title {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.li-presupuestos {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.plus-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.space-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.reservation-container {
+  display: flex;
+  align-items: center;
+}
+
+.reservation-text {
+  flex: 1; /* Esto permite que el texto ocupe todo el espacio disponible a la izquierda */
+}
+
+.follow-text {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 /* Media query for smaller screens */
@@ -160,18 +222,18 @@
   }
 
   .side-image {
+    margin: 0;
     max-width: 100%;
     height: auto;
-    margin-bottom: 10px;
   }
 
   .text-container {
-    margin: 10px;
+    margin: 0 10px 10px 0;
     max-width: 400px;
   }
 
   .text-quienesSomos {
-    margin: 0; /* Eliminado el margen derecho para evitar que los párrafos se superpongan */
+    margin: 10px;
   }
 
   .topic-detail-container {
@@ -184,6 +246,18 @@
     padding: 10px;
     margin: 0 auto;
     text-align: center;
+  }
+
+  .reservation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reservation-text {
+    text-align: center;
+    margin-bottom: 20px;
   }
 }
 
