@@ -14,6 +14,7 @@ function Tematicas() {
   
       if (response.ok) {
         const rawData = await response.text();
+        console.log(response);
         const data = JSON.parse(rawData);
         setTopics(data);
       } else {

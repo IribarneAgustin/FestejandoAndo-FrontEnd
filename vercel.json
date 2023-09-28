@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "https://festejandoando.fly.dev/:path*"
+      }
+    ]
+  }
+  
