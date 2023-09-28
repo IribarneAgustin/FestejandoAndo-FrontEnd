@@ -6,6 +6,7 @@ import Tematicas from './Tematicas';
 import ScrollToTop from './ScrollToTop';
 import Layout from './Layout';
 import QuienesSomos from './QuienesSomos';
+import Presupuestos from './Presupuestos';
 
 function WebSite() {
   const tematicas = useRef(null);
@@ -43,9 +44,7 @@ function WebSite() {
           <div>
             <div ref={tematicas}>{<Tematicas />}</div>
             <div ref={quienesSomos}>{<QuienesSomos />}</div>
-            <div ref={presupuestos} className='presupuestos'>
-              PRESUPUESTOS
-            </div>
+            <div ref={presupuestos}> {<Presupuestos />}</div>
           </div>
         </div>
       </Layout>
