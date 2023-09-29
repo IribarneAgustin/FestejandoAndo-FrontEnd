@@ -11,11 +11,9 @@ function Tematicas() {
   async function fetchTopics() {
     try {
       const response = await fetch('/api/topic/list');
-  
+
       if (response.ok) {
-        const rawData = await response.text();
-        console.log(response);
-        const data = JSON.parse(rawData);
+        const data = await response.json();
         setTopics(data);
       } else {
         throw new Error('Failed to fetch topics');
@@ -24,7 +22,6 @@ function Tematicas() {
       console.error('Error fetching topics:', error);
     }
   }
-  
 
   return (
     <div className='TopicCards'>

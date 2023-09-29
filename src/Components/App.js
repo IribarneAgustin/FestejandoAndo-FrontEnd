@@ -6,7 +6,6 @@ import TopicDetail from './WebSite/TopicDetail';
 import BookingForm from './WebSite/BookingForm';
 import store from './../Components/WebSite/Redux/store';
 import { Provider } from 'react-redux';
-import ScheduledTask from '../Components/WebSite/ScheduledTask';
 import '../Assets/Styles/App.css';
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
           <Route path='/bookingForm' element={<BookingForm />} />
         </Routes>
       </Router>
-      <ScheduledTask />
     </Provider>
   );
 }

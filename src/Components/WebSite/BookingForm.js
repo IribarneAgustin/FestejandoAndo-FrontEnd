@@ -215,7 +215,7 @@ const BookingForm = () => {
                 </div>
                 <div className='captcha-festejando'>
                   <ReCAPTCHA
-                    sitekey='6LcdQP0nAAAAALIiPuoEd1nGtoFtUZ3_fE6maEe7'
+                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                     onChange={handleCaptchaChange}
                   />
                 </div>
