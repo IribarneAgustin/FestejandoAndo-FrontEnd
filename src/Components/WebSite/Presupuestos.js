@@ -56,7 +56,7 @@ function Presupuestos() {
           <div className='space-text'>¡Reserva tu evento con nosotros!</div>
           <p className='follow-text'>
             Síguenos en redes:
-            <strong style={{ marginLeft: '10px' }}>@festejando.ando_</strong>
+            <strong style={{ marginLeft: '10px' }}> festejandoando01@gmail.com</strong>
           </p>
         </div>
         <img src={logo} alt='Logo'></img>

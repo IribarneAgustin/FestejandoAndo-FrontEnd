@@ -23,7 +23,7 @@ const Layout = ({ children, showSubNav }) => {
           <li>
             <FaRegEnvelope className='icon-link' />
             <a className='mail-text' href='mailto:festejandoando_@gmail.com'>
-              festejandoando_@gmail.com
+              festejandoando01@gmail.com
             </a>
           </li>
           <li>
