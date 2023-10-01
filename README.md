@@ -46,7 +46,7 @@ Para ejecutar el proyecto **FESTEJANDO ANDO** en su entorno local, siga estos pa
 ```
 Backend URL: https://github.com/IribarneAgustin/Festejando-Ando
 
-Frontend URL: https://github.com/IribarneAgustin?tab=repositories
+Frontend URL: https://github.com/IribarneAgustin/FestejandoAndo-FrontEnd
    
 3. Configure la base de datos MySQL con la configuración adecuada y asegúrese de que esté en funcionamiento.
 4. Configure las propiedades de la aplicación, como la URL de la base de datos y las credenciales, en el archivo de configuración.
