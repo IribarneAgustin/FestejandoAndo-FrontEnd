@@ -11,7 +11,7 @@ function BookingConfirm({ id, refreshBookingList }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(true),
+        body: JSON.stringify({ confirm: true }),
       });
       if (response.ok) {
         window.alert('Se ha confirmado la reserva');
