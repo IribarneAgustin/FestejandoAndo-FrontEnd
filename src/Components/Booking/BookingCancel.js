@@ -11,7 +11,7 @@ function BookingCancel({ id, refreshBookingList }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ confirm: true }),
+        body: false,
       });
       if (response.ok) {
         window.alert('Se ha cancelado la reserva');
