@@ -31,58 +31,14 @@ function CarouselImages() {
   return (
     <div className='carousel-container'>
       {isMobile ? (
-        <Carousel
-          className='festejando-carousel'
-          showArrows={false}
-          autoPlay
-          interval={2500}
-          infiniteLoop
-          centerSlidePercentage={100}
-          centerMode
-          showThumbs={false}
-          showStatus={false}
-          showIndicators={true}
-          dynamicHeight
-        >
-          <div>
-            <img src={BannerMobile1} alt='bannerMobile' sizes='auto'></img>
-          </div>
-          <div>
-            <img src={BannerMobile2} alt='bannerMobile' sizes='auto'></img>
-          </div>
-          <div>
-            <img src={BannerMobile3} alt='bannerMobile' sizes='auto'></img>
-          </div>
-
-        </Carousel>
+        <>
+          <img src={BannerMobile1} alt='bannerMobile' style={{ width: '100%', height: '500px' }}></img>
+        </>
       ) : (
-        <Carousel
-          className='festejando-carousel'
-          showArrows={false}
-          autoPlay
-          interval={2500}
-          infiniteLoop
-          centerSlidePercentage={100}
-          centerMode
-          showThumbs={false}
-          showStatus={false}
-          showIndicators={true}
-          dynamicHeight
-        >
-          <div>
-            <img src={Banner1} alt='banner' sizes='auto'></img>
-          </div>
-          <div>
-            <img src={Banner2} alt='banner' sizes='auto'></img>
-          </div>
-          <div>
-            <img src={Banner3} alt='banner' sizes='auto'></img>
-          </div>
-
-        </Carousel>
-
+        <>
+          <img src={Banner1} alt='banner' style={{ width: '100%', height: '500px' }}></img>
+        </>
       )}
-
     </div >
   );
 }

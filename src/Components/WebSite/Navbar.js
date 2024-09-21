@@ -28,9 +28,6 @@ function NavBar({ onNavLinkClick }) {
           <img onClick={home} src='/logo.png' alt='logo'></img>
         </Link>
         <nav className={`nav ${clicked ? 'active' : ''}`}>
-          <Link to='/' className='nav-link'>
-            HOME
-          </Link>
           <Link className = 'nav-link'
             onClick={() => {
               onNavLinkClick('tematicas');

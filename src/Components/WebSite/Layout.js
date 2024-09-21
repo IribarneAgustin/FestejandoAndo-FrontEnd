@@ -13,7 +13,7 @@ const Layout = ({ children, showSubNav }) => {
           <li>
             <a
               className='icon-link'
-              href='https://www.instagram.com/festejando.ando_/'
+              href='https://www.instagram.com/festejando.ando/'
               target='_blank'
               rel='noopener noreferrer'
             >

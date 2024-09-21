@@ -94,9 +94,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
 }
 
 .productDescription {
+  white-space: pre-line;
   font-size: 1.1rem;
 }
 
@@ -173,6 +175,7 @@
   font-size: 24px;
   margin-right: 10px;
   vertical-align: middle;
+  padding-left: 3%;
 }
 
 .space-text {
@@ -246,6 +249,10 @@
     margin: 0 auto;
     text-align: center;
   }
+
+ .topic-description{
+    white-space: pre-line;
+ }
 
   .reservation-container {
     display: flex;

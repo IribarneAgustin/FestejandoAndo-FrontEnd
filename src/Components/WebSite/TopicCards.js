@@ -54,11 +54,6 @@ export function TopicCards({
               {itemExistsInCart ? 'Agregado ' : 'Agregar al Carrito '}
               <FaShoppingCart />
             </button>
-            <div className='productRating'>
-              {[...Array(rating)].map((_, index) => (
-                <FaStar id={index + 1} key={index} />
-              ))}
-            </div>
           </div>
         </div>
       </div>

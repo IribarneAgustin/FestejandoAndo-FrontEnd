@@ -94,22 +94,26 @@ function TopicDetail() {
         </div>
         <div className='topic-info'>
           <h1>{topic.name}</h1>
-          <p>{topic.description}</p>
+          <p style={{  whiteSpace: 'pre-line'}}>{topic.description}</p>
           <b>Cantidad de niños sugerida: </b>
           {topic.suggestedQuantity}
-          <h3>Artículos</h3>
-          <ul className='article-list'>
-            {articles
-              .filter((article) => !article.suggested)
-              .map((article, index) => (
-                  <li key={index}>
-                      {article.name +
-                        ' (' +
-                        (article.quantity != null ? article.quantity : 0) +
-                        ')'}
-                  </li>
-              ))}
-          </ul>
+          {articles.filter((article) => !article.suggested).length > 0 && (
+  <>
+    <h3>Artículos</h3>
+    <ul className='article-list'>
+      {articles
+        .filter((article) => !article.suggested)
+        .map((article, index) => (
+          <li key={index}>
+            {article.name + ' (' + (article.quantity != null ? article.quantity : 0) + ')'}
+          </li>
+        ))}
+    </ul>
+  </>
+)}
+
+
+
         </div>
       </div>
       <div className='center-button-container'>

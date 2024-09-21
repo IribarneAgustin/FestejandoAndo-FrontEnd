@@ -161,16 +161,22 @@ function TopicModify({ entityToModify, articleList, refreshTopicList }) {
               temática
             </p>
             <br />
-
             <label>
               <b>Descripción:</b>
+              </label>
+              <br></br>
               <textarea
+              style={ {
+                width: '100%', 
+                height: '200px',
+                padding: '10px', 
+                font: '14px'
+            }}
                 type='text'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
               />
-            </label>
             <br />
 
             <label>

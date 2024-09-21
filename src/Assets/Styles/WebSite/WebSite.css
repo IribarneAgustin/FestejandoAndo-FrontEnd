@@ -79,8 +79,10 @@
   margin-bottom: auto;
 }
 .carousel-container {
+  position: relative;
   flex: 1;
   width: 100%;
+  z-index: -2;
 }
 
 .festejando-carousel {
